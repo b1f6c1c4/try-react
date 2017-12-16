@@ -89,5 +89,5 @@ containerGen.runActions({
   .catch(reportErrorsFor('container/Stateless'));
 
 const languageGen = plop.getGenerator('language');
-languageGen.runActions({ language: 'fr' })
+languageGen.runActions({ language: 'en' })
   .catch(reportErrorsFor('language'));
