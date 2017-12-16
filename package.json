@@ -1,16 +1,16 @@
 {
-  "name": "react-boilerplate",
-  "version": "3.5.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "name": "try-react",
+  "version": "1.0.0",
+  "description": "Try React",
   "repository": {
     "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+    "url": "git://github.com/b1f6c1c4/try-react"
   },
   "engines": {
-    "npm": ">=3",
-    "node": ">=5"
+    "npm": ">=5",
+    "node": ">=8"
   },
-  "author": "Max Stoiber",
+  "author": "b1f6c1c4",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
