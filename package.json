@@ -210,6 +210,7 @@
   },
   "dependencies": {
     "babel-polyfill": "6.26.0",
+    "browser-locale": "1.0.3",
     "chalk": "2.3.0",
     "compression": "1.7.1",
     "cross-env": "5.1.1",

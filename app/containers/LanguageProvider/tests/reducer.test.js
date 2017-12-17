@@ -1,18 +1,30 @@
-import { fromJS } from 'immutable';
-
-import languageProviderReducer from '../reducer';
-import {
-  CHANGE_LOCALE,
-} from '../constants';
+import { CHANGE_LOCALE } from '../constants';
+import { DEFAULT_LOCALE } from '../../App/constants';
 
 describe('languageProviderReducer', () => {
-  it('returns the initial state', () => {
-    expect(languageProviderReducer(undefined, {})).toEqual(fromJS({
-      locale: 'en',
-    }));
+  beforeEach(() => {
+    jest.resetModules();
+  });
+
+  it('returns browser locale', () => {
+    jest.mock('browser-locale', () => jest.fn(() => 'zh-CN'));
+    const languageProviderReducer = require('../reducer').default; // eslint-disable-line global-require
+    expect(languageProviderReducer(undefined, {}).toJS()).toEqual({
+      locale: 'zh',
+    });
+  });
+
+  it('fallbacks to DEFAULT_LOCALE', () => {
+    jest.mock('browser-locale', () => jest.fn(() => null));
+    const languageProviderReducer = require('../reducer').default; // eslint-disable-line global-require
+    expect(languageProviderReducer(undefined, {}).toJS()).toEqual({
+      locale: DEFAULT_LOCALE,
+    });
   });
 
   it('changes the locale', () => {
+    jest.mock('browser-locale', () => jest.fn(() => null));
+    const languageProviderReducer = require('../reducer').default; // eslint-disable-line global-require
     expect(languageProviderReducer(undefined, { type: CHANGE_LOCALE, locale: 'de' }).toJS()).toEqual({
       locale: 'de',
     });
