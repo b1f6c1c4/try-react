@@ -22,7 +22,7 @@ import App from 'containers/App';
 // Import Language Provider
 import LanguageProvider from 'containers/LanguageProvider';
 
-// Load the favicon, the manifest.json file and the .htaccess file
+// Load the favicon, the manifest.json file
 /* eslint-disable import/no-unresolved, import/extensions */
 import '!file-loader?name=[name].[ext]!./images/favicon.ico';
 import '!file-loader?name=[name].[ext]!./images/icon-72x72.png';
@@ -34,7 +34,6 @@ import '!file-loader?name=[name].[ext]!./images/icon-192x192.png';
 import '!file-loader?name=[name].[ext]!./images/icon-384x384.png';
 import '!file-loader?name=[name].[ext]!./images/icon-512x512.png';
 import '!file-loader?name=[name].[ext]!./manifest.json';
-import 'file-loader?name=[name].[ext]!./.htaccess';
 /* eslint-enable import/no-unresolved, import/extensions */
 
 import configureStore from './configureStore';

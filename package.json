@@ -13,6 +13,7 @@
   },
   "author": "b1f6c1c4",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "analyze:clean": "rimraf stats.json",
     "preanalyze": "npm run analyze:clean",
