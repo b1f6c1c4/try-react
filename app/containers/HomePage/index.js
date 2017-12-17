@@ -10,15 +10,21 @@
  */
 
 import React from 'react';
+import { Button } from 'material-ui';
+import Typography from 'material-ui/Typography';
 import { FormattedMessage } from 'react-intl';
+
 import messages from './messages';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <div>
+        <Typography type="display1" gutterBottom>
+          <FormattedMessage {...messages.header} />
+        </Typography>
+        <Button raised color="primary">Btn</Button>
+      </div>
     );
   }
 }

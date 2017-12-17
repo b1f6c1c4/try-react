@@ -11,3 +11,5 @@
 
 export const DEFAULT_LOCALE = 'zh'; // When can't find browser locale
 export const ROOT_LOCALE = 'en'; // Fallback when there is no translation
+
+export const TOGGLE_DRAWER = 'App/TOGGLE_DRAWER';

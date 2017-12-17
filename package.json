@@ -186,7 +186,6 @@
       "!app/**/*.test.{js,jsx}",
       "!app/*/RbGenerated*/*.{js,jsx}",
       "!app/app.js",
-      "!app/global-styles.js",
       "!app/*/*/Loadable.{js,jsx}"
     ],
     "coverageThreshold": {
@@ -224,6 +223,8 @@
     "invariant": "2.2.2",
     "ip": "1.1.5",
     "lodash": "4.17.4",
+    "material-ui": "1.0.0-beta.23",
+    "material-ui-icons": "1.0.0-beta.17",
     "minimist": "1.2.0",
     "prop-types": "15.6.0",
     "react": "16.2.0",
@@ -236,6 +237,7 @@
     "react-router-redux": "5.0.0-alpha.6",
     "redux": "3.7.2",
     "redux-immutable": "4.0.0",
+    "redux-logger": "^3.0.6",
     "redux-saga": "0.16.0",
     "reselect": "3.0.1",
     "sanitize.css": "5.0.0",
