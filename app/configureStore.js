@@ -22,9 +22,9 @@ export default function configureStore(initialState = {}, history) {
     routerMiddleware(history),
   ];
 
+  /* istanbul ignore if */
   if (process.env.NODE_ENV !== 'production' &&
     process.env.NODE_ENV !== 'test') {
-    /* istanbul ignore next */
     middlewares.push(logger);
   }
 

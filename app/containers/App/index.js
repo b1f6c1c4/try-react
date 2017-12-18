@@ -77,7 +77,7 @@ const styles = (theme) => ({
 
 class App extends React.PureComponent {
   render() {
-    const { classes, theme } = this.props;
+    const { classes } = this.props;
 
     const drawer = (
       <div>
@@ -109,7 +109,6 @@ class App extends React.PureComponent {
           <Hidden mdUp>
             <Drawer
               type="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
               open={this.props.drawerOpen}
               classes={{
                 paper: classes.drawerPaper,
@@ -147,7 +146,6 @@ class App extends React.PureComponent {
 
 App.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
   drawerOpen: PropTypes.bool.isRequired,
   onDrawerToggle: PropTypes.func.isRequired,
 };
