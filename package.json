@@ -303,9 +303,7 @@
   "config": {
     "pre-git": {
       "pre-commit": ["yarn lint:staged"],
-      "pre-push": ["yarn test"],
-      "post-checkout": ["yarn"],
-      "post-merge": ["yarn"]
+      "pre-push": ["yarn test"]
     }
   }
 }
