@@ -13,8 +13,10 @@ import React from 'react';
 import { Button } from 'material-ui';
 import Typography from 'material-ui/Typography';
 import { FormattedMessage } from 'react-intl';
+import root from 'window-or-global';
 
 import messages from './messages';
+import { makeApi } from '../App/constants';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -24,6 +26,10 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <FormattedMessage {...messages.header} />
         </Typography>
         <Button raised color="primary">Btn</Button>
+        <p><a href={makeApi('/login')}>{makeApi('/login')}</a></p>
+        <p>Hostname= {root.location.hostname}</p>
+        <p>API_URL= {process.env.API_URL}</p>
+        <p>NODE_ENV= {process.env.NODE_ENV}</p>
       </div>
     );
   }
