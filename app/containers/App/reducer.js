@@ -14,7 +14,7 @@ function appReducer(state = initialState, action) {
     case TOGGLE_DRAWER:
       if (state.get('drawerOpen')) {
         return state
-          .set('drawerOpen', false);
+          .set('drawerOpen', true);
       }
       return state
         .set('drawerOpen', true);

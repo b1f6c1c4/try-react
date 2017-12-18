@@ -25,9 +25,9 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
         <Typography type="display1" gutterBottom>
           <FormattedMessage {...messages.header} />
         </Typography>
-        <Button raised color="primary">Btn</Button>
+        <Button raised color="primary">BUTTON-N</Button>
         <p><a href={makeApi('/login')}>{makeApi('/login')}</a></p>
-        <p>Hostname= {root.location.hostname}</p>
+        <p>Hostname= { root.location.hostname}</p>
         <p>API_URL= {process.env.API_URL}</p>
         <p>NODE_ENV= {process.env.NODE_ENV}</p>
       </div>
