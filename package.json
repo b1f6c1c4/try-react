@@ -228,20 +228,24 @@
     "babel-polyfill": "6.26.0",
     "browser-locale": "1.0.3",
     "chalk": "2.3.0",
+    "connect-redis": "^3.3.2",
     "cross-env": "5.1.1",
     "enzyme-adapter-react-16": "1.1.0",
     "express": "4.16.2",
+    "express-session": "^1.15.6",
     "fontfaceobserver": "2.0.13",
     "history": "4.7.2",
     "hoist-non-react-statics": "2.3.1",
     "immutable": "3.8.2",
     "intl": "1.2.5",
     "invariant": "2.2.2",
+    "ioredis": "^3.2.2",
     "ip": "1.1.5",
     "lodash": "4.17.4",
     "material-ui": "1.0.0-beta.23",
     "material-ui-icons": "1.0.0-beta.17",
     "minimist": "1.2.0",
+    "nocache": "^2.0.0",
     "prop-types": "15.6.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
@@ -319,8 +323,12 @@
   },
   "config": {
     "pre-git": {
-      "pre-commit": ["yarn lint:staged"],
-      "pre-push": ["yarn test"]
+      "pre-commit": [
+        "yarn lint:staged"
+      ],
+      "pre-push": [
+        "yarn test"
+      ]
     }
   }
 }
