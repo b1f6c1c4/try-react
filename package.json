@@ -39,12 +39,12 @@
     "test:clean": "rimraf ./coverage",
     "test": "cross-env NODE_ENV=test jest --coverage",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
-    "coveralls": "cat ./coverage/lcov.info | coveralls"
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "commit": "commit-wizard"
   },
   "lint-staged": {
     "*.js": "lint:eslint"
   },
-  "pre-commit": "lint:staged",
   "babel": {
     "plugins": [
       "styled-components"
@@ -287,7 +287,7 @@
     "null-loader": "0.1.1",
     "offline-plugin": "4.8.5",
     "plop": "1.9.0",
-    "pre-commit": "1.2.2",
+    "pre-git": "3.16.0",
     "react-test-renderer": "16.2.0",
     "rimraf": "2.6.2",
     "shelljs": "0.7.8",
@@ -296,5 +296,17 @@
     "webpack": "3.10.0",
     "webpack-dev-middleware": "2.0.1",
     "webpack-hot-middleware": "2.21.0"
+  },
+  "release": {
+    "analyzeCommits": "simple-commit-message"
+  },
+  "config": {
+    "pre-git": {
+      "pre-commit": ["yarn lint:staged"],
+      "pre-push": ["yarn test"],
+      "post-commit": [],
+      "post-checkout": ["yarn"],
+      "post-merge": ["yarn"]
+    }
   }
 }
