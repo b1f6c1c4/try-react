@@ -22,7 +22,9 @@ import MenuIcon from 'material-ui-icons/Menu';
 
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import { toggleDrawer } from './actions';
+import injectSaga from 'utils/injectSaga';
+import { toggleDrawer, loginRequest } from './actions';
+import saga from './saga';
 
 const drawerWidth = 240;
 
@@ -76,6 +78,7 @@ const styles = (theme) => ({
 });
 
 class App extends React.PureComponent {
+  /* istanbul ignore next */
   render() {
     const { classes } = this.props;
 
@@ -101,9 +104,9 @@ class App extends React.PureComponent {
                 <MenuIcon />
               </IconButton>
               <Typography className={classes.flex} type="title" color="inherit" noWrap>
-                Try React
+                {this.props.JWT}
               </Typography>
-              <Button color="contrast">Login</Button>
+              <Button color="contrast" onClick={this.props.onLoginRequest}>Login</Button>
             </Toolbar>
           </AppBar>
           <Hidden mdUp>
@@ -147,12 +150,15 @@ class App extends React.PureComponent {
 App.propTypes = {
   classes: PropTypes.object.isRequired,
   drawerOpen: PropTypes.bool.isRequired,
+  JWT: PropTypes.string,
   onDrawerToggle: PropTypes.func.isRequired,
+  onLoginRequest: PropTypes.func.isRequired,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
     onDrawerToggle: () => dispatch(toggleDrawer()),
+    onLoginRequest: () => dispatch(loginRequest()),
   };
 }
 
@@ -161,11 +167,17 @@ const mapStateToProps = createStructuredSelector({
     (state) => state.get('global'),
     (state) => state.get('drawerOpen'),
   ),
+  JWT: createSelector(
+    (state) => state.get('global'),
+    (state) => state.get('JWT'),
+  ),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withSaga = injectSaga({ key: 'App', saga });
 
 export default compose(
+  withSaga,
   withConnect,
   withStyles(styles, { withTheme: true }),
 )(App);

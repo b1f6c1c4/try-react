@@ -3,6 +3,7 @@ import { fromJS } from 'immutable';
 import appReducer from '../reducer';
 import {
   toggleDrawer,
+  loginSuccess,
 } from '../actions';
 
 describe('appReducer', () => {
@@ -10,6 +11,7 @@ describe('appReducer', () => {
   beforeEach(() => {
     state = fromJS({
       drawerOpen: false,
+      JWT: null,
     });
   });
 
@@ -34,5 +36,14 @@ describe('appReducer', () => {
       .set('drawerOpen', false);
 
     expect(appReducer(originalState, toggleDrawer())).toEqual(expectedResult);
+  });
+
+  it('should load JWT after login', () => {
+    const originalState = state;
+    const result = { token: 'value' };
+    const expectedResult = state
+      .set('JWT', 'value');
+
+    expect(appReducer(originalState, loginSuccess(result))).toEqual(expectedResult);
   });
 });

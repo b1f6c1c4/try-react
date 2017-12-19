@@ -15,8 +15,8 @@ import Typography from 'material-ui/Typography';
 import { FormattedMessage } from 'react-intl';
 import root from 'window-or-global';
 
+import { makeApi } from 'utils/request';
 import messages from './messages';
-import { makeApi } from '../App/constants';
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render() {

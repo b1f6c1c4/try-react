@@ -2,11 +2,13 @@ import { fromJS } from 'immutable';
 
 import {
   TOGGLE_DRAWER,
+  LOGIN_SUCCESS,
 } from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
   drawerOpen: false,
+  JWT: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -18,6 +20,9 @@ function appReducer(state = initialState, action) {
       }
       return state
         .set('drawerOpen', true);
+    case LOGIN_SUCCESS:
+      return state
+        .set('JWT', action.result.token);
     default:
       return state;
   }

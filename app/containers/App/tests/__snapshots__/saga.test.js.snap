@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`loginRequest Saga should call the loginError action if the response errors 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "SELECT": Object {
+    "args": Array [],
+    "selector": [Function],
+  },
+}
+`;
+
+exports[`loginRequest Saga should call the loginError action if the response errors 2`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      "/login",
+      undefined,
+      "the-credential",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;
+
+exports[`loginRequest Saga should dispatch the loginSuccess action if it requests the data successfully 1`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "SELECT": Object {
+    "args": Array [],
+    "selector": [Function],
+  },
+}
+`;
+
+exports[`loginRequest Saga should dispatch the loginSuccess action if it requests the data successfully 2`] = `
+Object {
+  "@@redux-saga/IO": true,
+  "CALL": Object {
+    "args": Array [
+      "/login",
+      undefined,
+      "the-credential",
+    ],
+    "context": null,
+    "fn": [Function],
+  },
+}
+`;
