@@ -5,7 +5,7 @@ import {
   EXTERNAL_REQUEST,
 } from './constants';
 import {
-  select{{ properCase name }}Data,
+  makeSelect{{ properCase name }}Data,
 } from './selectors';
 import {
   externalSuccess,
@@ -13,7 +13,7 @@ import {
 } from './actions';
 
 export function* externalRequest() {
-  const json = yield select(select{{ properCase name }}Data);
+  const json = yield select(makeSelect{{ properCase name }}Data());
 
   try {
     const result = yield call(apiPOST, '/external', undefined, json);

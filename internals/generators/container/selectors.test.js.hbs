@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 
 import {
   select{{ properCase name }},
-  select{{ properCase name }}Data,
+  makeSelect{{ properCase name }}Data,
 } from '../selectors';
 
 describe('select{{ properCase name }}', () => {
@@ -17,7 +17,9 @@ describe('select{{ properCase name }}', () => {
   });
 });
 
-describe('select{{ properCase name }}Data', () => {
+describe('makeSelect{{ properCase name }}Data', () => {
+  const select{{ properCase name }}Data = makeSelect{{ properCase name }}Data();
+
   it('should select data', () => {
     const data = fromJS({
       key: 'value',

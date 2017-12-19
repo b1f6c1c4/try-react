@@ -19,12 +19,8 @@ import {
   Button,
 } from 'material-ui';
 
-{{#if wantMessages}}
-import messages from './messages';
-
-{{/if}}
 import {
-  select{{ properCase name }}Data,
+  makeSelect{{ properCase name }}Data,
 } from './selectors';
 {{#if wantActionsAndReducer}}
 import {
@@ -34,6 +30,9 @@ import reducer from './reducer';
 {{/if}}
 {{#if wantSaga}}
 import saga from './saga';
+{{/if}}
+{{#if wantMessages}}
+import messages from './messages';
 {{/if}}
 
 /* istanbul ignore next */
@@ -75,7 +74,7 @@ export function mapDispatchToProps(dispatch) {
 
 {{/if}}
 const mapStateToProps = createStructuredSelector({
-  data: select{{ properCase name }}Data,
+  data: makeSelect{{ properCase name }}Data(),
 });
 
 export default compose(
