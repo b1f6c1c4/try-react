@@ -1,6 +1,7 @@
 import { fromJS } from 'immutable';
 
 import appReducer from '../reducer';
+
 import {
   toggleDrawer,
   loginSuccess,

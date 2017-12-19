@@ -1,11 +1,10 @@
-/*
- *
- * {{ properCase name }} actions
- *
- */
-
 import {
   DEFAULT_ACTION,
+{{#if wantSaga}}
+  EXTERNAL_REQUEST,
+  EXTERNAL_SUCCESS,
+  EXTERNAL_FAILURE,
+{{/if}}
 } from './constants';
 
 export function defaultAction() {
@@ -13,3 +12,26 @@ export function defaultAction() {
     type: DEFAULT_ACTION,
   };
 }
+{{#if wantSaga}}
+
+
+export function externalRequest() {
+  return {
+    type: EXTERNAL_REQUEST,
+  };
+}
+
+export function externalSuccess(result) {
+  return {
+    type: EXTERNAL_SUCCESS,
+    result,
+  };
+}
+
+export function externalFailure(error) {
+  return {
+    type: EXTERNAL_FAILURE,
+    error,
+  };
+}
+{{/if}}

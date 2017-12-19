@@ -5,7 +5,6 @@ import {
   LOGIN_SUCCESS,
 } from './constants';
 
-// The initial state of the App
 const initialState = fromJS({
   drawerOpen: false,
   JWT: null,

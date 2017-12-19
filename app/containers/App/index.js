@@ -1,33 +1,41 @@
-/**
- *
- * App.js
- *
- * This component is the skeleton around the actual pages, and should only
- * contain code that should be seen on all pages. (e.g. navigation bar)
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { createSelector, createStructuredSelector } from 'reselect';
-import { Switch, Route } from 'react-router-dom';
-import { withStyles, Drawer, List, Hidden, Divider, AppBar, Toolbar, Typography, Button, IconButton } from 'material-ui';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import injectSaga from 'utils/injectSaga';
+
+import {
+  withStyles,
+  Drawer,
+  List,
+  Hidden,
+  Divider,
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+} from 'material-ui';
 import MenuIcon from 'material-ui-icons/Menu';
 
+import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import injectSaga from 'utils/injectSaga';
-import { toggleDrawer, loginRequest } from './actions';
+
+import {
+  toggleDrawer,
+  loginRequest,
+} from './actions';
+import {
+  selectDrawerOpen,
+  selectJWT,
+} from './selectors';
 import saga from './saga';
 
 const drawerWidth = 240;
 
+/* istanbul ignore next */
 const styles = (theme) => ({
   root: {
     width: '100%',
@@ -163,21 +171,13 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  drawerOpen: createSelector(
-    (state) => state.get('global'),
-    (state) => state.get('drawerOpen'),
-  ),
-  JWT: createSelector(
-    (state) => state.get('global'),
-    (state) => state.get('JWT'),
-  ),
+  drawerOpen: selectDrawerOpen,
+  JWT: selectJWT,
 });
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-const withSaga = injectSaga({ key: 'App', saga });
 
 export default compose(
-  withSaga,
-  withConnect,
+  connect(mapStateToProps, mapDispatchToProps),
+  injectSaga({ key: 'App', saga }),
   withStyles(styles, { withTheme: true }),
 )(App);
