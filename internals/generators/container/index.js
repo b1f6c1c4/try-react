@@ -9,8 +9,8 @@ module.exports = {
   prompts: [{
     type: 'input',
     name: 'name',
-    message: 'What should it be called?',
     default: 'Form',
+    message: 'What should it be called?',
     validate: (value) => {
       if ((/.+/).test(value)) {
         return componentExists(value) ? 'A component or container with this name already exists' : true;
@@ -119,17 +119,17 @@ module.exports = {
       });
 
       if (data.wantSaga) {
-        // Generate saga.js
+        // Generate sagas.js
         actions.push({
           type: 'add',
-          path: '../../app/containers/{{properCase name}}/saga.js',
-          templateFile: './container/saga.js.hbs',
+          path: '../../app/containers/{{properCase name}}/sagas.js',
+          templateFile: './container/sagas.js.hbs',
           abortOnFail: true,
         });
         actions.push({
           type: 'add',
-          path: '../../app/containers/{{properCase name}}/tests/saga.test.js',
-          templateFile: './container/saga.test.js.hbs',
+          path: '../../app/containers/{{properCase name}}/tests/sagas.test.js',
+          templateFile: './container/sagas.test.js.hbs',
           abortOnFail: true,
         });
       }
@@ -152,7 +152,7 @@ module.exports = {
       });
       actions.push({
         type: 'modify',
-        pattern: /([a-zA-Z]+Reducer,\n)(?!.*[a-zA-Z]+Reducer,\n)/g,
+        pattern: /([a-zA-Z]+Reducer,\n)(?!.*[a-zA-Z]+Reducer,)/g,
         path: '../../app/reducers.js',
         templateFile: './container/reducers-combine.js.hbs',
         abortOnFail: true,

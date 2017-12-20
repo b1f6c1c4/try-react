@@ -35,7 +35,7 @@ import reducer from './reducer';
 {{/if}}
 {{/if}}
 {{#if wantSaga}}
-import saga from './saga';
+import sagas from './sagas';
 {{/if}}
 {{#if wantMessages}}
 import messages from './messages';
@@ -89,7 +89,7 @@ export const styled{{ properCase name}} = withStyles(styles, { withTheme: true }
 
 export default compose(
 {{#if wantSaga}}
-  injectSaga({ key: '{{ camelCase name }}', saga }),
+  injectSaga({ key: '{{ camelCase name }}', sagas }),
 {{/if}}
 {{#if wantActionsAndReducer}}
 {{#if wantLoadable}}

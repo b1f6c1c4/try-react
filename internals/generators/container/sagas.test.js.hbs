@@ -8,7 +8,7 @@ import {
   externalFailure,
 } from '../actions';
 
-import external, { externalRequest } from '../saga';
+import external, { externalRequest } from '../sagas';
 
 const data = 'the-data';
 
