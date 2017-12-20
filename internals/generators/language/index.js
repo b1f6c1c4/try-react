@@ -46,7 +46,7 @@ module.exports = {
     actions.push({
       type: 'modify',
       path: '../../app/i18n.js',
-      pattern: /(from\s'.\/translations\/[a-z]+.json';\n)(?!.*from\s'.\/translations\/[a-z]+.json';)/g,
+      pattern: /(from\s'translations\/[a-z]+.json';\n)(?!.*from\s'translations\/[a-z]+.json';)/g,
       templateFile: './language/translation-messages.hbs',
     });
     actions.push({

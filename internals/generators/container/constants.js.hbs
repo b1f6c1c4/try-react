@@ -1,7 +1,9 @@
-/*
- *
- * {{ properCase name }} constants
- *
- */
+// Actions
+export const DEFAULT_ACTION = '{{ properCase name }}/DEFAULT_ACTION';
+{{#if wantSaga}}
 
-export const DEFAULT_ACTION = 'app/{{ properCase name }}/DEFAULT_ACTION';
+// Sagas
+export const EXTERNAL_REQUEST = '{{ properCase name }}/EXTERNAL_REQUEST';
+export const EXTERNAL_SUCCESS = '{{ properCase name }}/EXTERNAL_SUCCESS';
+export const EXTERNAL_FAILURE = '{{ properCase name }}/EXTERNAL_FAILURE';
+{{/if}}

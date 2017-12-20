@@ -1,10 +1,51 @@
-// import React from 'react';
-// import { shallow } from 'enzyme';
+import React from 'react';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-// import { {{ properCase name }} } from '../index';
+{{#if wantActionsAndReducer}}
+import { styled{{ properCase name }} as {{ properCase name }}, mapDispatchToProps } from '../index';
+{{else}}
+import { styled{{ properCase name }} as {{ properCase name }} } from '../index';
+{{/if}}
+
+{{#if wantActionsAndReducer}}
+import {
+  defaultAction,
+} from '../actions';
+{{/if}}
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('<{{ properCase name }} />', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+  it('should render', () => {
+    const renderedComponent = shallow(
+      <{{ properCase name }}
+        data="value"
+{{#if wantActionsAndReducer}}
+        onDefaultAction={jest.fn()}
+{{/if}}
+      />
+    ).dive();
+    expect(renderedComponent).toBeDefined();
   });
 });
+
+{{#if wantActionsAndReducer}}
+describe('mapDispatchToProps', () => {
+  // Actions
+  describe('onDefaultAction', () => {
+    it('should be injected', () => {
+      const dispatch = jest.fn();
+      const result = mapDispatchToProps(dispatch);
+      expect(result.onDefaultAction).toBeDefined();
+    });
+
+    it('should dispatch defaultAction when called', () => {
+      const dispatch = jest.fn();
+      const result = mapDispatchToProps(dispatch);
+      result.onDefaultAction();
+      expect(dispatch).toHaveBeenCalledWith(defaultAction());
+    });
+  });
+});
+{{/if}}

@@ -1,9 +1,60 @@
-
 import { fromJS } from 'immutable';
+
 import {{ camelCase name }}Reducer from '../reducer';
 
+import {
+  defaultAction,
+{{#if wantSaga}}
+  externalRequest,
+  externalSuccess,
+  externalFailure,
+{{/if}}
+} from '../actions';
+
 describe('{{ camelCase name }}Reducer', () => {
-  it('returns the initial state', () => {
-    expect({{ camelCase name }}Reducer(undefined, {})).toEqual(fromJS({}));
+  let state;
+  beforeEach(() => {
+    state = fromJS({
+      data: 'the data',
+    });
   });
+
+  it('should return the initial state', () => {
+    const expectedResult = state;
+    expect({{ camelCase name }}Reducer(undefined, {})).toEqual(expectedResult);
+  });
+
+  // Actions
+  it('should handle default action', () => {
+    const originalState = state;
+    const expectedResult = state;
+
+    expect({{ camelCase name }}Reducer(originalState, defaultAction())).toEqual(expectedResult);
+  });
+{{#if wantSaga}}
+
+  // Sagas
+  it('should handle external request', () => {
+    const originalState = state;
+    const expectedResult = state;
+
+    expect({{ camelCase name }}Reducer(originalState, externalRequest())).toEqual(expectedResult);
+  });
+
+  it('should handle external success', () => {
+    const originalState = state;
+    const result = { };
+    const expectedResult = state;
+
+    expect({{ camelCase name }}Reducer(originalState, externalSuccess(result))).toEqual(expectedResult);
+  });
+
+  it('should handle external failure', () => {
+    const originalState = state;
+    const error = { };
+    const expectedResult = state;
+
+    expect({{ camelCase name }}Reducer(originalState, externalFailure(error))).toEqual(expectedResult);
+  });
+{{/if}}
 });
