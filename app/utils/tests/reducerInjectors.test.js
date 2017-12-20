@@ -80,10 +80,10 @@ describe('reducer injectors', () => {
       expect(actual.toJS()).toEqual(expected.toJS());
     });
 
-    it('should not assign reducer if already existing', () => {
+    it('should throw if already existing', () => {
       store.replaceReducer = jest.fn();
       injectReducer('test', reducer);
-      injectReducer('test', reducer);
+      expect(() => injectReducer('test', reducer)).toThrow();
 
       expect(store.replaceReducer).toHaveBeenCalledTimes(1);
     });

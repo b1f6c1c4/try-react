@@ -1,5 +1,6 @@
+import { DEFAULT_LOCALE } from 'i18n';
+
 import { CHANGE_LOCALE } from '../constants';
-import { DEFAULT_LOCALE } from '../../App/constants';
 
 describe('languageProviderReducer', () => {
   beforeEach(() => {
