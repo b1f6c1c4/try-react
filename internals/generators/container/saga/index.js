@@ -147,7 +147,7 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       pattern: /^ {2}yield take.*REQUEST.*Request\);$/g,
       path: '../../app/containers/{{properCase container}}/sagas.js',
       template: `  /* istanbul ignore next */
-  yield takeEvery({{ constantCase name }}_REQUEST, {{ camelCase name }}Request);`,
+  yield takeEvery({{ constantCase name }}_REQUEST, handle{{ properCase name }}Request);`,
       abortOnFail: true,
     });
 
@@ -164,9 +164,9 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
     actions.push({
       type: 'complexModify',
       method: 'lastOccurance',
-      pattern: /^ {2}[a-zA-Z]+Request,$/g,
+      pattern: /^ {2}handle[a-zA-Z]+Request,$/g,
       path: '../../app/containers/{{properCase container}}/tests/sagas.test.js',
-      template: '  {{ camelCase name }}Request,',
+      template: '  handle{{ properCase name }}Request,',
       abortOnFail: true,
     });
     actions.push({

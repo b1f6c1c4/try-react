@@ -1,4 +1,4 @@
-export function* {{ camelCase name }}Request() {
+export function* handle{{ properCase name }}Request() {
   const json = yield select(makeSelect{{ properCase container }}Data());
 
   try {

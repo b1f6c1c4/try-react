@@ -13,7 +13,7 @@ import {
 } from './actions';
 
 // Sagas
-export function* {{ camelCase sagaName }}Request() {
+export function* handle{{ properCase sagaName }}Request() {
   const json = yield select(makeSelect{{ properCase name }}{{ properCase selectorName }}());
 
   try {
@@ -25,7 +25,8 @@ export function* {{ camelCase sagaName }}Request() {
 }
 
 // Watcher
+/* eslint-disable func-names */
 export default /* istanbul ignore next */ function* watcher() {
   /* istanbul ignore next */
-  yield takeEvery({{ constantCase sagaName }}_REQUEST, {{ camelCase sagaName }}Request);
+  yield takeEvery({{ constantCase sagaName }}_REQUEST, handle{{ properCase sagaName }}Request);
 }
