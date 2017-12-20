@@ -35,7 +35,7 @@ class Global extends React.PureComponent {
     return (
       <div className={classes.content}>
         <FormattedMessage {...messages.header} />
-        <Typography>{this.props.isDrawerOpen}</Typography>
+        <Typography>{this.props.isDrawerOpen.toString()}</Typography>
         <Button onClick={this.props.onToggleDrawerOpenAction}>ToggleDrawerOpenAction</Button>
         <Switch>
           <Route component={NotFoundPage} />
@@ -47,7 +47,7 @@ class Global extends React.PureComponent {
 
 Global.propTypes = {
   classes: PropTypes.object.isRequired,
-  isDrawerOpen: PropTypes.string.isRequired,
+  isDrawerOpen: PropTypes.bool.isRequired,
   onToggleDrawerOpenAction: PropTypes.func.isRequired,
 };
 

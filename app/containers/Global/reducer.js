@@ -5,14 +5,19 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  isDrawerOpen: 'the isDrawerOpen',
+  isDrawerOpen: false,
 });
 
 function globalReducer(state = initialState, action) {
   switch (action.type) {
     // Actions
     case TOGGLE_DRAWER_OPEN_ACTION:
-      return state;
+      if (state.get('isDrawerOpen')) {
+        return state
+          .set('isDrawerOpen', false);
+      }
+      return state
+        .set('isDrawerOpen', true);
     // Default
     default:
       return state;

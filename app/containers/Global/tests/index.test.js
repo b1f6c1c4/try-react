@@ -15,7 +15,7 @@ describe('<Global />', () => {
     const renderedComponent = shallow(
       <Global
         // Selectors
-        isDrawerOpen="value"
+        isDrawerOpen={false}
         // Actions
         onToggleDrawerOpenAction={jest.fn()}
       />

@@ -10,7 +10,7 @@ describe('globalReducer', () => {
   let state;
   beforeEach(() => {
     state = fromJS({
-      isDrawerOpen: 'the isDrawerOpen',
+      isDrawerOpen: false,
     });
   });
 
@@ -20,9 +20,16 @@ describe('globalReducer', () => {
   });
 
   // Actions
-  it('should handle toggleDrawerOpen action', () => {
+  it('should handle toggleDrawerOpen action: close', () => {
     const originalState = state;
-    const expectedResult = state;
+    const expectedResult = state.set('isDrawerOpen', true);
+
+    expect(globalReducer(originalState, toggleDrawerOpenAction())).toEqual(expectedResult);
+  });
+
+  it('should handle toggleDrawerOpen action: open', () => {
+    const originalState = state.set('isDrawerOpen', true);
+    const expectedResult = state.set('isDrawerOpen', false);
 
     expect(globalReducer(originalState, toggleDrawerOpenAction())).toEqual(expectedResult);
   });
