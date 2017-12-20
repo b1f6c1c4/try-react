@@ -1,36 +1,50 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
- */
-
 import React from 'react';
-import { Button } from 'material-ui';
-import Typography from 'material-ui/Typography';
+import PropTypes from 'prop-types';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
-import root from 'window-or-global';
 
-import { makeApi } from 'utils/request';
+import {
+  withStyles,
+  Typography,
+} from 'material-ui';
+
+import {
+  makeSelectHomePageData,
+} from './selectors';
 import messages from './messages';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+const styles = (theme) => ({
+  content: {
+    backgroundColor: theme.palette.background.default,
+  },
+});
+
+class HomePage extends React.PureComponent {
   render() {
+    const { classes } = this.props;
+
     return (
-      <div>
-        <Typography type="display1" gutterBottom>
-          <FormattedMessage {...messages.header} />
-        </Typography>
-        <Button raised color="primary">Btn</Button>
-        <p><a href={makeApi('/login')}>{makeApi('/login')}</a></p>
-        <p>Hostname= {root.location.hostname}</p>
-        <p>API_URL= {process.env.API_URL}</p>
-        <p>NODE_ENV= {process.env.NODE_ENV}</p>
+      <div className={classes.content}>
+        <Typography>{this.props.data}</Typography>
+        <FormattedMessage {...messages.header} />
       </div>
     );
   }
 }
+
+HomePage.propTypes = {
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.string.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  data: makeSelectHomePageData(),
+});
+
+export const styledHomePage = withStyles(styles, { withTheme: true })(HomePage);
+
+export default compose(
+  connect(mapStateToProps, null),
+)(styledHomePage);

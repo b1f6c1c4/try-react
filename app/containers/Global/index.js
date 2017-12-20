@@ -4,15 +4,21 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
+import injectSaga from 'utils/injectSaga';
 
 import {
   withStyles,
   Typography,
+  Button,
 } from 'material-ui';
 
 import {
-  makeSelectNotFoundPageData,
+  makeSelectGlobalData,
 } from './selectors';
+import {
+  defaultAction,
+} from './actions';
+import saga from './saga';
 import messages from './messages';
 
 const styles = (theme) => ({
@@ -21,30 +27,39 @@ const styles = (theme) => ({
   },
 });
 
-class NotFoundPage extends React.PureComponent {
+class Global extends React.PureComponent {
   render() {
     const { classes } = this.props;
 
     return (
       <div className={classes.content}>
         <Typography>{this.props.data}</Typography>
+        <Button onClick={this.props.onDefaultAction}>DefaultAction</Button>
         <FormattedMessage {...messages.header} />
       </div>
     );
   }
 }
 
-NotFoundPage.propTypes = {
+Global.propTypes = {
   classes: PropTypes.object.isRequired,
   data: PropTypes.string.isRequired,
+  onDefaultAction: PropTypes.func.isRequired,
 };
 
+export function mapDispatchToProps(dispatch) {
+  return {
+    onDefaultAction: () => dispatch(defaultAction()),
+  };
+}
+
 const mapStateToProps = createStructuredSelector({
-  data: makeSelectNotFoundPageData(),
+  data: makeSelectGlobalData(),
 });
 
-export const styledNotFoundPage = withStyles(styles, { withTheme: true })(NotFoundPage);
+export const styledGlobal = withStyles(styles, { withTheme: true })(Global);
 
 export default compose(
-  connect(mapStateToProps, null),
-)(styledNotFoundPage);
+  injectSaga({ key: 'global', saga }),
+  connect(mapStateToProps, mapDispatchToProps),
+)(styledGlobal);
