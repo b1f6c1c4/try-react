@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
+import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 import {
@@ -44,6 +45,7 @@ class Global extends React.PureComponent {
         <Button onClick={this.props.onToggleDrawerOpenAction}>ToggleDrawerOpenAction</Button>
         <ConnectedSwitch>
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/login" component={LoginPage} />
           <Route component={NotFoundPage} />
         </ConnectedSwitch>
       </div>

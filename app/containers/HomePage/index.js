@@ -4,6 +4,8 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 
+import { Link } from 'react-router-dom';
+
 import {
   withStyles,
 } from 'material-ui';
@@ -23,6 +25,7 @@ class HomePage extends React.PureComponent {
     return (
       <div className={classes.content}>
         <FormattedMessage {...messages.header} />
+        <Link to="/login">login</Link>
       </div>
     );
   }
