@@ -7,9 +7,7 @@ import {
 
 describe('selectGlobal', () => {
   it('should select the global state', () => {
-    const state = fromJS({
-      key: 'value',
-    });
+    const state = 'value';
     const mockedState = fromJS({
       global: state,
     });
@@ -21,9 +19,7 @@ describe('makeSelectGlobalIsDrawerOpen', () => {
   const selectGlobalIsDrawerOpen = makeSelectGlobalIsDrawerOpen();
 
   it('should select isDrawerOpen', () => {
-    const isDrawerOpen = fromJS({
-      key: 'value',
-    });
+    const isDrawerOpen = 'value';
     const state = fromJS({
       isDrawerOpen,
     });

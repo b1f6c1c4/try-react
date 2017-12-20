@@ -7,9 +7,7 @@ import {
 
 describe('select{{ properCase name }}', () => {
   it('should select the {{ camelCase name }} state', () => {
-    const state = fromJS({
-      key: 'value',
-    });
+    const state = 'value';
     const mockedState = fromJS({
       {{ camelCase name }}: state,
     });
@@ -21,9 +19,7 @@ describe('makeSelect{{ properCase name }}{{ properCase selectorName }}', () => {
   const select{{ properCase name }}{{ properCase selectorName }} = makeSelect{{ properCase name }}{{ properCase selectorName }}();
 
   it('should select {{ camelCase selectorName }}', () => {
-    const {{ camelCase selectorName }} = fromJS({
-      key: 'value',
-    });
+    const {{ camelCase selectorName }} = 'value';
     const state = fromJS({
       {{ camelCase selectorName }},
     });
