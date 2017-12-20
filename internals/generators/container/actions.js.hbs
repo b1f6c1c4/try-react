@@ -1,6 +1,6 @@
 import {
   DEFAULT_ACTION,
-{{#if wantSaga}}
+{{#if wantSagas}}
   EXTERNAL_REQUEST,
   EXTERNAL_SUCCESS,
   EXTERNAL_FAILURE,
@@ -13,7 +13,7 @@ export function defaultAction() {
     type: DEFAULT_ACTION,
   };
 }
-{{#if wantSaga}}
+{{#if wantSagas}}
 
 // Sagas
 export function externalRequest() {

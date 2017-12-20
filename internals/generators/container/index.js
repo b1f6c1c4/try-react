@@ -25,7 +25,13 @@ module.exports = {
     message: 'Do you want an actions/reducer tuple for this container?',
   }, {
     type: 'confirm',
-    name: 'wantSaga',
+    name: 'wantSelectors',
+    when: (ans) => !ans.wantActionsAndReducer,
+    default: true,
+    message: 'Do you want selectors?',
+  }, {
+    type: 'confirm',
+    name: 'wantSagas',
     when: (ans) => ans.wantActionsAndReducer,
     default: true,
     message: 'Do you want sagas for asynchronous flows? (e.g. fetching data)',
@@ -57,19 +63,21 @@ module.exports = {
       abortOnFail: true,
     });
 
-    // Generate selectors.js
-    actions.push({
-      type: 'add',
-      path: '../../app/containers/{{properCase name}}/selectors.js',
-      templateFile: './container/selectors.js.hbs',
-      abortOnFail: true,
-    });
-    actions.push({
-      type: 'add',
-      path: '../../app/containers/{{properCase name}}/tests/selectors.test.js',
-      templateFile: './container/selectors.test.js.hbs',
-      abortOnFail: true,
-    });
+    if (data.wantSelectors) {
+      // Generate selectors.js
+      actions.push({
+        type: 'add',
+        path: '../../app/containers/{{properCase name}}/selectors.js',
+        templateFile: './container/selectors.js.hbs',
+        abortOnFail: true,
+      });
+      actions.push({
+        type: 'add',
+        path: '../../app/containers/{{properCase name}}/tests/selectors.test.js',
+        templateFile: './container/selectors.test.js.hbs',
+        abortOnFail: true,
+      });
+    }
 
     if (data.wantMessages) {
       // Generate messages.js
@@ -118,7 +126,7 @@ module.exports = {
         abortOnFail: true,
       });
 
-      if (data.wantSaga) {
+      if (data.wantSagas) {
         // Generate sagas.js
         actions.push({
           type: 'add',

@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 
 import {
   DEFAULT_ACTION,
-{{#if wantSaga}}
+{{#if wantSagas}}
   EXTERNAL_REQUEST,
   EXTERNAL_SUCCESS,
   EXTERNAL_FAILURE,
@@ -18,7 +18,7 @@ function {{ camelCase name }}Reducer(state = initialState, action) {
     // Actions
     case DEFAULT_ACTION:
       return state;
-{{#if wantSaga}}
+{{#if wantSagas}}
     // Sagas
     case EXTERNAL_REQUEST:
       return state;

@@ -4,7 +4,7 @@ import {{ camelCase name }}Reducer from '../reducer';
 
 import {
   defaultAction,
-{{#if wantSaga}}
+{{#if wantSagas}}
   externalRequest,
   externalSuccess,
   externalFailure,
@@ -31,7 +31,7 @@ describe('{{ camelCase name }}Reducer', () => {
 
     expect({{ camelCase name }}Reducer(originalState, defaultAction())).toEqual(expectedResult);
   });
-{{#if wantSaga}}
+{{#if wantSagas}}
 
   // Sagas
   it('should handle external request', () => {

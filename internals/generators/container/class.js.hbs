@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
+{{#if wantSelectors}}
 import { createStructuredSelector } from 'reselect';
+{{/if}}
 {{#if wantMessages}}
 import { FormattedMessage } from 'react-intl';
 {{/if}}
@@ -11,7 +13,7 @@ import { FormattedMessage } from 'react-intl';
 import injectReducer from 'utils/injectReducer';
 {{/if}}
 {{/if}}
-{{#if wantSaga}}
+{{#if wantSagas}}
 import injectSaga from 'utils/injectSaga';
 {{/if}}
 
@@ -23,9 +25,11 @@ import {
 {{/if}}
 } from 'material-ui';
 
+{{#if wantSelectors}}
 import {
   makeSelect{{ properCase name }}Data,
 } from './selectors';
+{{/if}}
 {{#if wantActionsAndReducer}}
 import {
   defaultAction,
@@ -34,7 +38,7 @@ import {
 import reducer from './reducer';
 {{/if}}
 {{/if}}
-{{#if wantSaga}}
+{{#if wantSagas}}
 import sagas from './sagas';
 {{/if}}
 {{#if wantMessages}}
@@ -53,12 +57,14 @@ class {{ properCase name }} extends React.PureComponent {
 
     return (
       <div className={classes.content}>
-        <Typography>{this.props.data}</Typography>
-{{#if wantActionsAndReducer}}
-        <Button onClick={this.props.onDefaultAction}>DefaultAction</Button>
-{{/if}}
 {{#if wantMessages}}
         <FormattedMessage {...messages.header} />
+{{/if}}
+{{#if wantSelectors}}
+        <Typography>{this.props.data}</Typography>
+{{/if}}
+{{#if wantActionsAndReducer}}
+        <Button onClick={this.props.onDefaultAction}>DefaultAction</Button>
 {{/if}}
       </div>
     );
@@ -67,7 +73,9 @@ class {{ properCase name }} extends React.PureComponent {
 
 {{ properCase name }}.propTypes = {
   classes: PropTypes.object.isRequired,
+{{#if wantSelectors}}
   data: PropTypes.string.isRequired,
+{{/if}}
 {{#if wantActionsAndReducer}}
   onDefaultAction: PropTypes.func.isRequired,
 {{/if}}
@@ -81,15 +89,17 @@ export function mapDispatchToProps(dispatch) {
 }
 
 {{/if}}
+{{#if wantSelectors}}
 const mapStateToProps = createStructuredSelector({
   data: makeSelect{{ properCase name }}Data(),
 });
+{{/if}}
 
 export const styled{{ properCase name}} = withStyles(styles, { withTheme: true })({{ properCase name}});
 
 export default compose(
-{{#if wantSaga}}
-  injectSaga({ key: '{{ camelCase name }}', sagas }),
+{{#if wantSagas}}
+  injectSaga({ key: '{{ camelCase name }}', saga: sagas }),
 {{/if}}
 {{#if wantActionsAndReducer}}
 {{#if wantLoadable}}
@@ -97,6 +107,10 @@ export default compose(
 {{/if}}
   connect(mapStateToProps, mapDispatchToProps),
 {{else}}
+{{#if wantSelectors}}
   connect(mapStateToProps, null),
+{{else}}
+  connect(null, null),
+{{/if}}
 {{/if}}
 )(styled{{ properCase name }});
