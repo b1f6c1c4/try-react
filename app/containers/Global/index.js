@@ -28,6 +28,10 @@ const styles = (theme) => ({
   },
 });
 
+const ConnectedSwitch = connect(/* istanbul ignore next */ (state) => ({
+  location: state.get('route').get('location').toJS(),
+}))(Switch);
+
 class Global extends React.PureComponent {
   render() {
     const { classes } = this.props;
@@ -37,9 +41,9 @@ class Global extends React.PureComponent {
         <FormattedMessage {...messages.header} />
         <Typography>{this.props.isDrawerOpen.toString()}</Typography>
         <Button onClick={this.props.onToggleDrawerOpenAction}>ToggleDrawerOpenAction</Button>
-        <Switch>
+        <ConnectedSwitch>
           <Route component={NotFoundPage} />
-        </Switch>
+        </ConnectedSwitch>
       </div>
     );
   }
