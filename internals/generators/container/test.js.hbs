@@ -1,13 +1,11 @@
 import React from 'react';
-import { fromJS } from 'immutable';
-import { createStore } from 'redux';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 {{#if wantActionsAndReducer}}
-import {{ properCase name }}, { mapDispatchToProps } from '../index';
+import { styled{{ properCase name }} as {{ properCase name }}, mapDispatchToProps } from '../index';
 {{else}}
-import {{ properCase name }} from '../index';
+import { styled{{ properCase name }} as {{ properCase name }} } from '../index';
 {{/if}}
 
 {{#if wantActionsAndReducer}}
@@ -20,26 +18,15 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('<{{ properCase name }} />', () => {
   it('should render', () => {
-    const reducer = (s) => s;
-    const store = createStore(reducer, fromJS({
-      {{ camelCase name }}: {
-        data: 'value',
-      },
-    }));
-    let renderedComponent = shallow(
-      <{{ properCase name }} store={store} />
-    );
-{{#if wantSaga}}
-    renderedComponent = renderedComopnent.dive(); // withSaga
-{{/if}}
+    const renderedComponent = shallow(
+      <{{ properCase name }}
+        data="value"
 {{#if wantActionsAndReducer}}
-{{#if wantLoadable}}
-    renderedComponent = renderedComopnent.dive(); // withReducer
+        onDefaultAction={jest.fn()}
 {{/if}}
-{{/if}}
-    renderedComponent = renderedComopnent.dive(); // withConnect
-    renderedComponent = renderedComopnent.dive(); // withStyles
-    expect(renderedComponent.length).not.toBe(0);
+      />
+    ).dive();
+    expect(renderedComponent).toBeDefined();
   });
 });
 

@@ -18,7 +18,9 @@ import injectSaga from 'utils/injectSaga';
 import {
   withStyles,
   Typography,
+{{#if wantActionsAndReducer}}
   Button,
+{{/if}}
 } from 'material-ui';
 
 import {
@@ -52,7 +54,9 @@ class {{ properCase name }} extends React.PureComponent {
     return (
       <div className={classes.content}>
         <Typography>{this.props.data}</Typography>
+{{#if wantActionsAndReducer}}
         <Button onClick={this.props.onDefaultAction}>DefaultAction</Button>
+{{/if}}
 {{#if wantMessages}}
         <FormattedMessage {...messages.header} />
 {{/if}}
@@ -81,6 +85,8 @@ const mapStateToProps = createStructuredSelector({
   data: makeSelect{{ properCase name }}Data(),
 });
 
+export const styled{{ properCase name}} = withStyles(styles, { withTheme: true })({{ properCase name}});
+
 export default compose(
 {{#if wantSaga}}
   injectSaga({ key: '{{ camelCase name }}', saga }),
@@ -93,5 +99,4 @@ export default compose(
 {{else}}
   connect(mapStateToProps, null),
 {{/if}}
-  withStyles(styles, { withTheme: true }),
-)({{ properCase name }});
+)(styled{{ properCase name }});
