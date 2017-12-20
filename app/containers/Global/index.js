@@ -18,7 +18,7 @@ import {
 import {
   defaultAction,
 } from './actions';
-import saga from './saga';
+import sagas from './sagas';
 import messages from './messages';
 
 const styles = (theme) => ({
@@ -60,6 +60,6 @@ const mapStateToProps = createStructuredSelector({
 export const styledGlobal = withStyles(styles, { withTheme: true })(Global);
 
 export default compose(
-  injectSaga({ key: 'global', saga }),
+  injectSaga({ key: 'global', sagas }),
   connect(mapStateToProps, mapDispatchToProps),
 )(styledGlobal);
