@@ -1,7 +1,7 @@
 // Actions
-export const DEFAULT_ACTION = 'Global/actions/DEFAULT_ACTION';
+export const DEFAULT_ACTION = 'Global/DEFAULT_ACTION';
 
 // Sagas
-export const EXTERNAL_REQUEST = 'Global/sagas/EXTERNAL_REQUEST';
-export const EXTERNAL_SUCCESS = 'Global/sagas/EXTERNAL_SUCCESS';
-export const EXTERNAL_FAILURE = 'Global/sagas/EXTERNAL_FAILURE';
+export const EXTERNAL_REQUEST = 'Global/EXTERNAL_REQUEST';
+export const EXTERNAL_SUCCESS = 'Global/EXTERNAL_SUCCESS';
+export const EXTERNAL_FAILURE = 'Global/EXTERNAL_FAILURE';
