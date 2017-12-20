@@ -1,17 +1,17 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 
-import {
-  EXTERNAL_REQUEST,
-} from '../constants';
 import {
   externalSuccess,
   externalFailure,
 } from '../actions';
 
-import external, { externalRequest } from '../sagas';
+import {
+  externalRequest,
+} from '../sagas';
 
 const data = 'the-data';
 
+// Sagas
 /* eslint-disable redux-saga/yield-effects */
 describe('externalRequest Saga', () => {
   let externalRequestGenerator;
@@ -42,13 +42,3 @@ describe('externalRequest Saga', () => {
     expect(putDescriptor).toEqual(put(externalFailure(response)));
   });
 });
-
-describe('external Saga', () => {
-  const saga = external();
-
-  it('should start task to watch for EXTERNAL_REQUEST action', () => {
-    const takeLatestDescriptor = saga.next().value;
-    expect(takeLatestDescriptor).toEqual(takeLatest(EXTERNAL_REQUEST, externalRequest));
-  });
-});
-

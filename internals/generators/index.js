@@ -9,6 +9,7 @@ const path = require('path');
 const componentGenerator = require('./component/index.js');
 const containerGenerator = require('./container/index.js');
 const actionGenerator = require('./container/action/index.js');
+const sagaGenerator = require('./container/saga/index.js');
 const languageGenerator = require('./language/index.js');
 const complexModify = require('./utils/complexModify.js');
 
@@ -17,6 +18,7 @@ module.exports = (plop) => {
   plop.setGenerator('component', componentGenerator);
   plop.setGenerator('container', containerGenerator);
   plop.setGenerator('action', actionGenerator);
+  plop.setGenerator('saga', sagaGenerator);
   plop.setGenerator('language', languageGenerator);
   plop.addHelper('directory', (comp) => {
     try {

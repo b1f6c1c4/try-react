@@ -1,0 +1,10 @@
+export function* {{ camelCase name }}Request() {
+  const json = yield select(makeSelect{{ properCase name }}Data());
+
+  try {
+    const result = yield call(apiPOST, '/{{ camelCase name }}', undefined, json);
+    yield put({{ camelCase name }}Success(result));
+  } catch (err) {
+    yield put({{ camelCase name }}Failure(err));
+  }
+}

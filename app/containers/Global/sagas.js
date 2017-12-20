@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { apiPOST } from 'utils/request';
 
 import {
@@ -12,6 +12,7 @@ import {
   externalFailure,
 } from './actions';
 
+// Sagas
 export function* externalRequest() {
   const json = yield select(makeSelectGlobalData());
 
@@ -23,6 +24,8 @@ export function* externalRequest() {
   }
 }
 
-export default function* external() {
-  yield takeLatest(EXTERNAL_REQUEST, externalRequest);
+// Watcher
+export default /* istanbul ignore next */ function* watcher() {
+  /* istanbul ignore next */
+  yield takeEvery(EXTERNAL_REQUEST, externalRequest);
 }

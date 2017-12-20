@@ -1,0 +1,22 @@
+  it('should handle external request', () => {
+    const originalState = state;
+    const expectedResult = state;
+
+    expect({{ camelCase name }}Reducer(originalState, externalRequest())).toEqual(expectedResult);
+  });
+
+  it('should handle external success', () => {
+    const originalState = state;
+    const result = { };
+    const expectedResult = state;
+
+    expect({{ camelCase name }}Reducer(originalState, externalSuccess(result))).toEqual(expectedResult);
+  });
+
+  it('should handle external failure', () => {
+    const originalState = state;
+    const error = { };
+    const expectedResult = state;
+
+    expect({{ camelCase name }}Reducer(originalState, externalFailure(error))).toEqual(expectedResult);
+  });
