@@ -19,7 +19,7 @@ module.exports = {
   }, {
     type: 'input',
     name: 'name',
-    default: 'toggle',
+    default: 'toggle open',
     message: 'Name of the action?',
   }, {
     type: 'confirm',

@@ -1,9 +1,9 @@
 // Actions
-export const DEFAULT_ACTION = '{{ properCase name }}/DEFAULT_ACTION';
+export const {{ constantCase actionName }}_ACTION = '{{ properCase name }}/{{ constantCase actionName }}_ACTION';
 {{#if wantSagas}}
 
 // Sagas
-export const EXTERNAL_REQUEST = '{{ properCase name }}/EXTERNAL_REQUEST';
-export const EXTERNAL_SUCCESS = '{{ properCase name }}/EXTERNAL_SUCCESS';
-export const EXTERNAL_FAILURE = '{{ properCase name }}/EXTERNAL_FAILURE';
+export const {{ constantCase sagaName }}_REQUEST = '{{ properCase name }}/{{ constantCase sagaName }}_REQUEST';
+export const {{ constantCase sagaName }}_SUCCESS = '{{ properCase name }}/{{ constantCase sagaName }}_SUCCESS';
+export const {{ constantCase sagaName }}_FAILURE = '{{ properCase name }}/{{ constantCase sagaName }}_FAILURE';
 {{/if}}

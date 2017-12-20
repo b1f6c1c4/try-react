@@ -1,37 +1,37 @@
 import {
-  DEFAULT_ACTION,
+  {{ constantCase actionName }}_ACTION,
 {{#if wantSagas}}
-  EXTERNAL_REQUEST,
-  EXTERNAL_SUCCESS,
-  EXTERNAL_FAILURE,
+  {{ constantCase sagaName }}_REQUEST,
+  {{ constantCase sagaName }}_SUCCESS,
+  {{ constantCase sagaName }}_FAILURE,
 {{/if}}
 } from './constants';
 
 // Actions
-export function defaultAction() {
+export function {{ camelCase actionName }}Action() {
   return {
-    type: DEFAULT_ACTION,
+    type: {{ constantCase actionName }}_ACTION,
   };
 }
 {{#if wantSagas}}
 
 // Sagas
-export function externalRequest() {
+export function {{ camelCase sagaName }}Request() {
   return {
-    type: EXTERNAL_REQUEST,
+    type: {{ constantCase sagaName }}_REQUEST,
   };
 }
 
-export function externalSuccess(result) {
+export function {{ camelCase sagaName }}Success(result) {
   return {
-    type: EXTERNAL_SUCCESS,
+    type: {{ constantCase sagaName }}_SUCCESS,
     result,
   };
 }
 
-export function externalFailure(error) {
+export function {{ camelCase sagaName }}Failure(error) {
   return {
-    type: EXTERNAL_FAILURE,
+    type: {{ constantCase sagaName }}_FAILURE,
     error,
   };
 }

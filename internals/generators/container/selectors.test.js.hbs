@@ -2,7 +2,7 @@ import { fromJS } from 'immutable';
 
 import {
   select{{ properCase name }},
-  makeSelect{{ properCase name }}Data,
+  makeSelect{{ properCase name }}{{ properCase selectorName }},
 } from '../selectors';
 
 describe('select{{ properCase name }}', () => {
@@ -17,19 +17,19 @@ describe('select{{ properCase name }}', () => {
   });
 });
 
-describe('makeSelect{{ properCase name }}Data', () => {
-  const select{{ properCase name }}Data = makeSelect{{ properCase name }}Data();
+describe('makeSelect{{ properCase name }}{{ properCase selectorName }}', () => {
+  const select{{ properCase name }}{{ properCase selectorName }} = makeSelect{{ properCase name }}{{ properCase selectorName }}();
 
-  it('should select data', () => {
-    const data = fromJS({
+  it('should select {{ camelCase selectorName }}', () => {
+    const {{ camelCase selectorName }} = fromJS({
       key: 'value',
     });
     const state = fromJS({
-      data,
+      {{ camelCase selectorName }},
     });
     const mockedState = fromJS({
       {{ camelCase name }}: state,
     });
-    expect(select{{ properCase name }}Data(mockedState)).toEqual(data);
+    expect(select{{ properCase name }}{{ properCase selectorName }}(mockedState)).toEqual({{ camelCase selectorName }});
   });
 });

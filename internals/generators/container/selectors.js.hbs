@@ -2,7 +2,7 @@ import { createSelector } from 'reselect';
 
 export const select{{ properCase name }} = (state) => state.get('{{ camelCase name }}');
 
-export const makeSelect{{ properCase name }}Data = () => createSelector(
+export const makeSelect{{ properCase name }}{{ properCase selectorName }} = () => createSelector(
   select{{ properCase name }},
-  (state) => state.get('data'),
+  (state) => state.get('{{ camelCase selectorName }}'),
 );

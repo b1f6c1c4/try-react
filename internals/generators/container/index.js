@@ -20,21 +20,39 @@ module.exports = {
     },
   }, {
     type: 'confirm',
+    name: 'wantSelectors',
+    default: true,
+    message: 'Do you want selectors?',
+  }, {
+    type: 'input',
+    name: 'selectorName',
+    when: (ans) => ans.wantSelectors,
+    default: 'data',
+    message: 'Selector name?',
+  }, {
+    type: 'confirm',
     name: 'wantActionsAndReducer',
+    when: (ans) => ans.wantSelectors,
     default: true,
     message: 'Do you want an actions/reducer tuple for this container?',
   }, {
-    type: 'confirm',
-    name: 'wantSelectors',
-    when: (ans) => !ans.wantActionsAndReducer,
-    default: true,
-    message: 'Do you want selectors?',
+    type: 'input',
+    name: 'actionName',
+    when: (ans) => ans.wantActionsAndReducer,
+    default: 'default',
+    message: 'Action name?',
   }, {
     type: 'confirm',
     name: 'wantSagas',
     when: (ans) => ans.wantActionsAndReducer,
     default: true,
     message: 'Do you want sagas for asynchronous flows? (e.g. fetching data)',
+  }, {
+    type: 'input',
+    name: 'sagaName',
+    when: (ans) => ans.wantSagas,
+    default: 'external',
+    message: 'Saga name?',
   }, {
     type: 'confirm',
     name: 'wantMessages',
@@ -150,7 +168,7 @@ module.exports = {
         templateFile: './component/loadable.js.hbs',
         abortOnFail: true,
       });
-    } else {
+    } else if (data.wantActionsAndReducer) {
       actions.push({
         type: 'modify',
         pattern: /(from\s'containers\/[a-zA-Z]+\/reducer';\n)(?!.*from\s'containers\/[a-zA-Z]+\/reducer';)/g,

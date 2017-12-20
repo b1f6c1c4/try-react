@@ -3,11 +3,11 @@ import { fromJS } from 'immutable';
 import {{ camelCase name }}Reducer from '../reducer';
 
 import {
-  defaultAction,
+  {{ camelCase actionName }}Action,
 {{#if wantSagas}}
-  externalRequest,
-  externalSuccess,
-  externalFailure,
+  {{ camelCase sagaName }}Request,
+  {{ camelCase sagaName }}Success,
+  {{ camelCase sagaName }}Failure,
 {{/if}}
 } from '../actions';
 
@@ -15,7 +15,7 @@ describe('{{ camelCase name }}Reducer', () => {
   let state;
   beforeEach(() => {
     state = fromJS({
-      data: 'the data',
+      {{ camelCase selectorName }}: 'the {{ camelCase selectorName }}',
     });
   });
 
@@ -25,36 +25,36 @@ describe('{{ camelCase name }}Reducer', () => {
   });
 
   // Actions
-  it('should handle default action', () => {
+  it('should handle {{ camelCase actionName }} action', () => {
     const originalState = state;
     const expectedResult = state;
 
-    expect({{ camelCase name }}Reducer(originalState, defaultAction())).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase actionName }}Action())).toEqual(expectedResult);
   });
 {{#if wantSagas}}
 
   // Sagas
-  it('should handle external request', () => {
+  it('should handle {{ camelCase sagaName }} request', () => {
     const originalState = state;
     const expectedResult = state;
 
-    expect({{ camelCase name }}Reducer(originalState, externalRequest())).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Request())).toEqual(expectedResult);
   });
 
-  it('should handle external success', () => {
+  it('should handle {{ camelCase sagaName }} success', () => {
     const originalState = state;
     const result = { };
     const expectedResult = state;
 
-    expect({{ camelCase name }}Reducer(originalState, externalSuccess(result))).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Success(result))).toEqual(expectedResult);
   });
 
-  it('should handle external failure', () => {
+  it('should handle {{ camelCase sagaName }} failure', () => {
     const originalState = state;
     const error = { };
     const expectedResult = state;
 
-    expect({{ camelCase name }}Reducer(originalState, externalFailure(error))).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Failure(error))).toEqual(expectedResult);
   });
 {{/if}}
 });

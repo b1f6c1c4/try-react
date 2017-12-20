@@ -1,44 +1,44 @@
 import { put } from 'redux-saga/effects';
 
 import {
-  externalSuccess,
-  externalFailure,
+  {{ camelCase sagaName }}Success,
+  {{ camelCase sagaName }}Failure,
 } from '../actions';
 
 import {
-  externalRequest,
+  {{ camelCase sagaName }}Request,
 } from '../sagas';
 
-const data = 'the-data';
+const {{ camelCase selectorName }} = 'the-{{ camelCase selectorName }}';
 
 // Sagas
 /* eslint-disable redux-saga/yield-effects */
-describe('externalRequest Saga', () => {
-  let externalRequestGenerator;
+describe('{{ camelCase sagaName }}Request Saga', () => {
+  let {{ camelCase sagaName }}RequestGenerator;
 
   beforeEach(() => {
-    externalRequestGenerator = externalRequest();
+    {{ camelCase sagaName }}RequestGenerator = {{ camelCase sagaName }}Request();
 
-    const selectDescriptor = externalRequestGenerator.next().value;
+    const selectDescriptor = {{ camelCase sagaName }}RequestGenerator.next().value;
     expect(selectDescriptor).toMatchSnapshot();
 
-    const callDescriptor = externalRequestGenerator.next(data).value;
+    const callDescriptor = {{ camelCase sagaName }}RequestGenerator.next({{ camelCase selectorName }}).value;
     expect(callDescriptor).toMatchSnapshot();
   });
 
-  it('should dispatch the externalSuccess action if it requests the data successfully', () => {
+  it('should dispatch the {{ camelCase sagaName }}Success action if it requests the {{ camelCase selectorName }} successfully', () => {
     const response = [{
       name: 'First',
     }, {
       name: 'Second',
     }];
-    const putDescriptor = externalRequestGenerator.next(response).value;
-    expect(putDescriptor).toEqual(put(externalSuccess(response)));
+    const putDescriptor = {{ camelCase sagaName }}RequestGenerator.next(response).value;
+    expect(putDescriptor).toEqual(put({{ camelCase sagaName }}Success(response)));
   });
 
-  it('should call the externalFailure action if the response errors', () => {
+  it('should call the {{ camelCase sagaName }}Failure action if the response errors', () => {
     const response = new Error('Some error');
-    const putDescriptor = externalRequestGenerator.throw(response).value;
-    expect(putDescriptor).toEqual(put(externalFailure(response)));
+    const putDescriptor = {{ camelCase sagaName }}RequestGenerator.throw(response).value;
+    expect(putDescriptor).toEqual(put({{ camelCase sagaName }}Failure(response)));
   });
 });

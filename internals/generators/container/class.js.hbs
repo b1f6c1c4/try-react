@@ -19,7 +19,9 @@ import injectSaga from 'utils/injectSaga';
 
 import {
   withStyles,
+{{#if wantSelectors}}
   Typography,
+{{/if}}
 {{#if wantActionsAndReducer}}
   Button,
 {{/if}}
@@ -27,12 +29,12 @@ import {
 
 {{#if wantSelectors}}
 import {
-  makeSelect{{ properCase name }}Data,
+  makeSelect{{ properCase name }}{{ properCase selectorName }},
 } from './selectors';
 {{/if}}
 {{#if wantActionsAndReducer}}
 import {
-  defaultAction,
+  {{ camelCase actionName }}Action,
 } from './actions';
 {{#if wantLoadable}}
 import reducer from './reducer';
@@ -61,10 +63,10 @@ class {{ properCase name }} extends React.PureComponent {
         <FormattedMessage {...messages.header} />
 {{/if}}
 {{#if wantSelectors}}
-        <Typography>{this.props.data}</Typography>
+        <Typography>{{curly true}}this.props.{{ camelCase selectorName }}{{curly false}}</Typography>
 {{/if}}
 {{#if wantActionsAndReducer}}
-        <Button onClick={this.props.onDefaultAction}>DefaultAction</Button>
+        <Button onClick={this.props.on{{ properCase actionName }}Action}>{{ properCase actionName }}Action</Button>
 {{/if}}
       </div>
     );
@@ -74,24 +76,24 @@ class {{ properCase name }} extends React.PureComponent {
 {{ properCase name }}.propTypes = {
   classes: PropTypes.object.isRequired,
 {{#if wantSelectors}}
-  data: PropTypes.string.isRequired,
+  {{ camelCase selectorName }}: PropTypes.string.isRequired,
 {{/if}}
 {{#if wantActionsAndReducer}}
-  onDefaultAction: PropTypes.func.isRequired,
+  on{{ properCase actionName }}Action: PropTypes.func.isRequired,
 {{/if}}
 };
 
 {{#if wantActionsAndReducer}}
 export function mapDispatchToProps(dispatch) {
   return {
-    onDefaultAction: () => dispatch(defaultAction()),
+    on{{ properCase actionName }}Action: () => dispatch({{ camelCase actionName }}Action()),
   };
 }
 
 {{/if}}
 {{#if wantSelectors}}
 const mapStateToProps = createStructuredSelector({
-  data: makeSelect{{ properCase name }}Data(),
+  {{ camelCase selectorName }}: makeSelect{{ properCase name }}{{ properCase selectorName }}(),
 });
 {{/if}}
 
