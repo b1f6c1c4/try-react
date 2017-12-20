@@ -1,5 +1,4 @@
-import { ROOT_LOCALE } from '../i18n';
-import { formatTranslationMessages } from '../i18n';
+import { ROOT_LOCALE, formatTranslationMessages } from '../i18n';
 
 jest.mock('../translations/en.json', () => (
   {
