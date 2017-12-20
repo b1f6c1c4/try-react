@@ -53,8 +53,8 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       pattern: /^ {2}[A-Z_]+_FAILURE,$/g,
       path: '../../app/containers/{{properCase container}}/actions.js',
       template: `  {{ constantCase name }}_REQUEST,
-{{ constantCase name }}_SUCCESS,
-{{ constantCase name }}_FAILURE,`,
+  {{ constantCase name }}_SUCCESS,
+  {{ constantCase name }}_FAILURE,`,
       abortOnFail: true,
     });
     actions.push({
@@ -64,7 +64,7 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       section: /^\/\/ Sagas/g,
       pattern: /^\/\/ [A-Z][a-zA-Z]*$/g,
       path: '../../app/containers/{{properCase container}}/actions.js',
-      templateFile: './container/action/actions.js.hbs',
+      templateFile: './container/saga/actions.js.hbs',
       abortOnFail: true,
     });
 
@@ -75,8 +75,8 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       pattern: /^ {2}[A-Z_]+_FAILURE,$/g,
       path: '../../app/containers/{{properCase container}}/reducer.js',
       template: `  {{ constantCase name }}_REQUEST,
-{{ constantCase name }}_SUCCESS,
-{{ constantCase name }}_FAILURE,`,
+  {{ constantCase name }}_SUCCESS,
+  {{ constantCase name }}_FAILURE,`,
       abortOnFail: true,
     });
     actions.push({
@@ -87,7 +87,7 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       section: /^ {4}\/\/ Sagas/g,
       pattern: /^ {4}\/\/ [A-Z][a-zA-Z]*$/g,
       path: '../../app/containers/{{properCase container}}/reducer.js',
-      templateFile: './container/action/reducer.js.hbs',
+      templateFile: './container/saga/reducer.js.hbs',
       abortOnFail: true,
     });
 
@@ -109,7 +109,7 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       section: /^ {2}\/\/ Sagas/g,
       pattern: /^ {2}\/\/ [A-Z][a-zA-Z]*$/g,
       path: '../../app/containers/{{properCase container}}/tests/reducer.test.js',
-      templateFile: './container/action/reducer.test.js.hbs',
+      templateFile: './container/saga/reducer.test.js.hbs',
       abortOnFail: true,
     });
 
@@ -138,13 +138,13 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       section: /^\/\/ Sagas/g,
       pattern: /^\/\/ [A-Z][a-zA-Z]*$/g,
       path: '../../app/containers/{{properCase container}}/sagas.js',
-      templateFile: './container/action/sagas.js.hbs',
+      templateFile: './container/saga/sagas.js.hbs',
       abortOnFail: true,
     });
     actions.push({
       type: 'complexModify',
       method: 'lastOccurance',
-      pattern: /^ yield take.*REQUEST.*Request);$/g,
+      pattern: /^ {2}yield take.*REQUEST.*Request\);$/g,
       path: '../../app/containers/{{properCase container}}/sagas.js',
       template: `  /* istanbul ignore next */
   yield takeEvery({{ constantCase name }}_REQUEST, {{ camelCase name }}Request);`,
@@ -176,7 +176,7 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       section: /^\/\/ Sagas/g,
       pattern: /^\/\/ [A-Z][a-zA-Z]*$/g,
       path: '../../app/containers/{{properCase container}}/tests/sagas.test.js',
-      templateFile: './container/action/sagas.test.js.hbs',
+      templateFile: './container/saga/sagas.test.js.hbs',
       abortOnFail: true,
     });
 
