@@ -1,12 +1,18 @@
+import root from 'window-or-global';
 import 'whatwg-fetch';
 
-/**
- * Parses the JSON returned by a network request
- *
- * @param  {object} response A response from a network request
- *
- * @return {object}          The parsed JSON from the request
- */
+export const apiUrl = (raw, host) => {
+  if (!raw) {
+    return '/api';
+  }
+  if (host.includes('try-react-staging')) {
+    return raw.replace('try-react', 'try-react-staging');
+  }
+  return raw;
+};
+
+export const makeApi = (url) => apiUrl(process.env.API_URL, root.location.hostname) + url;
+
 function parseJSON(response) {
   if (response.status === 204 || response.status === 205) {
     return null;
@@ -14,13 +20,6 @@ function parseJSON(response) {
   return response.json();
 }
 
-/**
- * Checks if a network request came back fine, and throws an error if not
- *
- * @param  {object} response   A response from a network request
- *
- * @return {object|undefined} Returns either the response, or throws an error
- */
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -31,16 +30,35 @@ function checkStatus(response) {
   throw error;
 }
 
-/**
- * Requests a URL, returning a promise
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- *
- * @return {object}           The response data
- */
-export default function request(url, options) {
-  return fetch(url, options)
-    .then(checkStatus)
+function apiBare(method, url, auth) {
+  return fetch(makeApi(url), {
+    method,
+    headers: {
+      Authorization: auth,
+    },
+  }).then(checkStatus)
     .then(parseJSON);
 }
+
+export function api(method, url, auth, body) {
+  if (!body) {
+    return apiBare(method, url, auth);
+  }
+
+  return fetch(makeApi(url), {
+    method,
+    headers: {
+      Authorization: auth,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  }).then(checkStatus)
+    .then(parseJSON);
+}
+
+/* istanbul ignore next */
+export const apiGET = (url, auth, body) => api('GET', url, auth, body);
+export const apiPOST = (url, auth, body) => api('POST', url, auth, body);
+export const apiPUT = (url, auth, body) => api('PUT', url, auth, body);
+export const apiDELETE = (url, auth) => api('DELETE', url, auth);
+export const apiPATCH = (url, auth, body) => api('PATCH', url, auth, body);

@@ -1,18 +1,16 @@
-
 import {
-  defaultAction,
-} from '../actions';
-import {
-  DEFAULT_ACTION,
+  {{ constantCase actionName }}_ACTION,
 } from '../constants';
 
+import {
+  {{ camelCase actionName }}Action,
+} from '../actions';
+
 describe('{{ properCase name }} actions', () => {
-  describe('Default Action', () => {
-    it('has a type of DEFAULT_ACTION', () => {
-      const expected = {
-        type: DEFAULT_ACTION,
-      };
-      expect(defaultAction()).toEqual(expected);
+  // Actions
+  describe('{{ camelCase actionName }} action', () => {
+    it('has a type of {{ constantCase actionName }}_ACTION', () => {
+      expect({{ camelCase actionName }}Action().type).toEqual({{ constantCase actionName }}_ACTION);
     });
   });
 });

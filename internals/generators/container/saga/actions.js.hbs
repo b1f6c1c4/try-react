@@ -1,0 +1,19 @@
+export function {{ camelCase name }}Request() {
+  return {
+    type: {{ constantCase name }}_REQUEST,
+  };
+}
+
+export function {{ camelCase name }}Success(result) {
+  return {
+    type: {{ constantCase name }}_SUCCESS,
+    result,
+  };
+}
+
+export function {{ camelCase name }}Failure(error) {
+  return {
+    type: {{ constantCase name }}_FAILURE,
+    error,
+  };
+}

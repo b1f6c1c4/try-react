@@ -1,8 +1,35 @@
-// import { fromJS } from 'immutable';
-// import { select{{ properCase name }}Domain } from '../selectors';
+import { fromJS } from 'immutable';
 
-describe('select{{ properCase name }}Domain', () => {
-  it('Expect to have unit tests specified', () => {
-    expect(true).toEqual(false);
+import {
+  select{{ properCase name }},
+  makeSelect{{ properCase name }}{{ properCase selectorName }},
+} from '../selectors';
+
+describe('select{{ properCase name }}', () => {
+  it('should select the {{ camelCase name }} state', () => {
+    const state = fromJS({
+      key: 'value',
+    });
+    const mockedState = fromJS({
+      {{ camelCase name }}: state,
+    });
+    expect(select{{ properCase name }}(mockedState)).toEqual(state);
+  });
+});
+
+describe('makeSelect{{ properCase name }}{{ properCase selectorName }}', () => {
+  const select{{ properCase name }}{{ properCase selectorName }} = makeSelect{{ properCase name }}{{ properCase selectorName }}();
+
+  it('should select {{ camelCase selectorName }}', () => {
+    const {{ camelCase selectorName }} = fromJS({
+      key: 'value',
+    });
+    const state = fromJS({
+      {{ camelCase selectorName }},
+    });
+    const mockedState = fromJS({
+      {{ camelCase name }}: state,
+    });
+    expect(select{{ properCase name }}{{ properCase selectorName }}(mockedState)).toEqual({{ camelCase selectorName }});
   });
 });

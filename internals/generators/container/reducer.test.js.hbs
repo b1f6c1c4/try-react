@@ -1,9 +1,60 @@
-
 import { fromJS } from 'immutable';
+
 import {{ camelCase name }}Reducer from '../reducer';
 
+import {
+  {{ camelCase actionName }}Action,
+{{#if wantSagas}}
+  {{ camelCase sagaName }}Request,
+  {{ camelCase sagaName }}Success,
+  {{ camelCase sagaName }}Failure,
+{{/if}}
+} from '../actions';
+
 describe('{{ camelCase name }}Reducer', () => {
-  it('returns the initial state', () => {
-    expect({{ camelCase name }}Reducer(undefined, {})).toEqual(fromJS({}));
+  let state;
+  beforeEach(() => {
+    state = fromJS({
+      {{ camelCase selectorName }}: 'the {{ camelCase selectorName }}',
+    });
   });
+
+  it('should return the initial state', () => {
+    const expectedResult = state;
+    expect({{ camelCase name }}Reducer(undefined, {})).toEqual(expectedResult);
+  });
+
+  // Actions
+  it('should handle {{ camelCase actionName }} action', () => {
+    const originalState = state;
+    const expectedResult = state;
+
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase actionName }}Action())).toEqual(expectedResult);
+  });
+{{#if wantSagas}}
+
+  // Sagas
+  it('should handle {{ camelCase sagaName }} request', () => {
+    const originalState = state;
+    const expectedResult = state;
+
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Request())).toEqual(expectedResult);
+  });
+
+  it('should handle {{ camelCase sagaName }} success', () => {
+    const originalState = state;
+    const result = { };
+    const expectedResult = state;
+
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Success(result))).toEqual(expectedResult);
+  });
+
+  it('should handle {{ camelCase sagaName }} failure', () => {
+    const originalState = state;
+    const error = { };
+    const expectedResult = state;
+
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Failure(error))).toEqual(expectedResult);
+  });
+{{/if}}
 });

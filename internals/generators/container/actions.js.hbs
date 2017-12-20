@@ -1,15 +1,38 @@
-/*
- *
- * {{ properCase name }} actions
- *
- */
-
 import {
-  DEFAULT_ACTION,
+  {{ constantCase actionName }}_ACTION,
+{{#if wantSagas}}
+  {{ constantCase sagaName }}_REQUEST,
+  {{ constantCase sagaName }}_SUCCESS,
+  {{ constantCase sagaName }}_FAILURE,
+{{/if}}
 } from './constants';
 
-export function defaultAction() {
+// Actions
+export function {{ camelCase actionName }}Action() {
   return {
-    type: DEFAULT_ACTION,
+    type: {{ constantCase actionName }}_ACTION,
   };
 }
+{{#if wantSagas}}
+
+// Sagas
+export function {{ camelCase sagaName }}Request() {
+  return {
+    type: {{ constantCase sagaName }}_REQUEST,
+  };
+}
+
+export function {{ camelCase sagaName }}Success(result) {
+  return {
+    type: {{ constantCase sagaName }}_SUCCESS,
+    result,
+  };
+}
+
+export function {{ camelCase sagaName }}Failure(error) {
+  return {
+    type: {{ constantCase sagaName }}_FAILURE,
+    error,
+  };
+}
+{{/if}}

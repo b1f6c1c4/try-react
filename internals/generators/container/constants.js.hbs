@@ -1,7 +1,9 @@
-/*
- *
- * {{ properCase name }} constants
- *
- */
+// Actions
+export const {{ constantCase actionName }}_ACTION = '{{ properCase name }}/{{ constantCase actionName }}_ACTION';
+{{#if wantSagas}}
 
-export const DEFAULT_ACTION = 'app/{{ properCase name }}/DEFAULT_ACTION';
+// Sagas
+export const {{ constantCase sagaName }}_REQUEST = '{{ properCase name }}/{{ constantCase sagaName }}_REQUEST';
+export const {{ constantCase sagaName }}_SUCCESS = '{{ properCase name }}/{{ constantCase sagaName }}_SUCCESS';
+export const {{ constantCase sagaName }}_FAILURE = '{{ properCase name }}/{{ constantCase sagaName }}_FAILURE';
+{{/if}}

@@ -1,0 +1,30 @@
+/* eslint-disable redux-saga/yield-effects */
+describe('{{ camelCase name }}Request Saga', () => {
+  let {{ camelCase name }}RequestGenerator;
+
+  beforeEach(() => {
+    {{ camelCase name }}RequestGenerator = {{ camelCase name }}Request();
+
+    const selectDescriptor = {{ camelCase name }}RequestGenerator.next().value;
+    expect(selectDescriptor).toMatchSnapshot();
+
+    const callDescriptor = {{ camelCase name }}RequestGenerator.next(data).value;
+    expect(callDescriptor).toMatchSnapshot();
+  });
+
+  it('should dispatch the {{ camelCase name }}Success action if it requests the data successfully', () => {
+    const response = [{
+      name: 'First',
+    }, {
+      name: 'Second',
+    }];
+    const putDescriptor = {{ camelCase name }}RequestGenerator.next(response).value;
+    expect(putDescriptor).toEqual(put({{ camelCase name }}Success(response)));
+  });
+
+  it('should call the {{ camelCase name }}Failure action if the response errors', () => {
+    const response = new Error('Some error');
+    const putDescriptor = {{ camelCase name }}RequestGenerator.throw(response).value;
+    expect(putDescriptor).toEqual(put({{ camelCase name }}Failure(response)));
+  });
+});

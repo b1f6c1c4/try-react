@@ -1,20 +1,33 @@
-/*
- *
- * {{ properCase name }} reducer
- *
- */
-
 import { fromJS } from 'immutable';
+
 import {
-  DEFAULT_ACTION,
+  {{ constantCase actionName }}_ACTION,
+{{#if wantSagas}}
+  {{ constantCase sagaName }}_REQUEST,
+  {{ constantCase sagaName }}_SUCCESS,
+  {{ constantCase sagaName }}_FAILURE,
+{{/if}}
 } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  {{ camelCase selectorName }}: 'the {{ camelCase selectorName }}',
+});
 
 function {{ camelCase name }}Reducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
+    // Actions
+    case {{ constantCase actionName }}_ACTION:
       return state;
+{{#if wantSagas}}
+    // Sagas
+    case {{ constantCase sagaName }}_REQUEST:
+      return state;
+    case {{ constantCase sagaName }}_SUCCESS:
+      return state;
+    case {{ constantCase sagaName }}_FAILURE:
+      return state;
+{{/if}}
+    // Default
     default:
       return state;
   }

@@ -3,9 +3,13 @@ coverage
 build
 node_modules
 stats.json
+dll
 
 # Cruft
 *~
+*.swp
+*.swo
 .DS_Store
 npm-debug.log
+yarn-error.log
 .idea

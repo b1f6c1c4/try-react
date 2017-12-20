@@ -1,89 +1,118 @@
-/**
- *
- * {{properCase name }}
- *
- */
-
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
-{{#if wantHeaders}}
-import { Helmet } from 'react-helmet';
+{{#if wantSelectors}}
+import { createStructuredSelector } from 'reselect';
 {{/if}}
 {{#if wantMessages}}
 import { FormattedMessage } from 'react-intl';
 {{/if}}
 {{#if wantActionsAndReducer}}
-import { createStructuredSelector } from 'reselect';
+{{#if wantLoadable}}
+import injectReducer from 'utils/injectReducer';
 {{/if}}
-import { compose } from 'redux';
-
-{{#if wantSaga}}
+{{/if}}
+{{#if wantSagas}}
 import injectSaga from 'utils/injectSaga';
 {{/if}}
+
+import {
+  withStyles,
+{{#if wantSelectors}}
+  Typography,
+{{/if}}
 {{#if wantActionsAndReducer}}
-import injectReducer from 'utils/injectReducer';
-import makeSelect{{properCase name}} from './selectors';
+  Button,
+{{/if}}
+} from 'material-ui';
+
+{{#if wantSelectors}}
+import {
+  makeSelect{{ properCase name }}{{ properCase selectorName }},
+} from './selectors';
+{{/if}}
+{{#if wantActionsAndReducer}}
+import {
+  {{ camelCase actionName }}Action,
+} from './actions';
+{{#if wantLoadable}}
 import reducer from './reducer';
 {{/if}}
-{{#if wantSaga}}
-import saga from './saga';
+{{/if}}
+{{#if wantSagas}}
+import sagas from './sagas';
 {{/if}}
 {{#if wantMessages}}
 import messages from './messages';
 {{/if}}
 
-export class {{ properCase name }} extends {{{ type }}} { // eslint-disable-line react/prefer-stateless-function
+const styles = (theme) => ({
+  content: {
+    backgroundColor: theme.palette.background.default,
+  },
+});
+
+class {{ properCase name }} extends React.PureComponent {
   render() {
+    const { classes } = this.props;
+
     return (
-      <div>
-      {{#if wantHeaders}}
-        <Helmet>
-          <title>{{properCase name}}</title>
-          <meta name="description" content="Description of {{properCase name}}" />
-        </Helmet>
-      {{/if}}
-      {{#if wantMessages}}
+      <div className={classes.content}>
+{{#if wantMessages}}
         <FormattedMessage {...messages.header} />
-      {{/if}}
+{{/if}}
+{{#if wantSelectors}}
+        <Typography>{{curly true}}this.props.{{ camelCase selectorName }}{{curly false}}</Typography>
+{{/if}}
+{{#if wantActionsAndReducer}}
+        <Button onClick={this.props.on{{ properCase actionName }}Action}>{{ properCase actionName }}Action</Button>
+{{/if}}
       </div>
     );
   }
 }
 
 {{ properCase name }}.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  classes: PropTypes.object.isRequired,
+{{#if wantSelectors}}
+  {{ camelCase selectorName }}: PropTypes.string.isRequired,
+{{/if}}
+{{#if wantActionsAndReducer}}
+  on{{ properCase actionName }}Action: PropTypes.func.isRequired,
+{{/if}}
 };
 
 {{#if wantActionsAndReducer}}
-const mapStateToProps = createStructuredSelector({
-  {{ lowerCase name }}: makeSelect{{properCase name}}(),
-});
-{{/if}}
-
-function mapDispatchToProps(dispatch) {
+export function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    on{{ properCase actionName }}Action: () => dispatch({{ camelCase actionName }}Action()),
   };
 }
 
-{{#if wantActionsAndReducer}}
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+{{/if}}
+{{#if wantSelectors}}
+const mapStateToProps = createStructuredSelector({
+  {{ camelCase selectorName }}: makeSelect{{ properCase name }}{{ properCase selectorName }}(),
+});
+{{/if}}
 
-const withReducer = injectReducer({ key: '{{ camelCase name }}', reducer });
-{{else}}
-const withConnect = connect(null, mapDispatchToProps);
-{{/if}}
-{{#if wantSaga}}
-const withSaga = injectSaga({ key: '{{ camelCase name }}', saga });
-{{/if}}
+export const styled{{ properCase name}} = withStyles(styles, { withTheme: true })({{ properCase name}});
 
 export default compose(
+{{#if wantSagas}}
+  injectSaga({ key: '{{ camelCase name }}', saga: sagas }),
+{{/if}}
 {{#if wantActionsAndReducer}}
-  withReducer,
+{{#if wantLoadable}}
+  injectReducer({ key: '{{ camelCase name }}', reducer }),
 {{/if}}
-{{#if wantSaga}}
-  withSaga,
+  connect(mapStateToProps, mapDispatchToProps),
+{{else}}
+{{#if wantSelectors}}
+  connect(mapStateToProps, null),
+{{else}}
+  connect(null, null),
 {{/if}}
-  withConnect,
-)({{ properCase name }});
+{{/if}}
+)(styled{{ properCase name }});

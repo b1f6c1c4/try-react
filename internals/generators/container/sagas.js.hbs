@@ -1,0 +1,31 @@
+import { call, put, select, takeEvery } from 'redux-saga/effects';
+import { apiPOST } from 'utils/request';
+
+import {
+  {{ constantCase sagaName }}_REQUEST,
+} from './constants';
+import {
+  makeSelect{{ properCase name }}{{ properCase selectorName }},
+} from './selectors';
+import {
+  {{ camelCase sagaName }}Success,
+  {{ camelCase sagaName }}Failure,
+} from './actions';
+
+// Sagas
+export function* {{ camelCase sagaName }}Request() {
+  const json = yield select(makeSelect{{ properCase name }}{{ properCase selectorName }}());
+
+  try {
+    const result = yield call(apiPOST, '/{{ camelCase sagaName }}', undefined, json);
+    yield put({{ camelCase sagaName }}Success(result));
+  } catch (err) {
+    yield put({{ camelCase sagaName }}Failure(err));
+  }
+}
+
+// Watcher
+export default /* istanbul ignore next */ function* watcher() {
+  /* istanbul ignore next */
+  yield takeEvery({{ constantCase sagaName }}_REQUEST, {{ camelCase sagaName }}Request);
+}

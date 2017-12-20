@@ -1,0 +1,44 @@
+import { put } from 'redux-saga/effects';
+
+import {
+  {{ camelCase sagaName }}Success,
+  {{ camelCase sagaName }}Failure,
+} from '../actions';
+
+import {
+  {{ camelCase sagaName }}Request,
+} from '../sagas';
+
+const {{ camelCase selectorName }} = 'the-{{ camelCase selectorName }}';
+
+// Sagas
+/* eslint-disable redux-saga/yield-effects */
+describe('{{ camelCase sagaName }}Request Saga', () => {
+  let {{ camelCase sagaName }}RequestGenerator;
+
+  beforeEach(() => {
+    {{ camelCase sagaName }}RequestGenerator = {{ camelCase sagaName }}Request();
+
+    const selectDescriptor = {{ camelCase sagaName }}RequestGenerator.next().value;
+    expect(selectDescriptor).toMatchSnapshot();
+
+    const callDescriptor = {{ camelCase sagaName }}RequestGenerator.next({{ camelCase selectorName }}).value;
+    expect(callDescriptor).toMatchSnapshot();
+  });
+
+  it('should dispatch the {{ camelCase sagaName }}Success action if it requests the {{ camelCase selectorName }} successfully', () => {
+    const response = [{
+      name: 'First',
+    }, {
+      name: 'Second',
+    }];
+    const putDescriptor = {{ camelCase sagaName }}RequestGenerator.next(response).value;
+    expect(putDescriptor).toEqual(put({{ camelCase sagaName }}Success(response)));
+  });
+
+  it('should call the {{ camelCase sagaName }}Failure action if the response errors', () => {
+    const response = new Error('Some error');
+    const putDescriptor = {{ camelCase sagaName }}RequestGenerator.throw(response).value;
+    expect(putDescriptor).toEqual(put({{ camelCase sagaName }}Failure(response)));
+  });
+});
