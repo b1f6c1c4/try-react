@@ -1,0 +1,14 @@
+  describe('onDefaultAction', () => {
+    it('should be injected', () => {
+      const dispatch = jest.fn();
+      const result = mapDispatchToProps(dispatch);
+      expect(result.onDefaultAction).toBeDefined();
+    });
+
+    it('should dispatch defaultAction when called', () => {
+      const dispatch = jest.fn();
+      const result = mapDispatchToProps(dispatch);
+      result.onDefaultAction();
+      expect(dispatch).toHaveBeenCalledWith(defaultAction());
+    });
+  });

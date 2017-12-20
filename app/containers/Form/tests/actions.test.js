@@ -1,12 +1,14 @@
 import {
-  defaultAction,
-} from '../actions';
-
-import {
   DEFAULT_ACTION,
 } from '../constants';
 
+import {
+  defaultAction,
+} from '../actions';
+
 describe('Form actions', () => {
+
+  // Actions
   describe('default action', () => {
     it('has a type of DEFAULT_ACTION', () => {
       const expected = {
@@ -15,4 +17,5 @@ describe('Form actions', () => {
       expect(defaultAction()).toEqual(expected);
     });
   });
+
 });

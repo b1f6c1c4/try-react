@@ -34,25 +34,107 @@ module.exports = {
 
     const actions = [];
 
+    // constants.js
     actions.push({
-      type: 'modify',
-      pattern: /([A-Z_]+_ACTION';\n)(?!.*[A-Z_]+_ACTION')/g,
+      type: 'complexModify',
+      method: 'lastOccurance',
+      pattern: /[A-Z_]+_ACTION';$/g,
       path: '../../app/containers/{{properCase container}}/constants.js',
-      templateFile: './container/action/constants.js.hbs',
+      template: 'export const {{ constantCase name }}_ACTION = \'{{ properCase container }}/{{ constantCase name }}_ACTION\'',
+      abortOnFail: true,
+    });
+
+    // actions.js
+    actions.push({
+      type: 'complexModify',
+      method: 'lastOccurance',
+      pattern: /^ {2}[A-Z_]+_ACTION,$/g,
+      path: '../../app/containers/{{properCase container}}/actions.js',
+      template: '  {{ constantCase name }}_ACTION,',
       abortOnFail: true,
     });
     actions.push({
-      type: 'modify',
-      pattern: /([A-Z_]+_ACTION';\n)(?!.*[A-Z_]+_ACTION')/g,
+      type: 'complexModify',
+      method: 'sectionEnd',
+      indent: 0,
+      section: /^\/\/ Actions/g,
+      pattern: /^\/\/ [A-Z][a-zA-Z]*$/g,
       path: '../../app/containers/{{properCase container}}/actions.js',
-      templateFile: './container/action/actions-constant.js.hbs',
+      templateFile: './container/action/actions.js.hbs',
+      abortOnFail: true,
+    });
+
+    // actions.test.js
+    actions.push({
+      type: 'complexModify',
+      method: 'lastOccurance',
+      pattern: /^ {2}[A-Z_]+_ACTION,$/g,
+      path: '../../app/containers/{{properCase container}}/tests/actions.test.js',
+      template: '  {{ constantCase name }}_ACTION,',
       abortOnFail: true,
     });
     actions.push({
-      type: 'modify',
-      pattern: /(export function [a-zA-Z]+Action.*^};\n)(?!.*export function [a-zA-Z_]+Action')/g,
-      path: '../../app/containers/{{properCase container}}/actions.js',
-      templateFile: './container/action/actions-function.js.hbs',
+      type: 'complexModify',
+      method: 'lastOccurance',
+      pattern: /^ {2}[a-zA-Z]+Action,$/g,
+      path: '../../app/containers/{{properCase container}}/tests/actions.test.js',
+      template: '  {{ camelCase name }}Action,',
+      abortOnFail: true,
+    });
+    actions.push({
+      type: 'complexModify',
+      method: 'sectionEnd',
+      indent: 2,
+      section: /^\/\/ Actions/g,
+      pattern: /^\/\/ [A-Z][a-zA-Z]*$/g,
+      path: '../../app/containers/{{properCase container}}/tests/actions.test.js',
+      templateFile: './container/action/actions.test.js.hbs',
+      abortOnFail: true,
+    });
+
+    // index.js
+    actions.push({
+      type: 'complexModify',
+      method: 'lastOccurance',
+      pattern: /^ {2}[a-zA-Z]+Action,$/g,
+      path: '../../app/containers/{{properCase container}}/index.js',
+      template: '  {{ camelCase name }}Action,',
+      abortOnFail: true,
+    });
+    actions.push({
+      type: 'complexModify',
+      method: 'lastOccurance',
+      pattern: /^ {2}on[a-zA-Z]+: PropTypes/g,
+      path: '../../app/containers/{{properCase container}}/index.js',
+      template: '  on{{ ProperCase name }}Action: PropTypes.func.isRequired,',
+      abortOnFail: true,
+    });
+    actions.push({
+      type: 'complexModify',
+      method: 'lastOccurance',
+      pattern: /^ {2}on[a-zA-Z]+: \(\) => dispatch/g,
+      path: '../../app/containers/{{properCase container}}/index.js',
+      template: '  on{{ ProperCase name }}Action: () => dispatch({{ camelCase name }}Action()),',
+      abortOnFail: true,
+    });
+
+    // index.test.js
+    actions.push({
+      type: 'complexModify',
+      method: 'lastOccurance',
+      pattern: /^ {2}[a-zA-Z]+Action,$/g,
+      path: '../../app/containers/{{properCase container}}/tests/index.test.js',
+      template: '  {{ camelCase name }}Action,',
+      abortOnFail: true,
+    });
+    actions.push({
+      type: 'complexModify',
+      method: 'sectionEnd',
+      indent: 2,
+      section: /^ {2}\/\/ Actions/g,
+      pattern: /^ {2}\/\/ [A-Z][a-zA-Z]*$/g,
+      path: '../../app/containers/{{properCase container}}/tests/index.test.js',
+      templateFile: './container/action/test.js.hbs',
       abortOnFail: true,
     });
 

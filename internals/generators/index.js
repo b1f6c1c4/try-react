@@ -10,8 +10,10 @@ const componentGenerator = require('./component/index.js');
 const containerGenerator = require('./container/index.js');
 const actionGenerator = require('./container/action/index.js');
 const languageGenerator = require('./language/index.js');
+const complexModify = require('./utils/complexModify.js');
 
 module.exports = (plop) => {
+  plop.setActionType('complexModify', complexModify);
   plop.setGenerator('component', componentGenerator);
   plop.setGenerator('container', containerGenerator);
   plop.setGenerator('action', actionGenerator);

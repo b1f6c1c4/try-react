@@ -23,6 +23,8 @@ describe('<Global />', () => {
 });
 
 describe('mapDispatchToProps', () => {
+
+  // Actions
   describe('onDefaultAction', () => {
     it('should be injected', () => {
       const dispatch = jest.fn();
@@ -37,4 +39,5 @@ describe('mapDispatchToProps', () => {
       expect(dispatch).toHaveBeenCalledWith(defaultAction());
     });
   });
+
 });
