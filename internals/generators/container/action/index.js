@@ -40,7 +40,7 @@ module.exports = {
       method: 'lastOccurance',
       pattern: /[A-Z_]+_ACTION';$/g,
       path: '../../app/containers/{{properCase container}}/constants.js',
-      template: 'export const {{ constantCase name }}_ACTION = \'{{ properCase container }}/{{ constantCase name }}_ACTION\'',
+      template: 'export const {{ constantCase name }}_ACTION = \'{{ properCase container }}/{{ constantCase name }}_ACTION\';',
       abortOnFail: true,
     });
 
@@ -85,10 +85,51 @@ module.exports = {
       type: 'complexModify',
       method: 'sectionEnd',
       indent: 2,
-      section: /^\/\/ Actions/g,
-      pattern: /^\/\/ [A-Z][a-zA-Z]*$/g,
+      section: /^ {2}\/\/ Actions/g,
+      pattern: /^ {2}\/\/ [A-Z][a-zA-Z]*$/g,
       path: '../../app/containers/{{properCase container}}/tests/actions.test.js',
       templateFile: './container/action/actions.test.js.hbs',
+      abortOnFail: true,
+    });
+
+    // reducer.js
+    actions.push({
+      type: 'complexModify',
+      method: 'lastOccurance',
+      pattern: /^ {2}[A-Z_]+_ACTION,$/g,
+      path: '../../app/containers/{{properCase container}}/reducer.js',
+      template: '  {{ constantCase name }}_ACTION,',
+      abortOnFail: true,
+    });
+    actions.push({
+      type: 'complexModify',
+      method: 'sectionEnd',
+      indent: 4,
+      postpadding: false,
+      section: /^ {4}\/\/ Actions/g,
+      pattern: /^ {4}\/\/ [A-Z][a-zA-Z]*$/g,
+      path: '../../app/containers/{{properCase container}}/reducer.js',
+      templateFile: './container/action/reducer.js.hbs',
+      abortOnFail: true,
+    });
+
+    // reducer.test.js
+    actions.push({
+      type: 'complexModify',
+      method: 'lastOccurance',
+      pattern: /^ {2}[a-zA-Z]+Action,$/g,
+      path: '../../app/containers/{{properCase container}}/tests/reducer.test.js',
+      template: '  {{ camelCase name }}Action,',
+      abortOnFail: true,
+    });
+    actions.push({
+      type: 'complexModify',
+      method: 'sectionEnd',
+      indent: 2,
+      section: /^ {2}\/\/ Actions/g,
+      pattern: /^ {2}\/\/ [A-Z][a-zA-Z]*$/g,
+      path: '../../app/containers/{{properCase container}}/tests/reducer.test.js',
+      templateFile: './container/action/reducer.test.js.hbs',
       abortOnFail: true,
     });
 
@@ -106,15 +147,15 @@ module.exports = {
       method: 'lastOccurance',
       pattern: /^ {2}on[a-zA-Z]+: PropTypes/g,
       path: '../../app/containers/{{properCase container}}/index.js',
-      template: '  on{{ ProperCase name }}Action: PropTypes.func.isRequired,',
+      template: '  on{{ properCase name }}Action: PropTypes.func.isRequired,',
       abortOnFail: true,
     });
     actions.push({
       type: 'complexModify',
       method: 'lastOccurance',
-      pattern: /^ {2}on[a-zA-Z]+: \(\) => dispatch/g,
+      pattern: /^ {4}on[a-zA-Z]+: \(\) => dispatch/g,
       path: '../../app/containers/{{properCase container}}/index.js',
-      template: '  on{{ ProperCase name }}Action: () => dispatch({{ camelCase name }}Action()),',
+      template: '    on{{ properCase name }}Action: () => dispatch({{ camelCase name }}Action()),',
       abortOnFail: true,
     });
 
@@ -125,6 +166,14 @@ module.exports = {
       pattern: /^ {2}[a-zA-Z]+Action,$/g,
       path: '../../app/containers/{{properCase container}}/tests/index.test.js',
       template: '  {{ camelCase name }}Action,',
+      abortOnFail: true,
+    });
+    actions.push({
+      type: 'complexModify',
+      method: 'lastOccurance',
+      pattern: /^ {8}on[A-Z][a-zA-Z]*Action=\{jest\.fn\(\)\}$/g,
+      path: '../../app/containers/{{properCase container}}/tests/index.test.js',
+      template: '        on{{ properCase name }}Action={jest.fn()}',
       abortOnFail: true,
     });
     actions.push({

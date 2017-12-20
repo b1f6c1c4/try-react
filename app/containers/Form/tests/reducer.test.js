@@ -22,6 +22,7 @@ describe('formReducer', () => {
     expect(formReducer(undefined, {})).toEqual(expectedResult);
   });
 
+  // Actions
   it('should handle default action', () => {
     const originalState = state;
     const expectedResult = state;
@@ -29,6 +30,7 @@ describe('formReducer', () => {
     expect(formReducer(originalState, defaultAction())).toEqual(expectedResult);
   });
 
+  // Sagas
   it('should handle external request', () => {
     const originalState = state;
     const expectedResult = state;

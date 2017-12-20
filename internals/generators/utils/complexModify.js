@@ -36,12 +36,16 @@ module.exports = co.wrap(function* complexModify(data, cfg, plop) {
             throw new Error('Section not found');
           }
           // Detect indent
-          const ind = lines.findIndex((l, i) => (i > id && l.match(/^\s*/)[0].length < cfg.indent));
+          const ind = lines.findIndex((l, i) => (l !== '' && i > id && l.match(/^\s*/)[0].length < cfg.indent));
           // Detect section boundary
           const nxt = lines.findIndex((l, i) => (i > id && (i < ind || ind === -1) && cfg.pattern.test(l)));
 
           if (nxt === -1) {
-            location = lines.length;
+            if (ind === -1) {
+              location = lines.length;
+            } else {
+              location = ind;
+            }
           } else {
             location = nxt;
           }
@@ -60,6 +64,18 @@ module.exports = co.wrap(function* complexModify(data, cfg, plop) {
         }
         default:
           throw new Error('Method not allowed');
+      }
+
+      if (cfg.postpadding === false) {
+        template = template.trimRight();
+      }
+
+      // Check if is block end
+      if (cfg.indent >= 2 && location < lines.length) {
+        const m = lines[location].match(/^\s*}/);
+        if (m && m[0].length === cfg.indent - 1) {
+          template = `\n${template.trimRight()}`;
+        }
       }
 
       lines.splice(location, 0, plop.renderString(template, data));

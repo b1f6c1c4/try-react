@@ -13,14 +13,17 @@ const initialState = fromJS({
 
 function globalReducer(state = initialState, action) {
   switch (action.type) {
+    // Actions
     case DEFAULT_ACTION:
       return state;
+    // Sagas
     case EXTERNAL_REQUEST:
       return state;
     case EXTERNAL_SUCCESS:
       return state;
     case EXTERNAL_FAILURE:
       return state;
+    // Default
     default:
       return state;
   }

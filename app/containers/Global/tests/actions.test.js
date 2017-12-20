@@ -7,15 +7,10 @@ import {
 } from '../actions';
 
 describe('Global actions', () => {
-
   // Actions
   describe('default action', () => {
     it('has a type of DEFAULT_ACTION', () => {
-      const expected = {
-        type: DEFAULT_ACTION,
-      };
-      expect(defaultAction()).toEqual(expected);
+      expect(defaultAction().type).toEqual(DEFAULT_ACTION);
     });
   });
-
 });

@@ -1,8 +1,5 @@
   describe('{{ camelCase name }} action', () => {
     it('has a type of {{ constantCase name }}_ACTION', () => {
-      const expected = {
-        type: {{ constantCase name }}_ACTION,
-      };
-      expect({{ camelCase name }}Action()).toEqual(expected);
+      expect({{ camelCase name }}Action().type).toEqual({{ constantCase name }}_ACTION);
     });
   });

@@ -23,7 +23,6 @@ describe('<Global />', () => {
 });
 
 describe('mapDispatchToProps', () => {
-
   // Actions
   describe('onDefaultAction', () => {
     it('should be injected', () => {
@@ -39,5 +38,4 @@ describe('mapDispatchToProps', () => {
       expect(dispatch).toHaveBeenCalledWith(defaultAction());
     });
   });
-
 });

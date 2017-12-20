@@ -22,6 +22,7 @@ describe('globalReducer', () => {
     expect(globalReducer(undefined, {})).toEqual(expectedResult);
   });
 
+  // Actions
   it('should handle default action', () => {
     const originalState = state;
     const expectedResult = state;
@@ -29,6 +30,7 @@ describe('globalReducer', () => {
     expect(globalReducer(originalState, defaultAction())).toEqual(expectedResult);
   });
 
+  // Sagas
   it('should handle external request', () => {
     const originalState = state;
     const expectedResult = state;

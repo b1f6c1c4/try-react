@@ -15,9 +15,11 @@ const initialState = fromJS({
 
 function {{ camelCase name }}Reducer(state = initialState, action) {
   switch (action.type) {
+    // Actions
     case DEFAULT_ACTION:
       return state;
 {{#if wantSaga}}
+    // Sagas
     case EXTERNAL_REQUEST:
       return state;
     case EXTERNAL_SUCCESS:
@@ -25,6 +27,7 @@ function {{ camelCase name }}Reducer(state = initialState, action) {
     case EXTERNAL_FAILURE:
       return state;
 {{/if}}
+    // Default
     default:
       return state;
   }

@@ -24,6 +24,7 @@ describe('{{ camelCase name }}Reducer', () => {
     expect({{ camelCase name }}Reducer(undefined, {})).toEqual(expectedResult);
   });
 
+  // Actions
   it('should handle default action', () => {
     const originalState = state;
     const expectedResult = state;
@@ -32,6 +33,7 @@ describe('{{ camelCase name }}Reducer', () => {
   });
 {{#if wantSaga}}
 
+  // Sagas
   it('should handle external request', () => {
     const originalState = state;
     const expectedResult = state;
