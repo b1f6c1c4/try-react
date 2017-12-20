@@ -8,9 +8,11 @@ import { addLocaleData } from 'react-intl';
 import enLocaleData from 'react-intl/locale-data/en';
 import zhLocaleData from 'react-intl/locale-data/zh';
 
-import { ROOT_LOCALE } from './containers/App/constants'; // eslint-disable-line
-import enTranslationMessages from './translations/en.json';
-import zhTranslationMessages from './translations/zh.json';
+import enTranslationMessages from 'translations/en.json';
+import zhTranslationMessages from 'translations/zh.json';
+
+export const DEFAULT_LOCALE = 'zh'; // When can't find browser locale
+export const ROOT_LOCALE = 'en'; // Fallback when there is no translation
 
 export const appLocales = [
   'en',

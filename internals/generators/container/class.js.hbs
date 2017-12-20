@@ -7,7 +7,9 @@ import { createStructuredSelector } from 'reselect';
 import { FormattedMessage } from 'react-intl';
 {{/if}}
 {{#if wantActionsAndReducer}}
+{{#if wantLoadable}}
 import injectReducer from 'utils/injectReducer';
+{{/if}}
 {{/if}}
 {{#if wantSaga}}
 import injectSaga from 'utils/injectSaga';
@@ -78,14 +80,17 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default compose(
-{{#if wantActionsAndReducer}}
-  connect(mapStateToProps, mapDispatchToProps),
-  injectReducer({ key: '{{ camelCase name }}', reducer }),
-{{else}}
-  connect(mapStateToProps, null),
-{{/if}}
 {{#if wantSaga}}
   injectSaga({ key: '{{ camelCase name }}', saga }),
+{{/if}}
+{{#if wantActionsAndReducer}}
+{{#if wantLoadable}}
+{{else}}
+  injectReducer({ key: '{{ camelCase name }}', reducer }),
+{{/if}}
+  connect(mapStateToProps, mapDispatchToProps),
+{{else}}
+  connect(mapStateToProps, null),
 {{/if}}
   withStyles(styles, { withTheme: true }),
 )({{ properCase name }});

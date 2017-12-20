@@ -142,6 +142,21 @@ module.exports = {
         templateFile: './component/loadable.js.hbs',
         abortOnFail: true,
       });
+    } else {
+      actions.push({
+        type: 'modify',
+        pattern: /(from\s'containers\/[a-zA-Z]+\/reducer';\n)(?!.*from\s'containers\/[a-zA-Z]+\/reducer';)/g,
+        path: '../../app/reducers.js',
+        templateFile: './container/reducers-import.js.hbs',
+        abortOnFail: true,
+      });
+      actions.push({
+        type: 'modify',
+        pattern: /([a-zA-Z]+Reducer,\n)(?!.*[a-zA-Z]+Reducer,\n)/g,
+        path: '../../app/reducers.js',
+        templateFile: './container/reducers-combine.js.hbs',
+        abortOnFail: true,
+      });
     }
 
     return actions;
