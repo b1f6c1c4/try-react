@@ -229,6 +229,7 @@
     "body-parser": "1.18.2",
     "browser-locale": "1.0.3",
     "chalk": "2.3.0",
+    "cors": "2.8.4",
     "cross-env": "5.1.1",
     "enzyme-adapter-react-16": "1.1.0",
     "express": "4.16.2",
