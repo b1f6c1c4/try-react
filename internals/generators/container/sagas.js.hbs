@@ -6,7 +6,7 @@ import * as {{ camelCase name }}Actions from './actions';
 
 // Sagas
 export function* handle{{ properCase sagaName }}Request() {
-  const json = yield select((state) => state.get('{{ camelCase name }}').get('{{ camelCase selectorName }}').toJS());
+  const json = yield select((state) => state.get('{{ camelCase name }}').get('{{ camelCase selectorName }}'));
 
   try {
     const result = yield call(api.POST, '/{{ camelCase sagaName }}', undefined, json);
