@@ -1,0 +1,2 @@
+// Actions
+export const TOGGLE_DRAWER_OPEN_ACTION = 'Global/TOGGLE_DRAWER_OPEN_ACTION';

@@ -1,31 +1,27 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { apiPOST } from 'utils/request';
+import * as api from 'utils/request';
 
-import {
-  {{ constantCase sagaName }}_REQUEST,
-} from './constants';
-import {
-  makeSelect{{ properCase name }}{{ properCase selectorName }},
-} from './selectors';
-import {
-  {{ camelCase sagaName }}Success,
-  {{ camelCase sagaName }}Failure,
-} from './actions';
+import * as {{ constantCase name }} from './constants';
+import * as {{ camelCase name }}Actions from './actions';
 
 // Sagas
-export function* {{ camelCase sagaName }}Request() {
-  const json = yield select(makeSelect{{ properCase name }}{{ properCase selectorName }}());
+export function* handle{{ properCase sagaName }}Request() {
+  const json = yield select((state) => state.get('{{ camelCase name }}').get('{{ camelCase selectorName }}').toJS());
 
   try {
-    const result = yield call(apiPOST, '/{{ camelCase sagaName }}', undefined, json);
-    yield put({{ camelCase sagaName }}Success(result));
+    const result = yield call(api.POST, '/{{ camelCase sagaName }}', undefined, json);
+    yield put({{ camelCase name }}Actions.{{ camelCase sagaName }}Success(result));
   } catch (err) {
-    yield put({{ camelCase sagaName }}Failure(err));
+    yield put({{ camelCase name }}Actions.{{ camelCase sagaName }}Failure(err));
   }
 }
 
 // Watcher
-export default /* istanbul ignore next */ function* watcher() {
-  /* istanbul ignore next */
-  yield takeEvery({{ constantCase sagaName }}_REQUEST, {{ camelCase sagaName }}Request);
+/* eslint-disable func-names */
+export default function* watcher() {
+  yield takeEvery({{ constantCase name }}.{{ constantCase sagaName }}_REQUEST, handle{{ properCase sagaName }}Request);
+
+  yield takeEvery({{ constantCase name }}.{{ constantCase actionName }}_ACTION, function* () {
+    yield put({{ camelCase name }}Actions.{{ camelCase sagaName }}Request());
+  });
 }
