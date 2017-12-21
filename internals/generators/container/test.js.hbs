@@ -23,6 +23,9 @@ describe('<{{ properCase name }} />', () => {
         // Selectors
         {{ camelCase selectorName }}="value"
 {{/if}}
+{{#if wantMSelectors}}
+        {{ camelCase mselectorName }}="value"
+{{/if}}
 {{#if wantActionsAndReducer}}
         // Actions
         on{{ properCase actionName }}Action={jest.fn()}

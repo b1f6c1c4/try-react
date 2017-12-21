@@ -18,8 +18,8 @@ module.exports = {
     },
   }, {
     type: 'input',
-    name: 'selectorName',
-    default: 'is open',
+    name: 'mselectorName',
+    default: 'filtered data',
     message: 'Name of the selector?',
   }, {
     type: 'confirm',
@@ -52,7 +52,7 @@ module.exports = {
       method: 'lastOccurance',
       pattern: /^ {2}makeSelect[a-zA-Z]+,$/g,
       path: '../../app/containers/{{ properCase name }}/tests/selectors.test.js',
-      template: '  makeSelect{{ properCase name }}{{ properCase selectorName }},',
+      template: '  makeSelect{{ properCase name }}{{ properCase mselectorName }},',
       abortOnFail: true,
     });
     actions.push({
@@ -72,7 +72,7 @@ module.exports = {
       method: 'lastOccurance',
       pattern: /^ {2}makeSelect[a-zA-Z]+,$/g,
       path: '../../app/containers/{{ properCase name }}/index.js',
-      template: '  makeSelect{{ properCase name }}{{ properCase selectorName }},',
+      template: '  makeSelect{{ properCase name }}{{ properCase mselectorName }},',
       abortOnFail: true,
     });
     actions.push({
@@ -80,7 +80,7 @@ module.exports = {
       method: 'lastOccurance',
       pattern: /^ {2}[a-np-z][a-mn-zA-Z]?[a-zA-Z]*: PropTypes/g,
       path: '../../app/containers/{{ properCase name }}/index.js',
-      template: '  {{ camelCase selectorName }}: PropTypes.string.isRequired,',
+      template: '  {{ camelCase mselectorName }}: PropTypes.string.isRequired,',
       abortOnFail: true,
     });
     actions.push({
@@ -88,7 +88,7 @@ module.exports = {
       method: 'lastOccurance',
       pattern: /^ {2}[a-zA-Z]+: makeSelect[a-zA-Z]+\(\),$/g,
       path: '../../app/containers/{{ properCase name }}/index.js',
-      template: '  {{ camelCase selectorName }}: makeSelect{{ properCase name }}{{ properCase selectorName }}(),',
+      template: '  {{ camelCase mselectorName }}: makeSelect{{ properCase name }}{{ properCase mselectorName }}(),',
       abortOnFail: true,
     });
 
@@ -100,7 +100,7 @@ module.exports = {
       section: /^ {8}\/\/ Selectors/g,
       pattern: /^ {8}\/\/ [A-Z][a-zA-Z]*$/g,
       path: '../../app/containers/{{ properCase name }}/tests/index.test.js',
-      template: '        {{ camelCase selectorName }}="value"',
+      template: '        {{ camelCase mselectorName }}="value"',
       abortOnFail: true,
     });
 

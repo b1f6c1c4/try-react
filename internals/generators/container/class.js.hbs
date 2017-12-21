@@ -27,9 +27,9 @@ import {
 {{/if}}
 } from 'material-ui';
 
-{{#if wantSelectors}}
+{{#if wantMSelectors}}
 import {
-  makeSelect{{ properCase name }}{{ properCase selectorName }},
+  makeSelect{{ properCase name }}{{ properCase mselectorName }},
 } from './selectors';
 {{/if}}
 {{#if wantActionsAndReducer}}
@@ -63,6 +63,9 @@ class {{ properCase name }} extends React.PureComponent {
 {{#if wantSelectors}}
         <Typography>{{curly true}}this.props.{{ camelCase selectorName }}{{curly false}}</Typography>
 {{/if}}
+{{#if wantMSelectors}}
+        <Typography>{{curly true}}this.props.{{ camelCase mselectorName }}{{curly false}}</Typography>
+{{/if}}
 {{#if wantActionsAndReducer}}
         <Button onClick={this.props.on{{ properCase actionName }}Action}>{{ properCase actionName }}Action</Button>
 {{/if}}
@@ -75,6 +78,9 @@ class {{ properCase name }} extends React.PureComponent {
   classes: PropTypes.object.isRequired,
 {{#if wantSelectors}}
   {{ camelCase selectorName }}: PropTypes.string.isRequired,
+{{/if}}
+{{#if wantMSelectors}}
+  {{ camelCase mselectorName }}: PropTypes.string.isRequired,
 {{/if}}
 {{#if wantActionsAndReducer}}
   on{{ properCase actionName }}Action: PropTypes.func.isRequired,
@@ -91,7 +97,10 @@ export function mapDispatchToProps(dispatch) {
 {{/if}}
 {{#if wantSelectors}}
 const mapStateToProps = createStructuredSelector({
-  {{ camelCase selectorName }}: makeSelect{{ properCase name }}{{ properCase selectorName }}(),
+  {{ camelCase selectorName }}: /* istanbul ignore next */ (state) => state.get('{{ camelCase name }}').get('{{ camelCase selectorName }}').toJS(),
+{{#if wantMSelectors}}
+  {{ camelCase mselectorName }}: makeSelect{{ properCase name }}{{ properCase mselectorName }}(),
+{{/if}}
 });
 {{/if}}
 

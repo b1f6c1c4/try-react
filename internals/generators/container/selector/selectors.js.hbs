@@ -1,4 +1,4 @@
-export const makeSelect{{ properCase name }}{{ properCase selectorName }} = () => createSelector(
+export const makeSelect{{ properCase name }}{{ properCase mselectorName }} = () => createSelector(
   select{{ properCase name }},
-  (state) => state.get('{{ camelCase selectorName }}'),
+  (state) => state.get('{{ camelCase mselectorName }}'),
 );

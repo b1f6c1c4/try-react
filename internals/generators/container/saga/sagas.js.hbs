@@ -1,5 +1,5 @@
 export function* handle{{ properCase sagaName }}Request() {
-  const json = yield select(makeSelect{{ properCase name }}Data());
+  const json = yield select((state) => state.get('{{ camelCase name }}').toJS());
 
   try {
     const result = yield call(apiPOST, '/{{ camelCase sagaName }}', undefined, json);

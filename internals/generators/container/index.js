@@ -31,6 +31,18 @@ module.exports = {
     message: 'Selector name?',
   }, {
     type: 'confirm',
+    name: 'wantMSelectors',
+    when: (ans) => ans.wantSelectors,
+    default: true,
+    message: 'Do you want memorized selectors?',
+  }, {
+    type: 'input',
+    name: 'mselectorName',
+    when: (ans) => ans.wantMSelectors,
+    default: 'complex data',
+    message: 'Memorized selector name?',
+  }, {
+    type: 'confirm',
     name: 'wantActionsAndReducer',
     when: (ans) => ans.wantSelectors,
     default: true,
@@ -81,7 +93,7 @@ module.exports = {
       abortOnFail: true,
     });
 
-    if (data.wantSelectors) {
+    if (data.wantMSelectors) {
       // Generate selectors.js
       actions.push({
         type: 'add',

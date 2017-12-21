@@ -2,14 +2,11 @@ import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { apiPOST } from 'utils/request';
 
 import * as {{ constantCase name }} from './constants';
-import {
-  makeSelect{{ properCase name }}{{ properCase selectorName }},
-} from './selectors';
 import * as {{ camelCase name }}Actions from './actions';
 
 // Sagas
 export function* handle{{ properCase sagaName }}Request() {
-  const json = yield select(makeSelect{{ properCase name }}{{ properCase selectorName }}());
+  const json = yield select((state) => state.get('{{ camelCase name }}').get('{{ camelCase selectorName }}').toJS());
 
   try {
     const result = yield call(apiPOST, '/{{ camelCase sagaName }}', undefined, json);
