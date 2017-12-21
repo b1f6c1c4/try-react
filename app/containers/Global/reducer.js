@@ -4,6 +4,7 @@ import * as GLOBAL from './constants';
 
 const initialState = fromJS({
   isDrawerOpen: false,
+  credential: null,
 });
 
 function globalReducer(state = initialState, action) {
@@ -16,6 +17,8 @@ function globalReducer(state = initialState, action) {
       }
       return state
         .set('isDrawerOpen', true);
+    case GLOBAL.UPDATE_CREDENTIAL_ACTION:
+      return state.set('credential', action.credential);
     // Default
     default:
       return state;

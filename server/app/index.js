@@ -12,11 +12,13 @@ const ExtractJwt = passportJWT.ExtractJwt;
 const jwtOptions = {
   issuer: 'try-react',
   audience: 'try-react',
+  expiresIn: '3s',
 };
 const pjwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
   secretOrKey: 's3cReT',
-  ignoreExpiration: true,
+  ignoreExpiration: false,
+  maxAge: '2h',
   jsonWebTokenOptions: jwtOptions,
 };
 
@@ -33,7 +35,9 @@ router.use(nocache(), bodyParser.json(), passport.initialize());
 router.get('/', (req, res) => res.json({}));
 
 router.post('/login', (req, res) => {
-  const payload = { id: req.body.un };
+  const payload = {
+    username: req.body.username,
+  };
   const token = jwt.sign(payload, pjwtOptions.secretOrKey, jwtOptions);
   res.json({
     message: 'ok',

@@ -2,6 +2,7 @@ import { fromJS } from 'immutable';
 
 import globalReducer from '../reducer';
 
+import * as GLOBAL from '../constants';
 import * as globalActions from '../actions';
 
 describe('globalReducer', () => {
@@ -9,6 +10,7 @@ describe('globalReducer', () => {
   beforeEach(() => {
     state = fromJS({
       isDrawerOpen: false,
+      credential: null,
     });
   });
 
@@ -30,5 +32,19 @@ describe('globalReducer', () => {
     const expectedResult = state.set('isDrawerOpen', false);
 
     expect(globalReducer(originalState, globalActions.toggleDrawerOpen())).toEqual(expectedResult);
+  });
+
+  it('should handle updateCredential action', () => {
+    const originalState = state;
+    const credential = {
+      key: 'value',
+    };
+    const theAction = {
+      type: GLOBAL.UPDATE_CREDENTIAL_ACTION,
+      credential,
+    };
+    const expectedResult = state.set('credential', credential);
+
+    expect(globalReducer(originalState, theAction)).toEqual(expectedResult);
   });
 });

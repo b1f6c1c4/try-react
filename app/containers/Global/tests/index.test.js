@@ -14,6 +14,7 @@ describe('<Global />', () => {
       <Global
         // Selectors
         isDrawerOpen={false}
+        hasCredential={false}
         // Actions
         onToggleDrawerOpenAction={jest.fn()}
       />
