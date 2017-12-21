@@ -16,12 +16,7 @@ import {
   Button,
 } from 'material-ui';
 
-import {
-  makeSelectGlobalIsDrawerOpen,
-} from './selectors';
-import {
-  toggleDrawerOpenAction,
-} from './actions';
+import * as globalActions from './actions';
 import messages from './messages';
 
 const styles = (theme) => ({
@@ -61,12 +56,12 @@ Global.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onToggleDrawerOpenAction: () => dispatch(toggleDrawerOpenAction()),
+    onToggleDrawerOpenAction: () => dispatch(globalActions.toggleDrawerOpen()),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  isDrawerOpen: makeSelectGlobalIsDrawerOpen(),
+  isDrawerOpen: /* istanbul ignore next */ (state) => state.get('global').get('isDrawerOpen').toJS(),
 });
 
 export const styledGlobal = withStyles(styles, { withTheme: true })(Global);

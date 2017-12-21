@@ -4,9 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import { styledLoginPage as LoginPage, mapDispatchToProps } from '../index';
 
-import {
-  submitLoginAction,
-} from '../actions';
+import * as loginPageActions from '../actions';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -33,11 +31,11 @@ describe('mapDispatchToProps', () => {
       expect(result.onSubmitLoginAction).toBeDefined();
     });
 
-    it('should dispatch submitLoginAction when called', () => {
+    it('should dispatch loginPageActions.submitLogin when called', () => {
       const dispatch = jest.fn();
       const result = mapDispatchToProps(dispatch);
       result.onSubmitLoginAction();
-      expect(dispatch).toHaveBeenCalledWith(submitLoginAction());
+      expect(dispatch).toHaveBeenCalledWith(loginPageActions.submitLogin());
     });
   });
 });

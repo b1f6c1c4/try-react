@@ -1,10 +1,8 @@
-import {
-  TOGGLE_DRAWER_OPEN_ACTION,
-} from './constants';
+import * as GLOBAL from './constants';
 
 // Actions
-export function toggleDrawerOpenAction() {
+export function toggleDrawerOpen() {
   return {
-    type: TOGGLE_DRAWER_OPEN_ACTION,
+    type: GLOBAL.TOGGLE_DRAWER_OPEN_ACTION,
   };
 }

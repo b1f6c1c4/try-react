@@ -1,8 +1,6 @@
 import { fromJS } from 'immutable';
 
-import {
-  TOGGLE_DRAWER_OPEN_ACTION,
-} from './constants';
+import * as GLOBAL from './constants';
 
 const initialState = fromJS({
   isDrawerOpen: false,
@@ -11,7 +9,7 @@ const initialState = fromJS({
 function globalReducer(state = initialState, action) {
   switch (action.type) {
     // Actions
-    case TOGGLE_DRAWER_OPEN_ACTION:
+    case GLOBAL.TOGGLE_DRAWER_OPEN_ACTION:
       if (state.get('isDrawerOpen')) {
         return state
           .set('isDrawerOpen', false);

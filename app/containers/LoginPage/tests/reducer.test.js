@@ -2,12 +2,7 @@ import { fromJS } from 'immutable';
 
 import loginPageReducer from '../reducer';
 
-import {
-  submitLoginAction,
-  loginRequest,
-  loginSuccess,
-  loginFailure,
-} from '../actions';
+import * as loginPageActions from '../actions';
 
 describe('loginPageReducer', () => {
   let state;
@@ -27,7 +22,7 @@ describe('loginPageReducer', () => {
     const originalState = state;
     const expectedResult = state;
 
-    expect(loginPageReducer(originalState, submitLoginAction())).toEqual(expectedResult);
+    expect(loginPageReducer(originalState, loginPageActions.submitLogin())).toEqual(expectedResult);
   });
 
   // Sagas
@@ -35,7 +30,7 @@ describe('loginPageReducer', () => {
     const originalState = state;
     const expectedResult = state.set('isLoading', true);
 
-    expect(loginPageReducer(originalState, loginRequest())).toEqual(expectedResult);
+    expect(loginPageReducer(originalState, loginPageActions.loginRequest())).toEqual(expectedResult);
   });
 
   it('should handle login success', () => {
@@ -43,7 +38,7 @@ describe('loginPageReducer', () => {
     const result = { };
     const expectedResult = state.set('isLoading', false);
 
-    expect(loginPageReducer(originalState, loginSuccess(result))).toEqual(expectedResult);
+    expect(loginPageReducer(originalState, loginPageActions.loginSuccess(result))).toEqual(expectedResult);
   });
 
   it('should handle login failure', () => {
@@ -51,6 +46,6 @@ describe('loginPageReducer', () => {
     const error = { };
     const expectedResult = state.set('isLoading', false);
 
-    expect(loginPageReducer(originalState, loginFailure(error))).toEqual(expectedResult);
+    expect(loginPageReducer(originalState, loginPageActions.loginFailure(error))).toEqual(expectedResult);
   });
 });

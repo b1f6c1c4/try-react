@@ -1,28 +1,18 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { apiPOST } from 'utils/request';
 
-import {
-  LOGIN_REQUEST,
-  SUBMIT_LOGIN_ACTION,
-} from './constants';
-import {
-  makeSelectFormLoginValues,
-} from './selectors';
-import {
-  loginRequest,
-  loginSuccess,
-  loginFailure,
-} from './actions';
+import * as LOGIN_PAGE from './constants';
+import * as loginPageActions from './actions';
 
 // Sagas
 export function* handleLoginRequest() {
-  const json = yield select(makeSelectFormLoginValues());
+  const json = yield select((state) => state.get('form').get('login').get('values').toJS());
 
   try {
     const result = yield call(apiPOST, '/login', undefined, json);
-    yield put(loginSuccess(result));
+    yield put(loginPageActions.loginSuccess(result));
   } catch (err) {
-    yield put(loginFailure(err));
+    yield put(loginPageActions.loginFailure(err));
   }
 }
 
@@ -30,9 +20,9 @@ export function* handleLoginRequest() {
 /* eslint-disable func-names */
 export default /* istanbul ignore next */ function* watcher() {
   /* istanbul ignore next */
-  yield takeEvery(LOGIN_REQUEST, handleLoginRequest);
+  yield takeEvery(LOGIN_PAGE.LOGIN_REQUEST, handleLoginRequest);
 
-  yield takeEvery(SUBMIT_LOGIN_ACTION, function* () {
-    yield put(loginRequest());
+  yield takeEvery(LOGIN_PAGE.SUBMIT_LOGIN_ACTION, function* () {
+    yield put(loginPageActions.loginRequest());
   });
 }
