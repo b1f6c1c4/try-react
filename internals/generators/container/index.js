@@ -39,7 +39,7 @@ module.exports = {
     type: 'input',
     name: 'actionName',
     when: (ans) => ans.wantActionsAndReducer,
-    default: 'default',
+    default: 'change',
     message: 'Action name?',
   }, {
     type: 'confirm',

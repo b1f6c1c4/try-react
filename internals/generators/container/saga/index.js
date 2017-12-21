@@ -74,16 +74,6 @@ export const {{ constantCase sagaName }}_FAILURE = '{{ properCase name }}/{{ con
     // reducer.test.js
     actions.push({
       type: 'complexModify',
-      method: 'lastOccurance',
-      pattern: /^ {2}[a-zA-Z]+Failure,$/g,
-      path: '../../app/containers/{{ properCase name }}/tests/reducer.test.js',
-      template: `  {{ camelCase sagaName }}Request,
-  {{ camelCase sagaName }}Success,
-  {{ camelCase sagaName }}Failure,`,
-      abortOnFail: true,
-    });
-    actions.push({
-      type: 'complexModify',
       method: 'sectionEnd',
       indent: 2,
       section: /^ {2}\/\/ Sagas/g,
@@ -94,15 +84,6 @@ export const {{ constantCase sagaName }}_FAILURE = '{{ properCase name }}/{{ con
     });
 
     // sagas.js
-    actions.push({
-      type: 'complexModify',
-      method: 'lastOccurance',
-      pattern: /^ {2}[a-zA-Z]+Failure,$/g,
-      path: '../../app/containers/{{ properCase name }}/sagas.js',
-      template: `  {{ camelCase sagaName }}Success,
-  {{ camelCase sagaName }}Failure,`,
-      abortOnFail: true,
-    });
     actions.push({
       type: 'complexModify',
       method: 'sectionEnd',
@@ -124,15 +105,6 @@ export const {{ constantCase sagaName }}_FAILURE = '{{ properCase name }}/{{ con
     });
 
     // sagas.test.js
-    actions.push({
-      type: 'complexModify',
-      method: 'lastOccurance',
-      pattern: /^ {2}[a-zA-Z]+Failure,$/g,
-      path: '../../app/containers/{{ properCase name }}/tests/sagas.test.js',
-      template: `  {{ camelCase sagaName }}Success,
-  {{ camelCase sagaName }}Failure,`,
-      abortOnFail: true,
-    });
     actions.push({
       type: 'complexModify',
       method: 'lastOccurance',

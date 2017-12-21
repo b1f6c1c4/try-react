@@ -33,9 +33,7 @@ import {
 } from './selectors';
 {{/if}}
 {{#if wantActionsAndReducer}}
-import {
-  {{ camelCase actionName }}Action,
-} from './actions';
+import * as {{ camelCase name }}Actions from './actions';
 {{#if wantLoadable}}
 import reducer from './reducer';
 {{/if}}
@@ -86,7 +84,7 @@ class {{ properCase name }} extends React.PureComponent {
 {{#if wantActionsAndReducer}}
 export function mapDispatchToProps(dispatch) {
   return {
-    on{{ properCase actionName }}Action: () => dispatch({{ camelCase actionName }}Action()),
+    on{{ properCase actionName }}Action: () => dispatch({{ camelCase name }}Actions.{{ camelCase actionName }}()),
   };
 }
 

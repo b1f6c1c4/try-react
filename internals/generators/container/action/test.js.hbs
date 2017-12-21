@@ -5,10 +5,10 @@
       expect(result.on{{ properCase actionName }}Action).toBeDefined();
     });
 
-    it('should dispatch {{ camelCase actionName }}Action when called', () => {
+    it('should dispatch {{ camelCase name }}Actions.{{ camelCase actionName }} when called', () => {
       const dispatch = jest.fn();
       const result = mapDispatchToProps(dispatch);
       result.on{{ properCase actionName }}Action();
-      expect(dispatch).toHaveBeenCalledWith({{ camelCase actionName }}Action());
+      expect(dispatch).toHaveBeenCalledWith({{ camelCase name }}Actions.{{ camelCase actionName }}());
     });
   });

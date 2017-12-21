@@ -3,8 +3,8 @@ export function* handle{{ properCase sagaName }}Request() {
 
   try {
     const result = yield call(apiPOST, '/{{ camelCase sagaName }}', undefined, json);
-    yield put({{ camelCase sagaName }}Success(result));
+    yield put({{ camelCase name }}Actions.{{ camelCase sagaName }}Success(result));
   } catch (err) {
-    yield put({{ camelCase sagaName }}Failure(err));
+    yield put({{ camelCase name }}Actions.{{ camelCase sagaName }}Failure(err));
   }
 }

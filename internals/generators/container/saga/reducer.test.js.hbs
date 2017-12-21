@@ -2,7 +2,7 @@
     const originalState = state;
     const expectedResult = state;
 
-    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Request())).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase name }}Actions.{{ camelCase sagaName }}Request())).toEqual(expectedResult);
   });
 
   it('should handle {{ camelCase sagaName }} success', () => {
@@ -10,7 +10,7 @@
     const result = { };
     const expectedResult = state;
 
-    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Success(result))).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase name }}Actions.{{ camelCase sagaName }}Success(result))).toEqual(expectedResult);
   });
 
   it('should handle {{ camelCase sagaName }} failure', () => {
@@ -18,5 +18,5 @@
     const error = { };
     const expectedResult = state;
 
-    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Failure(error))).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase name }}Actions.{{ camelCase sagaName }}Failure(error))).toEqual(expectedResult);
   });

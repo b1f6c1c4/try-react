@@ -59,14 +59,6 @@ module.exports = {
     // actions.test.js
     actions.push({
       type: 'complexModify',
-      method: 'lastOccurance',
-      pattern: /^ {2}[a-zA-Z]+Action,$/g,
-      path: '../../app/containers/{{ properCase name }}/tests/actions.test.js',
-      template: '  {{ camelCase actionName }}Action,',
-      abortOnFail: true,
-    });
-    actions.push({
-      type: 'complexModify',
       method: 'sectionEnd',
       indent: 2,
       section: /^ {2}\/\/ Actions/g,
@@ -92,14 +84,6 @@ module.exports = {
     // reducer.test.js
     actions.push({
       type: 'complexModify',
-      method: 'lastOccurance',
-      pattern: /^ {2}[a-zA-Z]+Action,$/g,
-      path: '../../app/containers/{{ properCase name }}/tests/reducer.test.js',
-      template: '  {{ camelCase actionName }}Action,',
-      abortOnFail: true,
-    });
-    actions.push({
-      type: 'complexModify',
       method: 'sectionEnd',
       indent: 2,
       section: /^ {2}\/\/ Actions/g,
@@ -113,14 +97,6 @@ module.exports = {
     actions.push({
       type: 'complexModify',
       method: 'lastOccurance',
-      pattern: /^ {2}[a-zA-Z]+Action,$/g,
-      path: '../../app/containers/{{ properCase name }}/index.js',
-      template: '  {{ camelCase actionName }}Action,',
-      abortOnFail: true,
-    });
-    actions.push({
-      type: 'complexModify',
-      method: 'lastOccurance',
       pattern: /^ {2}on[a-zA-Z]+: PropTypes/g,
       path: '../../app/containers/{{ properCase name }}/index.js',
       template: '  on{{ properCase actionName }}Action: PropTypes.func.isRequired,',
@@ -131,19 +107,11 @@ module.exports = {
       method: 'lastOccurance',
       pattern: /^ {4}on[a-zA-Z]+: \(\) => dispatch/g,
       path: '../../app/containers/{{ properCase name }}/index.js',
-      template: '    on{{ properCase actionName }}Action: () => dispatch({{ camelCase actionName }}Action()),',
+      template: '    on{{ properCase actionName }}Action: () => dispatch({{ camelCase name }}Actions.{{ camelCase actionName }}()),',
       abortOnFail: true,
     });
 
     // index.test.js
-    actions.push({
-      type: 'complexModify',
-      method: 'lastOccurance',
-      pattern: /^ {2}[a-zA-Z]+Action,$/g,
-      path: '../../app/containers/{{ properCase name }}/tests/index.test.js',
-      template: '  {{ camelCase actionName }}Action,',
-      abortOnFail: true,
-    });
     actions.push({
       type: 'complexModify',
       method: 'lastOccurance',
