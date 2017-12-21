@@ -1,19 +1,19 @@
-export function {{ camelCase name }}Request() {
+export function {{ camelCase sagaName }}Request() {
   return {
-    type: {{ constantCase name }}_REQUEST,
+    type: {{ constantCase sagaName }}_REQUEST,
   };
 }
 
-export function {{ camelCase name }}Success(result) {
+export function {{ camelCase sagaName }}Success(result) {
   return {
-    type: {{ constantCase name }}_SUCCESS,
+    type: {{ constantCase sagaName }}_SUCCESS,
     result,
   };
 }
 
-export function {{ camelCase name }}Failure(error) {
+export function {{ camelCase sagaName }}Failure(error) {
   return {
-    type: {{ constantCase name }}_FAILURE,
+    type: {{ constantCase sagaName }}_FAILURE,
     error,
   };
 }

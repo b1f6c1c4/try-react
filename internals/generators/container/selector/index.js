@@ -6,7 +6,7 @@ module.exports = {
   description: 'Add a selector to a container',
   prompts: [{
     type: 'input',
-    name: 'container',
+    name: 'name',
     default: 'Form',
     message: 'Name of the container?',
     validate: (value) => {
@@ -18,7 +18,7 @@ module.exports = {
     },
   }, {
     type: 'input',
-    name: 'name',
+    name: 'selectorName',
     default: 'is open',
     message: 'Name of the selector?',
   }, {
@@ -41,7 +41,7 @@ module.exports = {
       indent: 0,
       section: /.*/g,
       pattern: /(?!)/g,
-      path: '../../app/containers/{{properCase container}}/selectors.js',
+      path: '../../app/containers/{{ properCase name }}/selectors.js',
       templateFile: './container/selector/selectors.js.hbs',
       abortOnFail: true,
     });
@@ -51,8 +51,8 @@ module.exports = {
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /^ {2}makeSelect[a-zA-Z]+,$/g,
-      path: '../../app/containers/{{properCase container}}/tests/selectors.test.js',
-      template: '  makeSelect{{ properCase container }}{{ properCase name }},',
+      path: '../../app/containers/{{ properCase name }}/tests/selectors.test.js',
+      template: '  makeSelect{{ properCase name }}{{ properCase selectorName }},',
       abortOnFail: true,
     });
     actions.push({
@@ -61,7 +61,7 @@ module.exports = {
       indent: 0,
       section: /.*/g,
       pattern: /(?!)/g,
-      path: '../../app/containers/{{properCase container}}/tests/selectors.test.js',
+      path: '../../app/containers/{{ properCase name }}/tests/selectors.test.js',
       templateFile: './container/selector/selectors.test.js.hbs',
       abortOnFail: true,
     });
@@ -71,24 +71,24 @@ module.exports = {
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /^ {2}makeSelect[a-zA-Z]+,$/g,
-      path: '../../app/containers/{{properCase container}}/index.js',
-      template: '  makeSelect{{ properCase container }}{{ properCase name }},',
+      path: '../../app/containers/{{ properCase name }}/index.js',
+      template: '  makeSelect{{ properCase name }}{{ properCase selectorName }},',
       abortOnFail: true,
     });
     actions.push({
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /^ {2}[a-np-z][a-mn-zA-Z]?[a-zA-Z]*: PropTypes/g,
-      path: '../../app/containers/{{properCase container}}/index.js',
-      template: '  {{ camelCase name }}: PropTypes.string.isRequired,',
+      path: '../../app/containers/{{ properCase name }}/index.js',
+      template: '  {{ camelCase selectorName }}: PropTypes.string.isRequired,',
       abortOnFail: true,
     });
     actions.push({
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /^ {2}[a-zA-Z]+: makeSelect[a-zA-Z]+\(\),$/g,
-      path: '../../app/containers/{{properCase container}}/index.js',
-      template: '  {{ camelCase name }}: makeSelect{{ properCase container }}{{ properCase name }}(),',
+      path: '../../app/containers/{{ properCase name }}/index.js',
+      template: '  {{ camelCase selectorName }}: makeSelect{{ properCase name }}{{ properCase selectorName }}(),',
       abortOnFail: true,
     });
 
@@ -99,8 +99,8 @@ module.exports = {
       indent: 8,
       section: /^ {8}\/\/ Selectors/g,
       pattern: /^ {8}\/\/ [A-Z][a-zA-Z]*$/g,
-      path: '../../app/containers/{{properCase container}}/tests/index.test.js',
-      template: '        {{ camelCase name }}="value"',
+      path: '../../app/containers/{{ properCase name }}/tests/index.test.js',
+      template: '        {{ camelCase selectorName }}="value"',
       abortOnFail: true,
     });
 

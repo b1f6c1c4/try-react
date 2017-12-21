@@ -1,14 +1,14 @@
-describe('makeSelect{{ properCase container }}{{ properCase name }}', () => {
-  const select{{ properCase container }}{{ properCase name }} = makeSelect{{ properCase container }}{{ properCase name }}();
+describe('makeSelect{{ properCase name }}{{ properCase selectorName }}', () => {
+  const select{{ properCase name }}{{ properCase selectorName }} = makeSelect{{ properCase name }}{{ properCase selectorName }}();
 
-  it('should select {{ camelCase name }}', () => {
-    const {{ camelCase name }} = 'value';
+  it('should select {{ camelCase selectorName }}', () => {
+    const {{ camelCase selectorName }} = 'value';
     const state = fromJS({
-      {{ camelCase name }},
+      {{ camelCase selectorName }},
     });
     const mockedState = fromJS({
-      {{ camelCase container }}: state,
+      {{ camelCase name }}: state,
     });
-    expect(select{{ properCase container }}{{ properCase name }}(mockedState)).toEqual({{ camelCase name }});
+    expect(select{{ properCase name }}{{ properCase selectorName }}(mockedState)).toEqual({{ camelCase selectorName }});
   });
 });

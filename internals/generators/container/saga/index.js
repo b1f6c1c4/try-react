@@ -6,7 +6,7 @@ module.exports = {
   description: 'Add a saga to a container',
   prompts: [{
     type: 'input',
-    name: 'container',
+    name: 'name',
     default: 'Form',
     message: 'Name of the container?',
     validate: (value) => {
@@ -18,7 +18,7 @@ module.exports = {
     },
   }, {
     type: 'input',
-    name: 'name',
+    name: 'sagaName',
     default: 'ext',
     message: 'Name of the saga?',
   }, {
@@ -39,10 +39,10 @@ module.exports = {
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /[A-Z_]+_FAILURE';$/g,
-      path: '../../app/containers/{{properCase container}}/constants.js',
-      template: `export const {{ constantCase name }}_REQUEST = '{{ properCase container }}/{{ constantCase name }}_REQUEST';
-export const {{ constantCase name }}_SUCCESS = '{{ properCase container }}/{{ constantCase name }}_SUCCESS';
-export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ constantCase name }}_FAILURE';`,
+      path: '../../app/containers/{{ properCase name }}/constants.js',
+      template: `export const {{ constantCase sagaName }}_REQUEST = '{{ properCase name }}/{{ constantCase sagaName }}_REQUEST';
+export const {{ constantCase sagaName }}_SUCCESS = '{{ properCase name }}/{{ constantCase sagaName }}_SUCCESS';
+export const {{ constantCase sagaName }}_FAILURE = '{{ properCase name }}/{{ constantCase sagaName }}_FAILURE';`,
       abortOnFail: true,
     });
 
@@ -51,10 +51,10 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /^ {2}[A-Z_]+_FAILURE,$/g,
-      path: '../../app/containers/{{properCase container}}/actions.js',
-      template: `  {{ constantCase name }}_REQUEST,
-  {{ constantCase name }}_SUCCESS,
-  {{ constantCase name }}_FAILURE,`,
+      path: '../../app/containers/{{ properCase name }}/actions.js',
+      template: `  {{ constantCase sagaName }}_REQUEST,
+  {{ constantCase sagaName }}_SUCCESS,
+  {{ constantCase sagaName }}_FAILURE,`,
       abortOnFail: true,
     });
     actions.push({
@@ -63,7 +63,7 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       indent: 0,
       section: /^\/\/ Sagas/g,
       pattern: /^\/\/ [A-Z][a-zA-Z]*$/g,
-      path: '../../app/containers/{{properCase container}}/actions.js',
+      path: '../../app/containers/{{ properCase name }}/actions.js',
       templateFile: './container/saga/actions.js.hbs',
       abortOnFail: true,
     });
@@ -73,10 +73,10 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /^ {2}[A-Z_]+_FAILURE,$/g,
-      path: '../../app/containers/{{properCase container}}/reducer.js',
-      template: `  {{ constantCase name }}_REQUEST,
-  {{ constantCase name }}_SUCCESS,
-  {{ constantCase name }}_FAILURE,`,
+      path: '../../app/containers/{{ properCase name }}/reducer.js',
+      template: `  {{ constantCase sagaName }}_REQUEST,
+  {{ constantCase sagaName }}_SUCCESS,
+  {{ constantCase sagaName }}_FAILURE,`,
       abortOnFail: true,
     });
     actions.push({
@@ -86,7 +86,7 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       postpadding: false,
       section: /^ {4}\/\/ Sagas/g,
       pattern: /^ {4}\/\/ [A-Z][a-zA-Z]*$/g,
-      path: '../../app/containers/{{properCase container}}/reducer.js',
+      path: '../../app/containers/{{ properCase name }}/reducer.js',
       templateFile: './container/saga/reducer.js.hbs',
       abortOnFail: true,
     });
@@ -96,10 +96,10 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /^ {2}[a-zA-Z]+Failure,$/g,
-      path: '../../app/containers/{{properCase container}}/tests/reducer.test.js',
-      template: `  {{ camelCase name }}Request,
-  {{ camelCase name }}Success,
-  {{ camelCase name }}Failure,`,
+      path: '../../app/containers/{{ properCase name }}/tests/reducer.test.js',
+      template: `  {{ camelCase sagaName }}Request,
+  {{ camelCase sagaName }}Success,
+  {{ camelCase sagaName }}Failure,`,
       abortOnFail: true,
     });
     actions.push({
@@ -108,7 +108,7 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       indent: 2,
       section: /^ {2}\/\/ Sagas/g,
       pattern: /^ {2}\/\/ [A-Z][a-zA-Z]*$/g,
-      path: '../../app/containers/{{properCase container}}/tests/reducer.test.js',
+      path: '../../app/containers/{{ properCase name }}/tests/reducer.test.js',
       templateFile: './container/saga/reducer.test.js.hbs',
       abortOnFail: true,
     });
@@ -118,17 +118,17 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /^ {2}[A-Z_]+_REQUEST,$/g,
-      path: '../../app/containers/{{properCase container}}/sagas.js',
-      template: '  {{ constantCase name }}_REQUEST,',
+      path: '../../app/containers/{{ properCase name }}/sagas.js',
+      template: '  {{ constantCase sagaName }}_REQUEST,',
       abortOnFail: true,
     });
     actions.push({
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /^ {2}[a-zA-Z]+Failure,$/g,
-      path: '../../app/containers/{{properCase container}}/sagas.js',
-      template: `  {{ camelCase name }}Success,
-  {{ camelCase name }}Failure,`,
+      path: '../../app/containers/{{ properCase name }}/sagas.js',
+      template: `  {{ camelCase sagaName }}Success,
+  {{ camelCase sagaName }}Failure,`,
       abortOnFail: true,
     });
     actions.push({
@@ -137,7 +137,7 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       indent: 0,
       section: /^\/\/ Sagas/g,
       pattern: /^\/\/ [A-Z][a-zA-Z]*$/g,
-      path: '../../app/containers/{{properCase container}}/sagas.js',
+      path: '../../app/containers/{{ properCase name }}/sagas.js',
       templateFile: './container/saga/sagas.js.hbs',
       abortOnFail: true,
     });
@@ -145,9 +145,9 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /^ {2}yield take.*REQUEST.*Request\);$/g,
-      path: '../../app/containers/{{properCase container}}/sagas.js',
+      path: '../../app/containers/{{ properCase name }}/sagas.js',
       template: `  /* istanbul ignore next */
-  yield takeEvery({{ constantCase name }}_REQUEST, handle{{ properCase name }}Request);`,
+  yield takeEvery({{ constantCase sagaName }}_REQUEST, handle{{ properCase sagaName }}Request);`,
       abortOnFail: true,
     });
 
@@ -156,17 +156,17 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /^ {2}[a-zA-Z]+Failure,$/g,
-      path: '../../app/containers/{{properCase container}}/tests/sagas.test.js',
-      template: `  {{ camelCase name }}Success,
-  {{ camelCase name }}Failure,`,
+      path: '../../app/containers/{{ properCase name }}/tests/sagas.test.js',
+      template: `  {{ camelCase sagaName }}Success,
+  {{ camelCase sagaName }}Failure,`,
       abortOnFail: true,
     });
     actions.push({
       type: 'complexModify',
       method: 'lastOccurance',
       pattern: /^ {2}handle[a-zA-Z]+Request,$/g,
-      path: '../../app/containers/{{properCase container}}/tests/sagas.test.js',
-      template: '  handle{{ properCase name }}Request,',
+      path: '../../app/containers/{{ properCase name }}/tests/sagas.test.js',
+      template: '  handle{{ properCase sagaName }}Request,',
       abortOnFail: true,
     });
     actions.push({
@@ -175,7 +175,7 @@ export const {{ constantCase name }}_FAILURE = '{{ properCase container }}/{{ co
       indent: 0,
       section: /^\/\/ Sagas/g,
       pattern: /^\/\/ [A-Z][a-zA-Z]*$/g,
-      path: '../../app/containers/{{properCase container}}/tests/sagas.test.js',
+      path: '../../app/containers/{{ properCase name }}/tests/sagas.test.js',
       templateFile: './container/saga/sagas.test.js.hbs',
       abortOnFail: true,
     });

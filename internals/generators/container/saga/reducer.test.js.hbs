@@ -1,22 +1,22 @@
-  it('should handle {{ camelCase name }} request', () => {
+  it('should handle {{ camelCase sagaName }} request', () => {
     const originalState = state;
     const expectedResult = state;
 
-    expect({{ camelCase container }}Reducer(originalState, {{ camelCase name }}Request())).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Request())).toEqual(expectedResult);
   });
 
-  it('should handle {{ camelCase name }} success', () => {
+  it('should handle {{ camelCase sagaName }} success', () => {
     const originalState = state;
     const result = { };
     const expectedResult = state;
 
-    expect({{ camelCase container }}Reducer(originalState, {{ camelCase name }}Success(result))).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Success(result))).toEqual(expectedResult);
   });
 
-  it('should handle {{ camelCase name }} failure', () => {
+  it('should handle {{ camelCase sagaName }} failure', () => {
     const originalState = state;
     const error = { };
     const expectedResult = state;
 
-    expect({{ camelCase container }}Reducer(originalState, {{ camelCase name }}Failure(error))).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Failure(error))).toEqual(expectedResult);
   });
