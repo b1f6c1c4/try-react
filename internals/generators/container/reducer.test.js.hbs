@@ -2,14 +2,7 @@ import { fromJS } from 'immutable';
 
 import {{ camelCase name }}Reducer from '../reducer';
 
-import {
-  {{ camelCase actionName }}Action,
-{{#if wantSagas}}
-  {{ camelCase sagaName }}Request,
-  {{ camelCase sagaName }}Success,
-  {{ camelCase sagaName }}Failure,
-{{/if}}
-} from '../actions';
+import * as {{ camelCase name }}Actions from '../actions';
 
 describe('{{ camelCase name }}Reducer', () => {
   let state;
@@ -29,7 +22,7 @@ describe('{{ camelCase name }}Reducer', () => {
     const originalState = state;
     const expectedResult = state;
 
-    expect({{ camelCase name }}Reducer(originalState, {{ camelCase actionName }}Action())).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase name }}Actions.{{ camelCase actionName }}())).toEqual(expectedResult);
   });
 {{#if wantSagas}}
 
@@ -38,7 +31,7 @@ describe('{{ camelCase name }}Reducer', () => {
     const originalState = state;
     const expectedResult = state;
 
-    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Request())).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase name }}Actions.{{ camelCase sagaName }}Request())).toEqual(expectedResult);
   });
 
   it('should handle {{ camelCase sagaName }} success', () => {
@@ -46,7 +39,7 @@ describe('{{ camelCase name }}Reducer', () => {
     const result = { };
     const expectedResult = state;
 
-    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Success(result))).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase name }}Actions.{{ camelCase sagaName }}Success(result))).toEqual(expectedResult);
   });
 
   it('should handle {{ camelCase sagaName }} failure', () => {
@@ -54,7 +47,7 @@ describe('{{ camelCase name }}Reducer', () => {
     const error = { };
     const expectedResult = state;
 
-    expect({{ camelCase name }}Reducer(originalState, {{ camelCase sagaName }}Failure(error))).toEqual(expectedResult);
+    expect({{ camelCase name }}Reducer(originalState, {{ camelCase name }}Actions.{{ camelCase sagaName }}Failure(error))).toEqual(expectedResult);
   });
 {{/if}}
 });

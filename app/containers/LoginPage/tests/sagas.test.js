@@ -5,14 +5,7 @@ import * as matchers from 'redux-saga-test-plan/matchers';
 import { throwError } from 'redux-saga-test-plan/providers';
 import * as api from 'utils/request';
 
-import {
-  loginSuccess,
-  loginFailure,
-} from '../actions';
-
-import {
-  makeSelectFormLoginValues,
-} from '../selectors';
+import * as loginPageActions from '../actions';
 
 import {
   handleLoginRequest,
@@ -24,7 +17,7 @@ describe('handleLoginRequest Saga', () => {
     key: 'value',
   };
 
-  it('should dispatch the loginSuccess action if it requests the credential successfully', () => {
+  it('should dispatch the loginPageActions.loginSuccess action if it requests the credential successfully', () => {
     const response = {
       status: 'ok',
       jwt: 'value',
@@ -32,22 +25,20 @@ describe('handleLoginRequest Saga', () => {
 
     return expectSaga(handleLoginRequest, api)
       .provide([
-        [matchers.select.selector(makeSelectFormLoginValues()), values],
         [matchers.call.fn(api.POST, '/login', undefined, values), response],
       ])
-      .put(loginSuccess(response))
+      .put(loginPageActions.loginSuccess(response))
       .run();
   });
 
-  it('should call the loginFailure action if the response errors', () => {
+  it('should call the loginPageActions.loginFailure action if the response errors', () => {
     const error = new Error('value');
 
     return expectSaga(handleLoginRequest, api)
       .provide([
-        [matchers.select.fn(makeSelectFormLoginValues()), values],
         [matchers.call.fn(api.POST, '/login', undefined, values), throwError(error)],
       ])
-      .put(loginFailure(error))
+      .put(loginPageActions.loginFailure(error))
       .run();
   });
 });

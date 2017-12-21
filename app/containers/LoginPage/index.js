@@ -14,12 +14,7 @@ import {
   Button,
 } from 'material-ui';
 
-import {
-  makeSelectLoginPageIsLoading,
-} from './selectors';
-import {
-  submitLoginAction,
-} from './actions';
+import * as loginPageActions from './actions';
 import reducer from './reducer';
 import sagas from './sagas';
 import messages from './messages';
@@ -56,12 +51,12 @@ LoginPage.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onSubmitLoginAction: () => dispatch(submitLoginAction()),
+    onSubmitLoginAction: () => dispatch(loginPageActions.submitLogin()),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  isLoading: makeSelectLoginPageIsLoading(),
+  isLoading: /* istanbul ignore next */ (state) => state.get('loginPage').get('isLoading'),
 });
 
 export const styledLoginPage = withStyles(styles, { withTheme: true })(LoginPage);

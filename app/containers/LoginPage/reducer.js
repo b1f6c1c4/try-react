@@ -1,11 +1,6 @@
 import { fromJS } from 'immutable';
 
-import {
-  SUBMIT_LOGIN_ACTION,
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-} from './constants';
+import * as LOGIN_PAGE from './constants';
 
 const initialState = fromJS({
   isLoading: false,
@@ -14,14 +9,14 @@ const initialState = fromJS({
 function loginPageReducer(state = initialState, action) {
   switch (action.type) {
     // Actions
-    case SUBMIT_LOGIN_ACTION:
+    case LOGIN_PAGE.SUBMIT_LOGIN_ACTION:
       return state;
     // Sagas
-    case LOGIN_REQUEST:
+    case LOGIN_PAGE.LOGIN_REQUEST:
       return state.set('isLoading', true);
-    case LOGIN_SUCCESS:
+    case LOGIN_PAGE.LOGIN_SUCCESS:
       return state.set('isLoading', false);
-    case LOGIN_FAILURE:
+    case LOGIN_PAGE.LOGIN_FAILURE:
       return state.set('isLoading', false);
     // Default
     default:

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`handleLoginRequest Saga should call the loginFailure action if the response errors 1`] = `
+exports[`handleLoginRequest Saga should call the loginPageActions.loginFailure action if the response errors 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "SELECT": Object {
@@ -10,7 +10,7 @@ Object {
 }
 `;
 
-exports[`handleLoginRequest Saga should call the loginFailure action if the response errors 2`] = `
+exports[`handleLoginRequest Saga should call the loginPageActions.loginFailure action if the response errors 2`] = `
 Object {
   "@@redux-saga/IO": true,
   "CALL": Object {
@@ -25,7 +25,7 @@ Object {
 }
 `;
 
-exports[`handleLoginRequest Saga should dispatch the loginSuccess action if it requests the credential successfully 1`] = `
+exports[`handleLoginRequest Saga should dispatch the loginPageActions.loginSuccess action if it requests the credential successfully 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "SELECT": Object {
@@ -35,7 +35,7 @@ Object {
 }
 `;
 
-exports[`handleLoginRequest Saga should dispatch the loginSuccess action if it requests the credential successfully 2`] = `
+exports[`handleLoginRequest Saga should dispatch the loginPageActions.loginSuccess action if it requests the credential successfully 2`] = `
 Object {
   "@@redux-saga/IO": true,
   "CALL": Object {

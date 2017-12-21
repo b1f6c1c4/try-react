@@ -9,9 +9,7 @@ import { styled{{ properCase name }} as {{ properCase name }} } from '../index';
 {{/if}}
 
 {{#if wantActionsAndReducer}}
-import {
-  {{ camelCase actionName }}Action,
-} from '../actions';
+import * as {{ camelCase name }}Actions from '../actions';
 {{/if}}
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -24,6 +22,9 @@ describe('<{{ properCase name }} />', () => {
 {{#if wantSelectors}}
         // Selectors
         {{ camelCase selectorName }}="value"
+{{/if}}
+{{#if wantMSelectors}}
+        {{ camelCase mselectorName }}="value"
 {{/if}}
 {{#if wantActionsAndReducer}}
         // Actions
@@ -48,11 +49,11 @@ describe('mapDispatchToProps', () => {
       expect(result.on{{ properCase actionName }}Action).toBeDefined();
     });
 
-    it('should dispatch {{ camelCase actionName }}Action when called', () => {
+    it('should dispatch {{ camelCase name }}Actions.{{ camelCase actionName }} when called', () => {
       const dispatch = jest.fn();
       const result = mapDispatchToProps(dispatch);
       result.on{{ properCase actionName }}Action();
-      expect(dispatch).toHaveBeenCalledWith({{ camelCase actionName }}Action());
+      expect(dispatch).toHaveBeenCalledWith({{ camelCase name }}Actions.{{ camelCase actionName }}());
     });
   });
 });

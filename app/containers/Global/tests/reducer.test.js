@@ -2,9 +2,7 @@ import { fromJS } from 'immutable';
 
 import globalReducer from '../reducer';
 
-import {
-  toggleDrawerOpenAction,
-} from '../actions';
+import * as globalActions from '../actions';
 
 describe('globalReducer', () => {
   let state;
@@ -24,13 +22,13 @@ describe('globalReducer', () => {
     const originalState = state;
     const expectedResult = state.set('isDrawerOpen', true);
 
-    expect(globalReducer(originalState, toggleDrawerOpenAction())).toEqual(expectedResult);
+    expect(globalReducer(originalState, globalActions.toggleDrawerOpen())).toEqual(expectedResult);
   });
 
   it('should handle toggleDrawerOpen action: open', () => {
     const originalState = state.set('isDrawerOpen', true);
     const expectedResult = state.set('isDrawerOpen', false);
 
-    expect(globalReducer(originalState, toggleDrawerOpenAction())).toEqual(expectedResult);
+    expect(globalReducer(originalState, globalActions.toggleDrawerOpen())).toEqual(expectedResult);
   });
 });

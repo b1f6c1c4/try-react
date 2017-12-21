@@ -1,10 +1,10 @@
-export function* handle{{ properCase name }}Request() {
-  const json = yield select(makeSelect{{ properCase container }}Data());
+export function* handle{{ properCase sagaName }}Request() {
+  const json = yield select((state) => state.get('{{ camelCase name }}').toJS());
 
   try {
-    const result = yield call(apiPOST, '/{{ camelCase name }}', undefined, json);
-    yield put({{ camelCase name }}Success(result));
+    const result = yield call(apiPOST, '/{{ camelCase sagaName }}', undefined, json);
+    yield put({{ camelCase name }}Actions.{{ camelCase sagaName }}Success(result));
   } catch (err) {
-    yield put({{ camelCase name }}Failure(err));
+    yield put({{ camelCase name }}Actions.{{ camelCase sagaName }}Failure(err));
   }
 }

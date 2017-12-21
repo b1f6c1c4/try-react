@@ -4,9 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 
 import { styledGlobal as Global, mapDispatchToProps } from '../index';
 
-import {
-  toggleDrawerOpenAction,
-} from '../actions';
+import * as globalActions from '../actions';
 
 Enzyme.configure({ adapter: new Adapter() });
 
@@ -33,11 +31,11 @@ describe('mapDispatchToProps', () => {
       expect(result.onToggleDrawerOpenAction).toBeDefined();
     });
 
-    it('should dispatch toggleDrawerOpenAction when called', () => {
+    it('should dispatch globalActions.toggleDrawerOpen when called', () => {
       const dispatch = jest.fn();
       const result = mapDispatchToProps(dispatch);
       result.onToggleDrawerOpenAction();
-      expect(dispatch).toHaveBeenCalledWith(toggleDrawerOpenAction());
+      expect(dispatch).toHaveBeenCalledWith(globalActions.toggleDrawerOpen());
     });
   });
 });
