@@ -61,7 +61,7 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  isDrawerOpen: /* istanbul ignore next */ (state) => state.get('global').get('isDrawerOpen').toJS(),
+  isDrawerOpen: /* istanbul ignore next */ (state) => state.get('global').get('isDrawerOpen'),
 });
 
 export const styledGlobal = withStyles(styles, { withTheme: true })(Global);
