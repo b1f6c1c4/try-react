@@ -31,7 +31,7 @@ describe('mapDispatchToProps', () => {
       expect(result.onToggleDrawerOpenAction).toBeDefined();
     });
 
-    it('should dispatch globalActions.toggleDrawerOpen when called', () => {
+    it('should dispatch toggleDrawerOpen when called', () => {
       const dispatch = jest.fn();
       const result = mapDispatchToProps(dispatch);
       result.onToggleDrawerOpenAction();

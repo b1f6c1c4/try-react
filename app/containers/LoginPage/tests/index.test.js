@@ -31,7 +31,7 @@ describe('mapDispatchToProps', () => {
       expect(result.onSubmitLoginAction).toBeDefined();
     });
 
-    it('should dispatch loginPageActions.submitLogin when called', () => {
+    it('should dispatch submitLogin when called', () => {
       const dispatch = jest.fn();
       const result = mapDispatchToProps(dispatch);
       result.onSubmitLoginAction();

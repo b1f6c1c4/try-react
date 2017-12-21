@@ -21,13 +21,13 @@ describe('handle{{ properCase sagaName }}Request Saga', () => {
   });
 
   // eslint-disable-next-line arrow-body-style
-  it('should listen {{ constantCase name }}.{{ constantCase sagaName }}_REQUEST in the watcher', () => {
+  it('should listen {{ constantCase sagaName }}_REQUEST in the watcher', () => {
     return expectSaga(watcher)
       .take({{ constantCase name }}.{{ constantCase sagaName }}_REQUEST)
       .run();
   });
 
-  it('should dispatch the {{ camelCase name }}Actions.{{ camelCase sagaName }}Success action if it requests the credential successfully', () => {
+  it('should dispatch the {{ camelCase sagaName }}Success action if it requests the credential successfully', () => {
     const response = {
       status: 'ok',
       jwt: 'value',
@@ -42,7 +42,7 @@ describe('handle{{ properCase sagaName }}Request Saga', () => {
       .run();
   });
 
-  it('should call the {{ camelCase name }}Actions.{{ camelCase sagaName }}Failure action if the response errors', () => {
+  it('should call the {{ camelCase sagaName }}Failure action if the response errors', () => {
     const error = new Error('value');
 
     return expectSaga(handle{{ properCase sagaName }}Request, api)
@@ -58,7 +58,7 @@ describe('handle{{ properCase sagaName }}Request Saga', () => {
 // Watcher
 describe('watcher', () => {
   // eslint-disable-next-line arrow-body-style
-  it('should forward {{ camelCase name }}Actions.{{ camelCase actionName }} to {{ camelCase name }}Actions.{{ camelCase sagaName }}Request', () => {
+  it('should forward {{ camelCase actionName }} to {{ camelCase sagaName }}Request', () => {
     return expectSaga(watcher)
       .provide([
         [matchers.put({{ camelCase name }}Actions.{{ camelCase sagaName }}Request())],

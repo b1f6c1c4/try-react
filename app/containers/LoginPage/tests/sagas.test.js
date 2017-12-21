@@ -25,13 +25,13 @@ describe('handleLoginRequest Saga', () => {
   });
 
   // eslint-disable-next-line arrow-body-style
-  it('should listen LOGIN_PAGE.LOGIN_REQUEST in the watcher', () => {
+  it('should listen LOGIN_REQUEST in the watcher', () => {
     return expectSaga(watcher)
       .take(LOGIN_PAGE.LOGIN_REQUEST)
       .run();
   });
 
-  it('should dispatch the loginPageActions.loginSuccess action if it requests the credential successfully', () => {
+  it('should dispatch the loginSuccess action if it requests the credential successfully', () => {
     const response = {
       status: 'ok',
       jwt: 'value',
@@ -46,7 +46,7 @@ describe('handleLoginRequest Saga', () => {
       .run();
   });
 
-  it('should call the loginPageActions.loginFailure action if the response errors', () => {
+  it('should call the loginFailure action if the response errors', () => {
     const error = new Error('value');
 
     return expectSaga(handleLoginRequest, api)
@@ -62,7 +62,7 @@ describe('handleLoginRequest Saga', () => {
 // Watcher
 describe('watcher', () => {
   // eslint-disable-next-line arrow-body-style
-  it('should forward loginPageActions.submitLogin to loginPageActions.loginRequest', () => {
+  it('should forward submitLogin to loginRequest', () => {
     return expectSaga(watcher)
       .provide([
         [matchers.put(loginPageActions.loginRequest())],

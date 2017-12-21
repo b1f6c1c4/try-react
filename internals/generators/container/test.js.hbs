@@ -49,7 +49,7 @@ describe('mapDispatchToProps', () => {
       expect(result.on{{ properCase actionName }}Action).toBeDefined();
     });
 
-    it('should dispatch {{ camelCase name }}Actions.{{ camelCase actionName }} when called', () => {
+    it('should dispatch {{ camelCase actionName }} when called', () => {
       const dispatch = jest.fn();
       const result = mapDispatchToProps(dispatch);
       result.on{{ properCase actionName }}Action();

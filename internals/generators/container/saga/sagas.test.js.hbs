@@ -12,7 +12,7 @@ describe('handle{{ properCase sagaName }}Request Saga', () => {
     expect(callDescriptor).toMatchSnapshot();
   });
 
-  it('should dispatch the {{ camelCase name }}Actions.{{ camelCase sagaName }}Success action if it requests the data successfully', () => {
+  it('should dispatch the {{ camelCase sagaName }}Success action if it requests the data successfully', () => {
     const response = [{
       name: 'First',
     }, {
@@ -22,7 +22,7 @@ describe('handle{{ properCase sagaName }}Request Saga', () => {
     expect(putDescriptor).toEqual(put({{ camelCase name }}Actions.{{ camelCase sagaName }}Success(response)));
   });
 
-  it('should call the {{ camelCase name }}Actions.{{ camelCase sagaName }}Failure action if the response errors', () => {
+  it('should call the {{ camelCase sagaName }}Failure action if the response errors', () => {
     const response = new Error('Some error');
     const putDescriptor = generator.throw(response).value;
     expect(putDescriptor).toEqual(put({{ camelCase name }}Actions.{{ camelCase sagaName }}Failure(response)));
