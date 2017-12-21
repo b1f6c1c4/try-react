@@ -56,8 +56,8 @@ export function api(method, url, auth, body) {
     .then(parseJSON);
 }
 
-export const apiGET = /* istanbul ignore next */ (url, auth, body) => api('GET', url, auth, body);
-export const apiPOST = /* istanbul ignore next */ (url, auth, body) => api('POST', url, auth, body);
-export const apiPUT = /* istanbul ignore next */ (url, auth, body) => api('PUT', url, auth, body);
-export const apiDELETE = /* istanbul ignore next */ (url, auth) => api('DELETE', url, auth);
-export const apiPATCH = /* istanbul ignore next */ (url, auth, body) => api('PATCH', url, auth, body);
+export const GET = /* istanbul ignore next */ (url, auth, body) => api('GET', url, auth, body);
+export const POST = /* istanbul ignore next */ (url, auth, body) => api('POST', url, auth, body);
+export const PUT = /* istanbul ignore next */ (url, auth, body) => api('PUT', url, auth, body);
+export const DELETE = /* istanbul ignore next */ (url, auth) => api('DELETE', url, auth);
+export const PATCH = /* istanbul ignore next */ (url, auth, body) => api('PATCH', url, auth, body);
