@@ -1,5 +1,5 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
-import { apiPOST } from 'utils/request';
+import * as api from 'utils/request';
 
 import * as {{ constantCase name }} from './constants';
 import * as {{ camelCase name }}Actions from './actions';
@@ -9,7 +9,7 @@ export function* handle{{ properCase sagaName }}Request() {
   const json = yield select((state) => state.get('{{ camelCase name }}').get('{{ camelCase selectorName }}').toJS());
 
   try {
-    const result = yield call(apiPOST, '/{{ camelCase sagaName }}', undefined, json);
+    const result = yield call(api.POST, '/{{ camelCase sagaName }}', undefined, json);
     yield put({{ camelCase name }}Actions.{{ camelCase sagaName }}Success(result));
   } catch (err) {
     yield put({{ camelCase name }}Actions.{{ camelCase sagaName }}Failure(err));
@@ -18,7 +18,10 @@ export function* handle{{ properCase sagaName }}Request() {
 
 // Watcher
 /* eslint-disable func-names */
-export default /* istanbul ignore next */ function* watcher() {
-  /* istanbul ignore next */
+export default function* watcher() {
   yield takeEvery({{ constantCase name }}.{{ constantCase sagaName }}_REQUEST, handle{{ properCase sagaName }}Request);
+
+  yield takeEvery({{ constantCase name }}.{{ constantCase actionName }}_ACTION, function* () {
+    yield put({{ camelCase name }}Actions.{{ camelCase sagaName }}Request());
+  });
 }
