@@ -1,6 +1,6 @@
-    case {{ constantCase sagaName }}_REQUEST:
+    case {{ constantCase name }}.{{ constantCase sagaName }}_REQUEST:
       return state;
-    case {{ constantCase sagaName }}_SUCCESS:
+    case {{ constantCase name }}.{{ constantCase sagaName }}_SUCCESS:
       return state;
-    case {{ constantCase sagaName }}_FAILURE:
+    case {{ constantCase name }}.{{ constantCase sagaName }}_FAILURE:
       return state;

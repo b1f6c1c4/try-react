@@ -1,9 +1,7 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import { apiPOST } from 'utils/request';
 
-import {
-  {{ constantCase sagaName }}_REQUEST,
-} from './constants';
+import * as {{ constantCase name }} from './constants';
 import {
   makeSelect{{ properCase name }}{{ properCase selectorName }},
 } from './selectors';
@@ -28,5 +26,5 @@ export function* handle{{ properCase sagaName }}Request() {
 /* eslint-disable func-names */
 export default /* istanbul ignore next */ function* watcher() {
   /* istanbul ignore next */
-  yield takeEvery({{ constantCase sagaName }}_REQUEST, handle{{ properCase sagaName }}Request);
+  yield takeEvery({{ constantCase name }}.{{ constantCase sagaName }}_REQUEST, handle{{ properCase sagaName }}Request);
 }

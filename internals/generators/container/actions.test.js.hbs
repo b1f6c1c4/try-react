@@ -1,6 +1,4 @@
-import {
-  {{ constantCase actionName }}_ACTION,
-} from '../constants';
+import * as {{ constantCase name }} from '../constants';
 
 import {
   {{ camelCase actionName }}Action,
@@ -9,8 +7,8 @@ import {
 describe('{{ properCase name }} actions', () => {
   // Actions
   describe('{{ camelCase actionName }} action', () => {
-    it('has a type of {{ constantCase actionName }}_ACTION', () => {
-      expect({{ camelCase actionName }}Action().type).toEqual({{ constantCase actionName }}_ACTION);
+    it('has a type of {{ constantCase name }}.{{ constantCase actionName }}_ACTION', () => {
+      expect({{ camelCase actionName }}Action().type).toEqual({{ constantCase name }}.{{ constantCase actionName }}_ACTION);
     });
   });
 });

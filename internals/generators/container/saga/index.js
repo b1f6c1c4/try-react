@@ -49,16 +49,6 @@ export const {{ constantCase sagaName }}_FAILURE = '{{ properCase name }}/{{ con
     // actions.js
     actions.push({
       type: 'complexModify',
-      method: 'lastOccurance',
-      pattern: /^ {2}[A-Z_]+_FAILURE,$/g,
-      path: '../../app/containers/{{ properCase name }}/actions.js',
-      template: `  {{ constantCase sagaName }}_REQUEST,
-  {{ constantCase sagaName }}_SUCCESS,
-  {{ constantCase sagaName }}_FAILURE,`,
-      abortOnFail: true,
-    });
-    actions.push({
-      type: 'complexModify',
       method: 'sectionEnd',
       indent: 0,
       section: /^\/\/ Sagas/g,
@@ -69,16 +59,6 @@ export const {{ constantCase sagaName }}_FAILURE = '{{ properCase name }}/{{ con
     });
 
     // reducer.js
-    actions.push({
-      type: 'complexModify',
-      method: 'lastOccurance',
-      pattern: /^ {2}[A-Z_]+_FAILURE,$/g,
-      path: '../../app/containers/{{ properCase name }}/reducer.js',
-      template: `  {{ constantCase sagaName }}_REQUEST,
-  {{ constantCase sagaName }}_SUCCESS,
-  {{ constantCase sagaName }}_FAILURE,`,
-      abortOnFail: true,
-    });
     actions.push({
       type: 'complexModify',
       method: 'sectionEnd',
@@ -117,14 +97,6 @@ export const {{ constantCase sagaName }}_FAILURE = '{{ properCase name }}/{{ con
     actions.push({
       type: 'complexModify',
       method: 'lastOccurance',
-      pattern: /^ {2}[A-Z_]+_REQUEST,$/g,
-      path: '../../app/containers/{{ properCase name }}/sagas.js',
-      template: '  {{ constantCase sagaName }}_REQUEST,',
-      abortOnFail: true,
-    });
-    actions.push({
-      type: 'complexModify',
-      method: 'lastOccurance',
       pattern: /^ {2}[a-zA-Z]+Failure,$/g,
       path: '../../app/containers/{{ properCase name }}/sagas.js',
       template: `  {{ camelCase sagaName }}Success,
@@ -147,7 +119,7 @@ export const {{ constantCase sagaName }}_FAILURE = '{{ properCase name }}/{{ con
       pattern: /^ {2}yield take.*REQUEST.*Request\);$/g,
       path: '../../app/containers/{{ properCase name }}/sagas.js',
       template: `  /* istanbul ignore next */
-  yield takeEvery({{ constantCase sagaName }}_REQUEST, handle{{ properCase sagaName }}Request);`,
+  yield takeEvery({{ constantCase name }}.{{ constantCase sagaName }}_REQUEST, handle{{ properCase sagaName }}Request);`,
       abortOnFail: true,
     });
 

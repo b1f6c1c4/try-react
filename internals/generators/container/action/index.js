@@ -47,14 +47,6 @@ module.exports = {
     // actions.js
     actions.push({
       type: 'complexModify',
-      method: 'lastOccurance',
-      pattern: /^ {2}[A-Z_]+_ACTION,$/g,
-      path: '../../app/containers/{{ properCase name }}/actions.js',
-      template: '  {{ constantCase actionName }}_ACTION,',
-      abortOnFail: true,
-    });
-    actions.push({
-      type: 'complexModify',
       method: 'sectionEnd',
       indent: 0,
       section: /^\/\/ Actions/g,
@@ -65,14 +57,6 @@ module.exports = {
     });
 
     // actions.test.js
-    actions.push({
-      type: 'complexModify',
-      method: 'lastOccurance',
-      pattern: /^ {2}[A-Z_]+_ACTION,$/g,
-      path: '../../app/containers/{{ properCase name }}/tests/actions.test.js',
-      template: '  {{ constantCase actionName }}_ACTION,',
-      abortOnFail: true,
-    });
     actions.push({
       type: 'complexModify',
       method: 'lastOccurance',
@@ -93,14 +77,6 @@ module.exports = {
     });
 
     // reducer.js
-    actions.push({
-      type: 'complexModify',
-      method: 'lastOccurance',
-      pattern: /^ {2}[A-Z_]+_ACTION,$/g,
-      path: '../../app/containers/{{ properCase name }}/reducer.js',
-      template: '  {{ constantCase actionName }}_ACTION,',
-      abortOnFail: true,
-    });
     actions.push({
       type: 'complexModify',
       method: 'sectionEnd',
