@@ -34,13 +34,14 @@ describe('request', () => {
         },
       });
 
+      process.env.API_URL = 'the/api';
       window.fetch.mockReturnValue(Promise.resolve(res));
     });
 
     it('should forward method, url, auth, but not undefined JSON body', () => {
       api('METHOD', '/url', 'auth');
       expect(window.fetch.mock.calls.length).toBe(1);
-      expect(window.fetch.mock.calls[0][0]).toBe('/api/url');
+      expect(window.fetch.mock.calls[0][0]).toBe('the/api/url');
       expect(window.fetch.mock.calls[0][1].method).toBe('METHOD');
       expect(window.fetch.mock.calls[0][1].headers.Authorization).toBe('auth');
       expect(window.fetch.mock.calls[0][1].headers['Content-Type']).toBeUndefined();
@@ -50,7 +51,7 @@ describe('request', () => {
     it('should forward method, url, auth, but not null JSON body', () => {
       api('METHOD', '/url', 'auth', null);
       expect(window.fetch.mock.calls.length).toBe(1);
-      expect(window.fetch.mock.calls[0][0]).toBe('/api/url');
+      expect(window.fetch.mock.calls[0][0]).toBe('the/api/url');
       expect(window.fetch.mock.calls[0][1].method).toBe('METHOD');
       expect(window.fetch.mock.calls[0][1].headers.Authorization).toBe('auth');
       expect(window.fetch.mock.calls[0][1].headers['Content-Type']).toBeUndefined();
@@ -61,7 +62,7 @@ describe('request', () => {
       const json = { json: true };
       api('METHOD', '/url', 'auth', json);
       expect(window.fetch.mock.calls.length).toBe(1);
-      expect(window.fetch.mock.calls[0][0]).toBe('/api/url');
+      expect(window.fetch.mock.calls[0][0]).toBe('the/api/url');
       expect(window.fetch.mock.calls[0][1].method).toBe('METHOD');
       expect(window.fetch.mock.calls[0][1].headers.Authorization).toBe('auth');
       expect(window.fetch.mock.calls[0][1].headers['Content-Type']).toBe('application/json');
