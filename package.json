@@ -15,7 +15,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=development node server",
+    "start": "cross-env NODE_ENV=development nodemon server",
     "start:prod": "cross-env NODE_ENV=production node server",
     "lint": "yarn lint:js",
     "lint:eslint": "eslint --ignore-path .gitignore",
@@ -73,6 +73,9 @@
       "require-yield": 0
     }
   },
+  "nodemonConfig": {
+    "ext": "js"
+  },
   "dependencies": {
     "body-parser": "1.18.2",
     "chalk": "2.3.0",
@@ -95,6 +98,7 @@
     "eslint-plugin-react": "7.0.1",
     "lint-staged": "6.0.0",
     "ngrok": "2.2.24",
+    "nodemon": "1.14.1",
     "pre-commit": "1.2.2"
   }
 }
