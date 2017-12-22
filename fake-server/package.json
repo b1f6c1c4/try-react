@@ -12,6 +12,9 @@
     "start": "node server.js",
     "start:dev": "nodemon server.js"
   },
+  "nodemonConfig": {
+    "ext": "js json html"
+  },
   "dependencies": {
     "boom": "^4.3.1",
     "confidence": "^3.0.2",

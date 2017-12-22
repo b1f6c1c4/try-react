@@ -84,7 +84,7 @@ const manifest = {
 };
 
 // Add plugins to manifest.registration for every endpoint in ./server/api
-Fs.readdirSync(pathToEndpointConfigFiles).map((file) => Path.join(pathToEndpointConfigFiles, file)).filter((file) => Fs.statSync(file).isFile()).forEach((file) => {
+Fs.readdirSync(pathToEndpointConfigFiles).filter((file) => /^[^.].*\.js$/.test(file)).map((file) => Path.join(pathToEndpointConfigFiles, file)).filter((file) => Fs.statSync(file).isFile()).forEach((file) => {
   const plugin = { plugin: `./server/api/${Path.parse(file).name}` };
   manifest.registrations.push(plugin);
 });

@@ -5,18 +5,13 @@ const criteria = {
   env: process.env.NODE_ENV,
 };
 
-
 const config = {
   $meta: 'General project wide config.',
   projectName: 'http-fake-backend',
   env: process.env.NODE_ENV,
   apiUrlPrefix: '/api',
   port: {
-    web: {
-      $filter: 'env',
-      test: process.env.TEST_PORT,
-      $default: process.env.SERVER_PORT,
-    },
+    web: process.env.PORT || 3000,
   },
 };
 
