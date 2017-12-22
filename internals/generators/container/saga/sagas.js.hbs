@@ -1,8 +1,8 @@
 export function* handle{{ properCase sagaName }}Request() {
-  const json = yield select((state) => state.get('{{ camelCase name }}').toJS());
+  const json = yield select((state) => state.get('{{ camelCase name }}').get('{{ camelCase sagaName }}Data'));
 
   try {
-    const result = yield call(apiPOST, '/{{ camelCase sagaName }}', undefined, json);
+    const result = yield call(api.POST, '/{{ camelCase sagaName }}', undefined, json);
     yield put({{ camelCase name }}Actions.{{ camelCase sagaName }}Success(result));
   } catch (err) {
     yield put({{ camelCase name }}Actions.{{ camelCase sagaName }}Failure(err));

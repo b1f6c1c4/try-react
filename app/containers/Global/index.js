@@ -36,6 +36,7 @@ class Global extends React.PureComponent {
     return (
       <div className={classes.content}>
         <FormattedMessage {...messages.header} />
+        <Typography>{this.props.hasCredential.toString()}</Typography>
         <Typography>{this.props.isDrawerOpen.toString()}</Typography>
         <Button onClick={this.props.onToggleDrawerOpenAction}>ToggleDrawerOpenAction</Button>
         <ConnectedSwitch>
@@ -51,6 +52,7 @@ class Global extends React.PureComponent {
 Global.propTypes = {
   classes: PropTypes.object.isRequired,
   isDrawerOpen: PropTypes.bool.isRequired,
+  hasCredential: PropTypes.bool.isRequired,
   onToggleDrawerOpenAction: PropTypes.func.isRequired,
 };
 
@@ -62,6 +64,7 @@ export function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = createStructuredSelector({
   isDrawerOpen: /* istanbul ignore next */ (state) => state.get('global').get('isDrawerOpen'),
+  hasCredential: /* istanbul ignore next */ (state) => !!state.get('global').get('credential'),
 });
 
 export const styledGlobal = withStyles(styles, { withTheme: true })(Global);

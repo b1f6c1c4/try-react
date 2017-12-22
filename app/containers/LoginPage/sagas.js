@@ -1,6 +1,9 @@
 import { call, put, select, takeEvery } from 'redux-saga/effects';
 import * as api from 'utils/request';
+import { change } from 'redux-form';
+import { push } from 'react-router-redux';
 
+import * as globalActions from 'containers/Global/actions';
 import * as LOGIN_PAGE from './constants';
 import * as loginPageActions from './actions';
 
@@ -8,9 +11,24 @@ import * as loginPageActions from './actions';
 export function* handleLoginRequest() {
   const json = yield select((state) => state.get('form').get('login').get('values').toJS());
 
+  yield put(change('login', 'password', ''));
   try {
     const result = yield call(api.POST, '/login', undefined, json);
-    yield put(loginPageActions.loginSuccess(result));
+    if (result.message !== 'ok') {
+      yield put(loginPageActions.loginFailure({
+        message: 'Server said no',
+        result,
+      }));
+    } else if (!result.token) {
+      yield put(loginPageActions.loginFailure({
+        message: 'Unrecognized server response',
+        result,
+      }));
+    } else {
+      yield put(globalActions.updateCredential(result.token));
+      yield put(loginPageActions.loginSuccess(result));
+      yield put(push('/'));
+    }
   } catch (err) {
     yield put(loginPageActions.loginFailure(err));
   }

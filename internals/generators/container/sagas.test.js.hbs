@@ -24,19 +24,20 @@ describe('handle{{ properCase sagaName }}Request Saga', () => {
   it('should listen {{ constantCase sagaName }}_REQUEST in the watcher', () => {
     return expectSaga(watcher)
       .take({{ constantCase name }}.{{ constantCase sagaName }}_REQUEST)
-      .run();
+      .silentRun();
   });
 
   it('should dispatch the {{ camelCase sagaName }}Success action if it requests the credential successfully', () => {
     const response = {
-      status: 'ok',
-      jwt: 'value',
+      message: 'ok',
+      payload: 'value',
     };
 
     return expectSaga(handle{{ properCase sagaName }}Request, api)
       .withState(state)
+      .call(api.POST, '/{{ camelCase sagaName }}', undefined, {{ camelCase selectorName }})
       .provide([
-        [matchers.call.fn(api.POST, '/{{ camelCase sagaName }}', undefined, values), response],
+        [matchers.call(api.POST, '/{{ camelCase sagaName }}', undefined, {{ camelCase selectorName }}), response],
       ])
       .put({{ camelCase name }}Actions.{{ camelCase sagaName }}Success(response))
       .run();
@@ -47,8 +48,9 @@ describe('handle{{ properCase sagaName }}Request Saga', () => {
 
     return expectSaga(handle{{ properCase sagaName }}Request, api)
       .withState(state)
+      .call(api.POST, '/{{ camelCase sagaName }}', undefined, {{ camelCase selectorName }})
       .provide([
-        [matchers.call.fn(api.POST, '/{{ camelCase sagaName }}', undefined, values), throwError(error)],
+        [matchers.call(api.POST, '/{{ camelCase sagaName }}', undefined, {{ camelCase selectorName }}), throwError(error)],
       ])
       .put({{ camelCase name }}Actions.{{ camelCase sagaName }}Failure(error))
       .run();
@@ -64,6 +66,6 @@ describe('watcher', () => {
         [matchers.put({{ camelCase name }}Actions.{{ camelCase sagaName }}Request())],
       ])
       .dispatch({{ camelCase name }}Actions.{{ camelCase actionName }}())
-      .run();
+      .silentRun();
   });
 });

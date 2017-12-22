@@ -7,10 +7,40 @@ import { fromJS } from 'immutable';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
+import persistState from 'redux-localstorage';
 
 import createReducer from './reducers';
 
 const sagaMiddleware = createSagaMiddleware();
+
+export const slicer = () => (state) => {
+  const forms = state.get('form');
+  if (!forms) {
+    return state;
+  }
+
+  return state.set('form', forms.map((form) => {
+    const fields = form.get('registeredFields');
+    if (!fields) {
+      return form;
+    }
+
+    const values = form.get('values');
+    if (!values) {
+      return form;
+    }
+
+    const sensitives = fields.filter((field) => field.get('name').toLowerCase().includes('password')).keys();
+    return form.set('values', values.withMutations((vals) => {
+      let val = vals;
+      // eslint-disable-next-line no-restricted-syntax
+      for (const v of sensitives) {
+        val = val.remove(v);
+      }
+      return val;
+    }));
+  }));
+};
 
 export default function configureStore(initialState = {}, history) {
   // Create the store with two middlewares
@@ -31,6 +61,16 @@ export default function configureStore(initialState = {}, history) {
   const enhancers = [
     applyMiddleware(...middlewares),
   ];
+
+  /* istanbul ignore if */
+  if (process.env.NODE_ENV !== 'test') {
+    enhancers.push(persistState(undefined, {
+      key: 'try-react',
+      slicer,
+      deserialize: /* istanbul ignore next */ (raw) => fromJS(JSON.parse(raw)),
+      merge: /* istanbul ignore next */ (init, stat) => init.mergeDeep(stat),
+    }));
+  }
 
   // If Redux DevTools Extension is installed use it, otherwise use Redux compose
   /* eslint-disable no-underscore-dangle */
