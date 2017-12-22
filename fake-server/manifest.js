@@ -34,25 +34,6 @@ const manifest = {
     labels: ['web'],
   }],
   registrations: [{
-    plugin: 'vision',
-  }, {
-    plugin: {
-      register: 'visionary',
-      options: {
-        layout: true,
-        engines: { hbs: 'handlebars' },
-        path: './server/web/views',
-        partialsPath: './server/web/views/partials',
-        layoutPath: './server/web/views/layout',
-        helpersPath: './server/web/views/helpers',
-        isCached: {
-          $filter: 'env',
-          development: false,
-          production: true,
-        },
-      },
-    },
-  }, {
     plugin: {
       register: 'good',
       options: {
@@ -74,12 +55,6 @@ const manifest = {
         },
       },
     },
-  }, {
-    plugin: 'inert',
-  }, {
-    plugin: './server/web/index',
-  }, {
-    plugin: './server/web/public',
   }],
 };
 
