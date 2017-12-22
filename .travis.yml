@@ -25,14 +25,6 @@ after_success:
   - yarn coveralls
   - ./internals/netlify.sh
 
-deploy:
-  provider: heroku
-  api_key:
-    secure: VmVD4cje/5M1wIEovK2LkKWPx/nHNpQQ4voIUNsS4I3Gpz2fcD42duZzsahuoOy8Q3ZAmaWQF083Omumxn1A9xMnmXuIr/t64NkMQd+KAzlGgS195146TLAiGPCBDKwmxFufvB498u/wZFrD/1uxbgB/juRnkHTXLnQ42N/Pa6AJqLpL5nLzrh8Tg/dY3aeA9osZUNN58GT7pb9IsAMoaU405/Gag4JcMWUnwZAlSaRs9K/LGaYKAayuOOgYVc2YBpIu20mC/wDOcyHpy5S9g2pu45NVIxZHP3V0lmZjaGuZQnd2MXJ/yIiurwqEN16xHhCEYQAyjB/QPXsOnz0bdemLBUKxYTa5VfNDeb7WHBdPkBRV+bnW5ww2VqtzFayPCWF+7Mk7ldFp9erAcZ8AlGctchr3w7m9Nl4nNl1FGVOZgBNgxOACu8Qbxq4GY8cxZGZJlNaCRVbo927nkblR8g7ksz2AZMotErDWIXYGucBaMdYCU24faMPaFTm6guLA6z91gAmDM23zm5dRQyiOgvCbXR/WIANJsIKhBSyEwZD0HcfqKTU+BPDT/LP70BDjCXjK829aGcWEXuXVv+u1L0D+fY/lN4tisZAnmIf3Lhh61PqJvcX74pvBXk2ADMizhpaYF7E0XcLULG3pTIwi504z8ziL1WnwHrglnV1EQgw=
-  app:
-    master: b1f6c1c4-try-react-staging
-  skip_cleanup: true
-
 cache:
   yarn: true
   directories:
