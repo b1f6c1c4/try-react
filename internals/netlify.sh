@@ -6,6 +6,8 @@ if [[ -z "$NETLIFYKEY" ]]; then
 else
   echo "Start deploying to Netlify..."
 
+  echo "/* /index.html 200" > build/_redirects
+
   zip -r website.zip build
 
   curl -H "Content-Type: application/zip" \
