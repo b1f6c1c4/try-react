@@ -11,7 +11,7 @@ const config = {
   env: process.env.NODE_ENV,
   apiUrlPrefix: '/api',
   port: {
-    web: process.env.PORT || 3000,
+    web: process.env.PORT || 3001,
   },
 };
 

@@ -7,7 +7,7 @@ const criteria = {
   env: process.env.NODE_ENV,
 };
 
-const pathToEndpointConfigFiles = './server/api';
+const pathToEndpointConfigFiles = 'fake-server/server/api';
 
 const manifest = {
   $meta: 'Hapi server config used by glue to compose the server.',
