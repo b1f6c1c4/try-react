@@ -1,46 +1,39 @@
-'use strict';
-
 const RequireDir = require('require-dir');
 const apiDir = RequireDir('../api');
 
+const getEndpoints = (request, reply) => {
+  const endpoints = [];
 
-const getEndpoints = function (request, reply) {
+  Object.keys(apiDir).forEach((key) => {
+    endpoints.push(apiDir[key].register.attributes);
+  });
 
-    const endpoints = [];
-
-    Object.keys(apiDir).forEach((key) => {
-
-        endpoints.push(apiDir[key].register.attributes);
-    });
-
-    return reply(endpoints);
+  return reply(endpoints);
 };
 
-exports.register = function (server, options, next) {
+exports.register = (server, options, next) => {
+  server.route({
+    method: 'GET',
+    path: '/',
+    config: {
+      pre: [{
+        method: getEndpoints,
+        assign: 'getEndpoints',
+      }],
+      handler(request, reply) {
+        return reply.view('index', {
+          title: 'endpoints / routes',
+          endpoints: request.pre.getEndpoints,
+        });
+      },
+    },
+  });
 
-    server.route({
-        method: 'GET',
-        path: '/',
-        config: {
-            pre: [{
-                method: getEndpoints,
-                assign: 'getEndpoints'
-            }],
-            handler: function (request, reply) {
-
-                return reply.view('index', {
-                    title: 'endpoints / routes',
-                    endpoints: request.pre.getEndpoints
-                });
-            }
-        }
-    });
-
-    next();
+  next();
 };
 
 
 exports.register.attributes = {
-    name: 'index',
-    dependencies: 'visionary'
+  name: 'index',
+  dependencies: 'visionary',
 };

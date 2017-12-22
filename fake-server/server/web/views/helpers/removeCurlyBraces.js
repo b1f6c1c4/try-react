@@ -1,17 +1,15 @@
-'use strict';
-
 /**
  * Returns the given params without curly braces.
  */
 
-module.exports = function (params) {
+module.exports = (theParams) => {
+  let params = theParams;
 
-    if (typeof params === 'string') {
-        params = params.replace(/({|})/g, '');
-    }
-    else {
-        params = '';
-    }
+  if (typeof params === 'string') {
+    params = params.replace(/(\{|\})/g, '');
+  } else {
+    params = '';
+  }
 
-    return params;
+  return params;
 };

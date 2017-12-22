@@ -1,22 +1,18 @@
-'use strict';
+exports.register = (server, options, next) => {
+  server.route({
+    method: 'GET',
+    path: '/assets/{param*}',
+    handler: {
+      directory: {
+        path: './server/web/public/assets',
+        listing: true,
+      },
+    },
+  });
 
-exports.register = function (server, options, next) {
-
-    server.route({
-        method: 'GET',
-        path: '/assets/{param*}',
-        handler: {
-            directory: {
-                path: './server/web/public/assets',
-                listing: true
-            }
-        }
-    });
-
-    next();
+  next();
 };
 
-
 exports.register.attributes = {
-    name: 'public'
+  name: 'public',
 };
