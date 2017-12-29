@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 const passportJWT = require('passport-jwt');
+const fs = require('fs');
 
 const router = express.Router();
 
@@ -44,7 +45,20 @@ router.use(cors({
 
 router.use(nocache(), bodyParser.json(), passport.initialize());
 
-router.get('/', (req, res) => res.json({}));
+let theStatus;
+fs.readFile('VERSION.json', 'utf8', (err, data) => {
+  if (!err) {
+    theStatus = JSON.parse(data);
+  }
+});
+
+router.get('/', (req, res) => {
+  if (theStatus) {
+    res.status(200).json(theStatus);
+  } else {
+    res.status(500).send();
+  }
+});
 
 router.post('/login', (req, res) => {
   const payload = {

@@ -10,6 +10,7 @@ node_js:
 
 script:
   - yarn test
+  - yarn build
 
 notifications:
   email:
@@ -17,6 +18,14 @@ notifications:
 
 after_success:
   - yarn coveralls
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: VRZO2CEdyTR1TH3BLEJ0qqdJFZJdRRHEeM5BDptqt9SKebJSHvYF1pADqk+CyzWuZ/t/ptkRbLydJbvvXe5IbN/uSRJoiETUkc7yG3aE3FfoQtZ3Poc1WIltIv5+SDsCKrzyWFg2ieOsX7uSp1i/Vp0A7oFclo2rsLSAXPrICMJcQF7dTDcpy1r+9lbt872KqMaBDM8GRfi/4h9/Vn7vmJnIgSH3l6OIED0+ixMVJMA1dSpNdqOravMtvByYjiGQHZ5IZ7iCEOlomjeBo3kof1DZvT2pOpEeqZcW2wKf1XoddugooGzaMhuYBWBWuflkpXLzj9ngEqSPQuQ038vX1FE/b3jv/jPvC1ft1DscV9tPcJv5KmQeO8BhgwuqU8PwT52zC1ngZ7WPyWkUpBfQgcCf9ulglqje7XERGigIq8VW+8ubtI3Z/OIN1voau+Vvo47W4bAShRZSgdl96VRE0H6dh+UCfBYU/cHuFVUqwKH5TYj1kR/LQpe0NHeCQlifGPsUkRB/CsbUC6qmZByQv06AbXKdlQPbUZtTIUgX59XBWWNpxKN3xPGg77MsFviuOFaoexJUiKqgnsO+mxPHWNUlUw28OO6Zn6WSET5ytBG2p5nGZFbwYPL+OWiwAsTLDQazpE52hhuo56L95+RT2uRRdQ2FI05QHSBi3erLOss=
+  app:
+    backend: b1f6c1c4-try-react-staging
+  skip_cleanup: true
 
 cache:
   yarn: true

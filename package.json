@@ -15,6 +15,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "build": "node tag.js",
     "start": "cross-env NODE_ENV=development nodemon server",
     "start:prod": "cross-env NODE_ENV=production node server",
     "lint": "yarn lint:js",
@@ -121,6 +122,7 @@
     "ngrok": "2.2.24",
     "nodemon": "1.14.1",
     "pre-commit": "1.2.2",
-    "rimraf": "2.6.2"
+    "rimraf": "2.6.2",
+    "shelljs": "0.7.8"
   }
 }
