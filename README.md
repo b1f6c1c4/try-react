@@ -10,6 +10,7 @@ cd try-react
 git clone --bare https://github.com/b1f6c1c4/try-react
 cd try-react.git
 git worktree add ../master master
+cd ../master
 
 yarn global add aglio
 yarn start
