@@ -17,18 +17,22 @@ const jwtOptions = {
 };
 const pjwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: 's3cReT',
+  secretOrKey: process.env.JWT_SECRET || 's3cReT',
   ignoreExpiration: false,
   maxAge: '2h',
   jsonWebTokenOptions: jwtOptions,
 };
 
 passport.use(new JwtStrategy(pjwtOptions, (payload, done) => {
-  if (payload.id.length < 4) {
-    return done(new Error('User not exist'), null);
+  if (typeof payload.username !== 'string') {
+    return done(new Error('Malformat'), null);
   }
 
-  return done(null, { id: payload.id });
+  // return done(new Error('User not exist'), null);
+
+  return done(null, {
+    username: payload.username,
+  });
 }));
 
 router.use(cors({
