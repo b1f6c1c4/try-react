@@ -20,7 +20,12 @@
     "lint": "yarn lint:js",
     "lint:eslint": "eslint --ignore-path .gitignore",
     "lint:js": "yarn lint:eslint .",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "pretest": "yarn test:clean && yarn lint",
+    "test:clean": "rimraf ./coverage",
+    "test": "cross-env NODE_ENV=test jest --coverage",
+    "test:watch": "cross-env NODE_ENV=test jest --watchAll",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "lint-staged": {
     "*.js": "lint:eslint"
@@ -30,6 +35,7 @@
     "extends": "airbnb",
     "env": {
       "node": true,
+      "jest": true,
       "es6": true
     },
     "parserOptions": {
@@ -73,6 +79,27 @@
       "require-yield": 0
     }
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "server/**/*.js",
+      "!server/**/*.test.js",
+      "!server/index.js",
+      "!server/logger.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "statements": 98,
+        "branches": 91,
+        "functions": 98,
+        "lines": 98
+      }
+    },
+    "moduleDirectories": [
+      "node_modules",
+      "server"
+    ],
+    "testRegex": "tests/.*\\.test\\.js$"
+  },
   "nodemonConfig": {
     "ext": "js"
   },
@@ -90,15 +117,18 @@
     "passport-jwt": "3.0.1"
   },
   "devDependencies": {
+    "coveralls": "3.0.0",
     "eslint": "3.19.0",
     "eslint-config-airbnb": "15.0.1",
     "eslint-config-airbnb-base": "11.2.0",
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jsx-a11y": "5.0.3",
     "eslint-plugin-react": "7.0.1",
+    "jest-cli": "22.0.3",
     "lint-staged": "6.0.0",
     "ngrok": "2.2.24",
     "nodemon": "1.14.1",
-    "pre-commit": "1.2.2"
+    "pre-commit": "1.2.2",
+    "rimraf": "2.6.2"
   }
 }
