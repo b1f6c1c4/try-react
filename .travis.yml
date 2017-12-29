@@ -8,6 +8,9 @@ branches:
 node_js:
   - 8
 
+before_install:
+  - npm install --global dredd@4.9.2
+
 script:
   - yarn test
   - yarn build

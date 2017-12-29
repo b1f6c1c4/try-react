@@ -24,7 +24,8 @@
     "lint:staged": "lint-staged",
     "pretest": "yarn test:clean && yarn lint",
     "test:clean": "rimraf ./coverage",
-    "test": "cross-env NODE_ENV=test jest --coverage",
+    "test": "cross-env NODE_ENV=test jest --coverage && yarn test:api",
+    "test:api": "yarn build && dredd",
     "test:watch": "cross-env NODE_ENV=test jest --watchAll",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
