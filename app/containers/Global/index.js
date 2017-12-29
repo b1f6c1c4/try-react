@@ -9,6 +9,7 @@ import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import StatusPage from 'containers/StatusPage/Loadable';
 
 import {
   withStyles,
@@ -42,6 +43,7 @@ class Global extends React.PureComponent {
         <ConnectedSwitch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/status" component={StatusPage} />
           <Route component={NotFoundPage} />
         </ConnectedSwitch>
       </div>

@@ -3,7 +3,7 @@ const Config = require('../../../config');
 
 module.exports = (settings) => {
   const exportEndpoint = {};
-  const path = `${Config.get('/apiUrlPrefix')}/${settings.name}`;
+  const path = settings.path || `${Config.get('/apiUrlPrefix')}/${settings.name}`;
   const urls = settings.urls;
 
   exportEndpoint.register = (server, options, next) => {
