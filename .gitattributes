@@ -62,6 +62,7 @@ Procfile text
 
 # Documentation
 *.md text
+*.apib text
 LICENSE text
 AUTHORS text
 
