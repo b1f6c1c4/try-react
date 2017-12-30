@@ -12,6 +12,7 @@
 cd try-react/try-react.git
 git worktree add ../frontend frontend
 cd ../frontend
+yarn global add drakov
 yarn
 yarn build:dll
 
