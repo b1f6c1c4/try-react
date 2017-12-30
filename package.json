@@ -33,54 +33,6 @@
     "*.js": "lint:eslint"
   },
   "pre-commit": "lint:staged",
-  "eslintConfig": {
-    "extends": "airbnb",
-    "env": {
-      "node": true,
-      "jest": true,
-      "es6": true
-    },
-    "parserOptions": {
-      "ecmaVersion": 6,
-      "sourceType": "module"
-    },
-    "rules": {
-      "arrow-parens": [
-        "error",
-        "always"
-      ],
-      "arrow-body-style": [
-        2,
-        "as-needed"
-      ],
-      "class-methods-use-this": 0,
-      "comma-dangle": [
-        2,
-        "always-multiline"
-      ],
-      "import/imports-first": 0,
-      "import/newline-after-import": 0,
-      "import/no-dynamic-require": 0,
-      "import/no-extraneous-dependencies": 0,
-      "import/no-named-as-default": 0,
-      "import/no-unresolved": 2,
-      "import/prefer-default-export": 0,
-      "indent": [
-        2,
-        2,
-        {
-          "SwitchCase": 1
-        }
-      ],
-      "max-len": 0,
-      "newline-per-chained-call": 0,
-      "no-confusing-arrow": 0,
-      "no-console": 1,
-      "no-use-before-define": 0,
-      "prefer-template": 2,
-      "require-yield": 0
-    }
-  },
   "jest": {
     "collectCoverageFrom": [
       "server/**/*.js",
@@ -112,13 +64,12 @@
   },
   "devDependencies": {
     "coveralls": "3.0.0",
-    "eslint": "3.19.0",
-    "eslint-config-airbnb": "15.0.1",
-    "eslint-config-airbnb-base": "11.2.0",
-    "eslint-plugin-import": "2.7.0",
-    "eslint-plugin-jsx-a11y": "5.0.3",
-    "eslint-plugin-react": "7.0.1",
-    "jest-cli": "22.0.3",
+    "eslint": "4.14.0",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
+    "eslint-plugin-react": "7.5.1",
+    "jest-cli": "22.0.4",
     "lint-staged": "6.0.0",
     "ngrok": "2.2.24",
     "nodemon": "1.14.1",

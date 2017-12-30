@@ -1,13 +1,12 @@
-/* eslint consistent-return:0 */
-
 const express = require('express');
-const logger = require('./logger');
-
 const argv = require('minimist')(process.argv.slice(2));
 const redirect = require('./middlewares/redirect');
-const isDev = process.env.NODE_ENV !== 'production';
-const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
 const api = require('./app');
+const logger = require('./logger');
+
+const isDev = process.env.NODE_ENV !== 'production';
+// eslint-disable-next-line import/newline-after-import
+const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
 const app = express();
 
 app.use('/api', api);
@@ -34,8 +33,11 @@ app.listen(port, host, (err) => {
       }
 
       logger.appStarted(port, prettyHost, url);
+      return undefined;
     });
   } else {
     logger.appStarted(port, prettyHost);
   }
+
+  return undefined;
 });

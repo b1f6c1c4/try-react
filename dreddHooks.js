@@ -1,6 +1,7 @@
-// eslint-disable-next-line import/no-unresolved
+// eslint-disable-next-line import/no-unresolved, import/no-extraneous-dependencies
 const hooks = require('hooks');
 const jwt = require('jsonwebtoken');
+
 const jwtOptions = {
   issuer: 'try-react',
   audience: 'try-react',

@@ -9,8 +9,7 @@ const fs = require('fs');
 
 const router = express.Router();
 
-const JwtStrategy = passportJWT.Strategy;
-const ExtractJwt = passportJWT.ExtractJwt;
+const { Strategy, ExtractJwt } = passportJWT;
 const jwtOptions = {
   issuer: 'try-react',
   audience: 'try-react',
@@ -24,7 +23,7 @@ const pjwtOptions = {
   jsonWebTokenOptions: jwtOptions,
 };
 
-passport.use(new JwtStrategy(pjwtOptions, (payload, done) => {
+passport.use(new Strategy(pjwtOptions, (payload, done) => {
   if (typeof payload.username !== 'string') {
     return done(new Error('Malformat'), null);
   }
