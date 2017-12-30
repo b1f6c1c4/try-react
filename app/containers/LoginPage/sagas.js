@@ -9,7 +9,7 @@ import * as loginPageActions from './actions';
 
 // Sagas
 export function* handleLoginRequest() {
-  const json = yield select((state) => state.get('form').get('login').get('values').toJS());
+  const json = yield select((state) => state.getIn(['form', 'login', 'values']).toJS());
 
   yield put(change('login', 'password', ''));
   try {

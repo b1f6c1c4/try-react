@@ -10,6 +10,7 @@
 
 const { join } = require('path');
 const webpack = require('webpack');
+// eslint-disable-next-line import/no-dynamic-require
 const pkg = require(join(process.cwd(), 'package.json'));
 
 if (!pkg.dllPlugin) { process.exit(0); }

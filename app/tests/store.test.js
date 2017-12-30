@@ -126,6 +126,6 @@ describe('configureStore params', () => {
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ = () => compose;
     configureStore(undefined, browserHistory);
     expect(compose).toHaveBeenCalled();
-    /* eslint-enable */
+    /* eslint-enable no-underscore-dangle */
   });
 });

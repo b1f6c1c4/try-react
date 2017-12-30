@@ -13,7 +13,7 @@ import { CHANGE_LOCALE } from './constants';
 function getLocale() {
   let locale = browserLocale();
   if (locale) {
-    locale = locale.split('-')[0];
+    [locale] = locale.split('-');
   } else {
     locale = DEFAULT_LOCALE;
   }

@@ -10,8 +10,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const logger = require('../../server/logger');
+// eslint-disable-next-line import/no-dynamic-require
 const pkg = require(path.resolve(process.cwd(), 'package.json'));
-const dllPlugin = pkg.dllPlugin;
+const { dllPlugin } = pkg;
 
 const plugins = [
   new webpack.HotModuleReplacementPlugin(), // Tell webpack we want hot reloading
@@ -52,7 +53,8 @@ module.exports = require('./webpack.base.babel')({
   },
 
   // Add development plugins
-  plugins: dependencyHandlers().concat(plugins), // eslint-disable-line no-use-before-define
+  // eslint-disable-next-line no-use-before-define
+  plugins: dependencyHandlers().concat(plugins),
 
   // Emit a source map for easier debugging
   // See https://webpack.js.org/configuration/devtool/#devtool
@@ -79,6 +81,7 @@ function dependencyHandlers() {
   return [
     new webpack.DllReferencePlugin({
       context: process.cwd(),
+      // eslint-disable-next-line import/no-dynamic-require
       manifest: require(manifestPath), // eslint-disable-line global-require
     }),
   ];
